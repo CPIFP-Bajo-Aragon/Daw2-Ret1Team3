@@ -60,6 +60,8 @@ if ($resultalumno = $conexion->query($queryalumno)) {
         $Direccion = $rowalumno->Direccion;
         $Perfil_Publico = $rowalumno->Perfil_Publico;
         $id_Municipio_usuario = $rowalumno->Id_Municipio;
+
+
     }
 }
 
@@ -80,20 +82,6 @@ if ($resultmunicipio = $conexion->query($querymunicipio)) {
     }
 }
 
-$queryidioma="SELECT Idioma.Idioma, Nivel.Nivel, Idioma.Id_Idioma
-FROM Idioma
-JOIN Nivel_Idioma ON Idioma.Id_Idioma = Nivel_Idioma.Id_Idioma
-JOIN Nivel ON Nivel.Id_Nivel = Nivel_Idioma.Id_Nivel
-WHERE Nivel_Idioma.DNI_CIF = '$dni'";
-
-if ($resultidioma = $conexion->query($queryidioma)) {
-    while ($rowidioma = $resultidioma->fetch(PDO::FETCH_OBJ)) {
-        $Idioma = $rowidioma -> Idioma;
-        $Nivel = $rowidioma->Nivel;
-        $Id_Idioma = $rowidioma->Id_Idioma;
-    }
-
-}
 
 $queryemail="SELECT Email FROM Usuario WHERE DNI_CIF='$dni'";
 if ($resultemail = $conexion->query($queryemail)) {
@@ -103,6 +91,20 @@ if ($resultemail = $conexion->query($queryemail)) {
 
 }
 
+echo "<h1>Datos Personales</h1>";
+echo "<img src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>";
+echo "<p>Nombre: ".$Nombre_Usuario."</p>";
+echo "<p>Apellidos: ".$Apellido."</p>";
+echo "<p>Fecha Nacimiento: ".$Fecha_Nacimiento."</p>";
+echo "<p>Direccion: ".$Direccion."</p>";
+echo "<p>Municipio: ".$Nombre_Municipio."</p>";
+echo "<p>Movilidad: ".$Movilidad."</p>";
+echo "<h1>Contacto</h1>";
+echo "<p>Telefono: ".$Telefono_Alumno."</p>";
+echo "<p>Correo: ".$email."</p>";
+
+
+echo "<h1>Experiencia Laboral</h1>";
 $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
  if ($resultexplab = $conexion->query($queryexplab)) {
      while ($rowexplab = $resultexplab->fetch(PDO::FETCH_OBJ)) {
@@ -112,9 +114,39 @@ $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
          $Descripcion = $rowexplab->Descripcion;
          $Fecha_Inicio_explab =  $rowexplab-> Fecha_Inicio;
          $Fecha_Fin_explab =  $rowexplab-> Fecha_Fin;
+
+
+ 
+
+            echo "<p>Nombre de la Empresa: ".$Nombre_Empresa."</p>";
+            echo "<p>Puesto: ".$Puesto."</p>";
+            echo "<p>Descripción: ".$Descripcion."</p>";
+            echo "<p>Fecha Inicio: ".$Fecha_Inicio_explab."</p>";
+            echo "<p>Fecha Fin: ".$Fecha_Fin_explab."</p>";
+
      }
     }
 
+    $queryidioma="SELECT Idioma.Idioma, Nivel.Nivel, Idioma.Id_Idioma
+    FROM Idioma
+    JOIN Nivel_Idioma ON Idioma.Id_Idioma = Nivel_Idioma.Id_Idioma
+    JOIN Nivel ON Nivel.Id_Nivel = Nivel_Idioma.Id_Nivel
+    WHERE Nivel_Idioma.DNI_CIF = '$dni'";
+    
+    if ($resultidioma = $conexion->query($queryidioma)) {
+        while ($rowidioma = $resultidioma->fetch(PDO::FETCH_OBJ)) {
+            $Idioma = $rowidioma -> Idioma;
+            $Nivel = $rowidioma->Nivel;
+            $Id_Idioma = $rowidioma->Id_Idioma;
+    
+            echo "<h1>Idioma</h1>";
+            echo "<p>Idioma: ".$Idioma."</p>";
+            echo "<p>Tipo: ".$Nivel."</p>"; 
+        }
+    
+    }
+
+    echo "<h1>Formacion Complementaria</h1>";
     $queryformacion="SELECT * FROM Formacion_Complementaria";
     if ($resultformacion = $conexion->query($queryformacion)) {
         while ($rowformacion = $resultformacion->fetch(PDO::FETCH_OBJ)) {
@@ -126,27 +158,41 @@ $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
             $Fecha_Caducidad_formacion =  $rowformacion-> Fecha_Caducidad;
             $Num_Horas_formacion =  $rowformacion-> Num_Horas;
 
+            echo "<p>Nombre Formacion: ".$Nombre_Formacion."</p>";
+            echo "<p>Enitdad Emisora: ".$Entidad_emisora."</p>";
+            echo "<p>Fecha Inicio: ".$Fecha_Inicio_formacion."</p>";
+            echo "<p>Fecha Fin: ".$$Fecha_Fin_formacion."</p>";
+            echo "<p>Fecha caducidad: ".$Fecha_Caducidad_formacion."</p>";
+            echo "<p>Numero de horas: ".$$Num_Horas_formacion."</p>";
+
+
         }
     }
 
     $queryhard = "SELECT Hard_Skill.Id_Hard, Hard_Skill.nombre, Hard_Skill.tipo FROM Hard_Skill, Hard_Skill_Alumno WHERE Hard_Skill.Id_Hard=Hard_Skill_Alumno.Id_Hard AND DNI_CIF='$dni'; ";
 
-
+    echo "<h1>Hard Skills</h1>";
     if ($resulthard = $conexion->query($queryhard)) {
         while ($rowhard = $resulthard->fetch(PDO::FETCH_OBJ)) {
             $Id_Hard = $rowhard->Id_Hard;
             $nombre_hard = $rowhard->nombre;
             $tipo_hard= $rowhard->tipo;
+
+ 
+            echo "<p>Categoria: ".$tipo_hard."</p>";
+            echo "<p>Hard Skill: ".$nombre_hard."</p>";
         }
     }
 
     $querysoft = "SELECT Soft_Skill.Id_Soft, Soft_Skill.nombre FROM Soft_Skill, Soft_Skill_Alumno WHERE Soft_Skill.Id_Soft=Soft_Skill_Alumno.Id_Soft AND DNI_CIF='$dni'; ";
 
-
+    echo "<h1>Soft Skills</h1>";
     if ($resultsoft = $conexion->query($querysoft)) {
         while ($rowsoft = $resultsoft->fetch(PDO::FETCH_OBJ)) {
             $Id_Soft = $rowsoft->Id_Soft;
             $nombre_soft = $rowsoft->nombre;
+ 
+            echo "<p>Soft Skills: ".$nombre_soft."</p>";
         }
     }
 
@@ -156,7 +202,7 @@ $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
     $stmttitulo->bindParam(':dni', $dni);
     $stmttitulo->execute();
     
-
+    echo "<h1>Titulaciones</h1>";
           while ($rowtitulo = $stmttitulo->fetch(PDO::FETCH_ASSOC)) {
             $Id_Centro = $rowtitulo['Id_Centro'];
             $Id_Tipo_Titulacion = $rowtitulo['Id_Tipo_Titulacion'];
@@ -166,82 +212,24 @@ $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
              $Fecha_Inicio_titulo=$rowtitulo['Fecha_Inicio'] ;
              $Fecha_Fin_titulo=$rowtitulo['Fecha_Fin'] ;
              $nombre_titulo=$rowtitulo['Nombre'] ;
-          }
 
+             ?>
+                             <div class="div5">
+                    <?php
 
-?>
-            <div class="parent">
-                <div class="div1">
-                    <?php
-            echo "<h1>Datos Personales</h1>";
-            echo "<img src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>";
-            echo "<p>Nombre: ".$Nombre_Usuario."</p>";
-            echo "<p>Apellidos: ".$Apellido."</p>";
-            echo "<p>Fecha Nacimiento: ".$Fecha_Nacimiento."</p>";
-            echo "<p>Direccion: ".$Direccion."</p>";
-            echo "<p>Municipio: ".$Nombre_Municipio."</p>";
-            echo "<p>Movilidad: ".$Movilidad."</p>";
-        ?>
-                </div>
-                <div class="div2">
-                    <?php
-            echo "<h1>Contacto</h1>";
-            echo "<p>Telefono: ".$Telefono_Alumno."</p>";
-            echo "<p>Correo: ".$email."</p>";
-        ?>
-                </div>
-                <div class="div3">
-                    <?php
-            echo "<h1>Experiencia Laboral</h1>";
-            echo "<p>Nombre de la Empresa: ".$Nombre_Empresa."</p>";
-            echo "<p>Puesto: ".$Puesto."</p>";
-            echo "<p>Descripción: ".$Descripcion."</p>";
-            echo "<p>Fecha Inicio: ".$Fecha_Inicio_explab."</p>";
-            echo "<p>Fecha Fin: ".$Fecha_Fin_explab."</p>";
-        ?>
-                </div>
-                <div class="div4">
-                    <?php
-            echo "<h1>Formación Complementaria</h1>";
-            echo "<p>Nombre de la Formación: ".$Nombre_Formacion."</p>";
-            echo "<p>Entidad Emisora: ".$Entidad_emisora."</p>";
-            echo "<p>Fecha Inicio: ".$Fecha_Inicio_formacion."</p>";
-            echo "<p>Fecha Fin: ".$Fecha_Fin_formacion."</p>";
-            echo "<p>Fecha Caducidad: ".$Fecha_Caducidad_formacion."</p>";
-            echo "<p>Numero de horas: ".$Num_Horas_formacion."</p>";
- 
-        ?>
-                </div>
-                <div class="div5">
-                    <?php
-            echo "<h1>Titulaciones</h1>";
             echo "<p>Nombre del centro: ".$Nombre_Centro."</p>";
             echo "<p>Titulacion: ".$nombre_titulo."</p>";
             echo "<p>Fecha Inicio".$Fecha_Inicio_titulo."</p>";
             echo "<p>Fecha Fin".$Fecha_Fin_titulo."</p>";
         ?>
                 </div>
-                <div class="div6">
-                    <?php
-            echo "<h1>Hard Skills</h1>";
-            echo "<p>Categoria: ".$tipo_hard."</p>";
-            echo "<p>Hard Skill: ".$nombre_hard."</p>";
-        ?>
-                </div>
-                <div class="div7">
-                    <?php
-            echo "<h1>Soft Skills</h1>";
-            echo "<p>Soft Skills: ".$nombre_soft."</p>";
-        ?>
-                </div>
-                <div class="div8">
-                    <?php
-            echo "<h1>Idioma</h1>";
-            echo "<p>Idioma: ".$Idioma."</p>";
-            echo "<p>Tipo: ".$Nivel."</p>"; 
-        ?>
-                </div>
-            </div>
+            <?php
+             
+          }
+
+
+?>
+
         </article>
 
         </section>

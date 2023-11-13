@@ -89,15 +89,17 @@
 
             $leeroferta = $conexion -> query($sql);
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
+                echo "<div class=\"container\">";
+                echo "<p class=\"info\">Nombre: ".$fila ->Nombre_Usuario."</p>";
                 echo "<hr>";
-                echo "<p>Nombre: ".$fila ->Nombre_Usuario."</p>";
-                echo "<p>Area de negocio: ".$fila ->Area_Negocio."</p>";
-                echo "<p>Numero de trabajadores: ".$fila ->Numero_Trabajadores."</p>";
-                echo "<p>Descripcion: ".$fila ->Descripcion."</p>";
-                echo "<p>Pais: ".$fila ->Pais."</p>";
-                echo "<p>Localidad: ".$fila ->Nombre_Municipio."</p>";
-                echo "<p>Web: ".$fila ->Web."</p>";
-                echo "<p>Telefono: ".$fila ->Telefono."</p>";
+                echo "<p class=\"info\">Area de negocio: ".$fila ->Area_Negocio."</p>";
+                echo "<p class=\"info\">Numero de trabajadores: ".$fila ->Numero_Trabajadores."</p>";
+                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                echo "<p class=\"info\">Pais: ".$fila ->Pais."</p>";
+                echo "<p class=\"info\">Localidad: ".$fila ->Nombre_Municipio."</p>";
+                echo "<p class=\"info\">Web: ".$fila ->Web."</p>";
+                echo "<p class=\"info\">Telefono: ".$fila ->Telefono."</p>";
+                echo "</div>";
                 ?>
     <?php
             }
@@ -112,15 +114,17 @@
         
         $leeroferta = $conexion -> query($sql);
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
+                echo "<div class=\"container\">";
+                echo "<p class=\"info\">Nombre: ".$fila ->Nombre_Usuario."</p>";
                 echo "<hr>";
-                echo "<p>Nombre: ".$fila ->Nombre_Usuario."</p>";
-                echo "<p>Area de negocio: ".$fila ->Area_Negocio."</p>";
-                echo "<p>Numero de trabajadores: ".$fila ->Numero_Trabajadores."</p>";
-                echo "<p>Descripcion: ".$fila ->Descripcion."</p>";
-                echo "<p>Pais: ".$fila ->Pais."</p>";
-                echo "<p>Localidad: ".$fila ->Nombre_Municipio."</p>";
-                echo "<p>Web: ".$fila ->Web."</p>";
-                echo "<p>Telefono: ".$fila ->Telefono."</p>";
+                echo "<p class=\"info\">Area de negocio: ".$fila ->Area_Negocio."</p>";
+                echo "<p class=\"info\">Numero de trabajadores: ".$fila ->Numero_Trabajadores."</p>";
+                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                echo "<p class=\"info\">Pais: ".$fila ->Pais."</p>";
+                echo "<p class=\"info\">Localidad: ".$fila ->Nombre_Municipio."</p>";
+                echo "<p class=\"info\">Web: ".$fila ->Web."</p>";
+                echo "<p class=\"info\">Telefono: ".$fila ->Telefono."</p>";
+                echo "</div>";
                 ?>
     <?php
             }

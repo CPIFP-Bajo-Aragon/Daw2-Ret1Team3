@@ -129,7 +129,7 @@
          </style>
          <?php
             
-        $sql ="SELECT DISTINCT Oferta.Id_Oferta, Oferta.Titulo, Oferta.Vacantes, Oferta.Descripcion, Oferta.Activo, Oferta.Fecha_Publicacion, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Oferta.DNI_CIF, Oferta.Id_Municipio FROM Oferta, Oferta_Tipo_Titulacion, Titulacion, Empresa, Oferta_Nivel_Idioma, Idioma WHERE Oferta.Activo=1 AND Oferta.Id_Oferta = Oferta_Tipo_Titulacion.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Empresa.DNI_CIF=Oferta.DNI_CIF AND Oferta_Nivel_Idioma.Id_Idioma=Idioma.Id_Idioma AND Oferta_Nivel_Idioma.Id_Oferta=Oferta.Id_Oferta";
+        $sql ="SELECT DISTINCT Oferta.Id_Oferta, Oferta.Titulo, Oferta.Vacantes, Oferta.Descripcion, Oferta.Activo, Oferta.Fecha_Publicacion, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Oferta.DNI_CIF, Oferta.Id_Municipio, Usuario.Nombre_Usuario FROM Oferta, Oferta_Tipo_Titulacion, Titulacion, Empresa, Oferta_Nivel_Idioma, Idioma, Usuario WHERE Oferta.Activo=1 AND Oferta.Id_Oferta = Oferta_Tipo_Titulacion.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Empresa.DNI_CIF=Oferta.DNI_CIF AND Oferta_Nivel_Idioma.Id_Idioma=Idioma.Id_Idioma AND Oferta_Nivel_Idioma.Id_Oferta=Oferta.Id_Oferta AND Oferta.DNI_CIF = Usuario.DNI_CIF";
             
         //     $sql="SELECT DISTINCT 
         //     O.Id_Oferta, 
