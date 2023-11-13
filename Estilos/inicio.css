@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+
+header {
+    background-color: #0074cc; /* Cambio de color de fondo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo img {
+    max-width: 100px;
+    height: auto;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #0058a3; /* Cambio de color al pasar el mouse */
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+/* MAIN */
+
+main {
+    background-color: #f0f0f0; /* Color de fondo más claro */
+    padding: 20px;
+}
+
+.main .header-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.separador {
+    background-color: #1162BC;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.infoPanel {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.infoPanelIzq{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.infoPanelIzq div{
+    position: absolute;
+    left: 20%;
+    top: 45%;
+}
+
+.infoPanelIzq div p{
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+.infoPanelDer{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%
+}
+
+.infoPanel .infoPanelIzq img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.5;
+}
+
+.infoPanel .infoPanelDer img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #f0f0f0; /* Color de fondo más claro */
+    text-align: center;
+    padding: 20px;
+}
+main>.fotoInfo {
+    width: 100vw;
+    height: 40vh;
+    overflow: hidden;
+}
+
+main>.fotoInfo>img {
+    max-width: 100%;
+    height: auto;
+    /* Mantiene la relación de aspecto original de la imagen */
+    display: block;
+}
+/*  */
+
+#inicioInfoPanel {
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  #inicioInfoPanel h1 {
+    color: #3498db;
+    font-size: 36px;
+  }
+  
+  #inicioInfoPanel h2 {
+    color: #3498db;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  #inicioInfoPanel p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  #inicioInfoPanel ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  #inicioInfoPanel li {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  /* Estilos para ocultar inicialmente los elementos */
+.scroll-animation {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Estilos para mostrar los elementos cuando se desplazan a la vista */
+.scroll-animation.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
