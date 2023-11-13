@@ -172,6 +172,7 @@
             }
 
             //echo $sql;
+            //sadfasdfbtasdy
 
             $leeroferta = $conexion -> query($sql);
         
