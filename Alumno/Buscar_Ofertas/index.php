@@ -44,7 +44,6 @@ function cerrarSesion(){
                     <li><a href="index.php">Buscar ofertas</a></li>
                     <hr>
                     <li><a href="#">Cambiar contraseña</a></li>
-                    <li><a href="#">Cerrar sesión</a></li>
                 </ul>
             </nav>
             <section class="main-info">

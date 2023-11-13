@@ -21,15 +21,22 @@
             </div>
         </div>
     </div>
+   
     <div class="rightGrid">
+    <p>
+        Login Usuario -> oscar@oscar.es Clave -> oscar
+    </p>
+    <p>
+        Login Empresa -> prueba1@prueba.es Clave -> prueba
+    </p>
         <div class="content">
           <div class="loginForm">
                 <form action="VerificarLogin.php" method="post">
                 <p>Login</p>
 
-                    <input value="oscar@oscar.es" type="email" name="email" id="" placeholder="Email" required>
+                    <input type="email" name="email" id="" placeholder="Email" required>
 
-                    <input  value="oscar" type="password" name="passw" placeholder="Contraseña" id="password" required>
+                    <input  type="password" name="passw" placeholder="Contraseña" id="password" required>
 
                     <input id="password-button" type="button" onclick="mostrar()" value="Mostrar contraseña">
                     <input type="submit" name="login" value="Entrar">

@@ -111,7 +111,9 @@
         ?>
             <input type="submit" name="buscar" value="Buscar" >
             <input type="reset" value="Limpiar">
+            
         </form>
+        
     </div>
     <?php
 
@@ -184,6 +186,12 @@
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
                 echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+                ?>
+                <form action="" method="post">
+                <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
+                <input type="submit" name="inscribirse" value="Inscribirse">
+                </form>
+                <?php
                 echo "</div>";
                 ?>  
     <?php
@@ -193,7 +201,7 @@
 
     <div id="nomostar">
     <?php
-        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion
+        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
         FROM Oferta, Usuario
         WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF";
         $leeroferta = $conexion -> query($sql);
@@ -206,9 +214,32 @@
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
                 echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+                ?>
+                <form action="" method="post">
+                <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
+                <input type="submit" name="inscribirse" value="Inscribirse">
+                </form>
+                <?php
                 echo "</div>";
                 ?>
     <?php
+            }
+            if(isset($_POST['inscribirse'])){
+                $IdOferta=$_POST['IdOferta'];
+                $dni=$_SESSION['dni'];
+                
+                $sentencia = $conexion->prepare("INSERT INTO Alumno_Oferta (DNI_CIF, Id_Oferta)VALUES (?,?)");
+                $sentencia->bindParam(1, $dni);
+                $sentencia->bindParam(2, $IdOferta);
+
+                try {
+                    $sentencia->execute();
+
+                
+                } catch (PDOException $e) {
+                    //Poner una ventana modal si ya esta escrito.
+                } 
+                
             }
     ?>
     </div>
