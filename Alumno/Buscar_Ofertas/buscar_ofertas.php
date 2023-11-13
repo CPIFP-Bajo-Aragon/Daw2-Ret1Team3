@@ -171,7 +171,7 @@
                 WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF";
             }
 
-            echo $sql;
+            //echo $sql;
 
             $leeroferta = $conexion -> query($sql);
         
