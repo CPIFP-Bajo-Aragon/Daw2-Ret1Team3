@@ -24,9 +24,8 @@
                     <li>Contacto</li>
                     <li>Dirección</li>
                     <li>Email</li>
-                    <li>Teléfono</li>
                 </ul>
             </div>
             </div>
         </footer>
-Oscar 
+Oscar  jjj
