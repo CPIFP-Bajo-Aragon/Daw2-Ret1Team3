@@ -220,11 +220,14 @@
                     if ($prevTipo !== null) {
                         echo "</optgroup>";
                     }
+
                     echo "<optgroup label=\"$tipo_hard\">";
                     $prevTipo = $tipo_hard; 
                 }
 
+
                 echo "<option value=\"$Id_Hard\">$nombre_hard</option>";
+  
             }
 
             if ($prevTipo !== null) {
