@@ -33,24 +33,6 @@ A continuación, se detallan los pasos para instalar y ejecutar la aplicación e
     cd Daw2-Ret1Team3
     ```
 
-2. **Instalar Dependencias:**
-
-    ```bash
-    # Comandos para instalar dependencias (si es necesario)
-    ```
-
-3. **Configuración:**
-
-    ```bash
-    # Configurar archivos de configuración, si es necesario
-    ```
-
-4. **Ejecutar la Aplicación:**
-
-    ```bash
-    # Comando para iniciar la aplicación
-    ```
-
     **Acceder a la Aplicación:**
     Abre tu navegador web y visita http://localhost:puerto.
 
@@ -65,10 +47,10 @@ A continuación, se detallan los pasos para instalar y ejecutar la aplicación e
 
 ## Problemas y Sugerencias
 
-Si encuentras algún problema o tienes alguna sugerencia, por favor crea un [issue](https://github.com/TU_USUARIO/Daw2-Ret1Team3/issues).
+Si encuentras algún problema o tienes alguna sugerencia, por favor crea un [issue](https://github.com/user/Daw2-Ret1Team3/issues).
 
 ## Licencia
 
-Este proyecto está bajo la licencia [Nombre de la Licencia]. Consulta el archivo LICENSE para más detalles.
+Este proyecto está bajo la licencia Creative Commons. Consulta el archivo LICENSE para más detalles.
 
 ¡Agradecemos tu interés en nuestro proyecto! Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros. ¡Feliz codificación!
