@@ -55,21 +55,59 @@
             }
         }else if($numFilas==0){
             ?>
-             <h2>¿No tienes cuenta?</h2>
-            <p><i>Registrate ahora y entra a una plataforma con mas de 500 empresas y mas de 100 ofertas de trabajo a diario</i></p>
-            <button>Registrate aquí</button>
-            <img src="../Imagenes/foto_login.jpg" alt="">
-            <h2>Login</h2>
+             <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" class="css">
+    <script src="../Funciones/mostrar.js"></script>
+    
+</head>
+<body>
 
-            <form action="VerificarLogin.php" method="post">
-                <input type="email" name="email" id="" placeholder="Email" required value="<?php echo $email ?>">
-                <input type="password" name="passw" placeholder="Contraseña" id="password" required>
-                <input type="button" onclick="mostrar()" value="Mostrar contraseña">
-                <input type="submit" name="login" value="Entrar">
-            </form>
-            <p>Nombre de usario y/o contraseña incorrectos.</p>
-            <p>¿Ha olvidado su contraseña?Recuperar contraseña</p>
-            <p id="p"></p>   
+    <?php include "../Header/Cabecera.php"; ?>
+
+<div class="gridContainer">
+    <div class="leftGrid">
+        <div class="content">
+            
+            <div class="imageContainer">
+                <img src="../Imagenes/oficinaImage.jpg" alt="">
+            </div>
+        </div>
+    </div>
+   
+    <div class="rightGrid">
+    <p>
+        Login Usuario -> oscar@oscar.es Clave -> oscar
+    </p>
+    <p>
+        Login Empresa -> prueba1@prueba.es Clave -> prueba
+    </p>
+        <div class="content">
+          <div class="loginForm">
+                <form action="VerificarLogin.php" method="post">
+                <p>Login</p>
+
+                    <input type="email" name="email" id="" placeholder="Email" required>
+
+                    <input  type="password" name="passw" placeholder="Contraseña" id="password" required>
+
+                    <input id="password-button" type="button" onclick="mostrar()" value="Mostrar contraseña">
+                    <input type="submit" name="login" value="Entrar">
+                </form>
+          </div>
+        </div>
+    </div>
+</div>
+
+    <?php include "../Footer/footer.php"; ?>
+
+</body>
+</html>
+
             <?php
 
 

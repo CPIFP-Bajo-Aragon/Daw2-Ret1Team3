@@ -7,7 +7,6 @@
     <title>Document</title>
     <?php include "../../Funciones/conexion.php";
     ?>
-    
 </head>
 
 <body>
@@ -125,10 +124,10 @@
 
             ?>
             <style>
-        #nomostar{
-            display: none;
-        }
-         </style>
+                #nomostar{
+                    display: none;
+                }
+            </style>
          <?php
             
         $sql ="SELECT DISTINCT Oferta.Id_Oferta, Oferta.Titulo, Oferta.Vacantes, Oferta.Descripcion, Oferta.Activo, Oferta.Fecha_Publicacion, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Oferta.DNI_CIF, Oferta.Id_Municipio, Usuario.Nombre_Usuario FROM Oferta, Oferta_Tipo_Titulacion, Titulacion, Empresa, Oferta_Nivel_Idioma, Idioma, Usuario WHERE Oferta.Activo=1 AND Oferta.Id_Oferta = Oferta_Tipo_Titulacion.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Empresa.DNI_CIF=Oferta.DNI_CIF AND Oferta_Nivel_Idioma.Id_Idioma=Idioma.Id_Idioma AND Oferta_Nivel_Idioma.Id_Oferta=Oferta.Id_Oferta AND Oferta.DNI_CIF = Usuario.DNI_CIF";
@@ -186,14 +185,34 @@
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
                 echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+
                 ?>
+                <button class="abrirModal">Ver Oferta</button>
+                    <div class="ventanaModal modal">
+                        <div class="modal-content">
+                            <span class="cerrar">&times;</span>
+                            <?php 
+                                echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
+                                echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
+                                echo "<p>Vacantes: ".$fila->Vacantes."</p>";
+                                echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
+                                echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
+                                echo "<p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p>";
+                                echo "<p>Titulacion: ".$fila->Nombre."</p>";
+                                echo "<p>Soft skills: ".$fila->Nombre_soft."</p>";
+                                echo "<p>Hard skills: ".$fila->Nombre_hard."</p>";
+                            ?>
+                        </div>
+                    </div>
+
                 <form action="" method="post">
                 <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
                 <input type="submit" name="inscribirse" value="Inscribirse">
                 </form>
                 <?php
                 echo "</div>";
-                ?>  
+                ?>       
+  
     <?php
              }
         }
@@ -201,11 +220,12 @@
 
     <div id="nomostar">
     <?php
-        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
-        FROM Oferta, Usuario
-        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF";
-        $leeroferta = $conexion -> query($sql);
+        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta, Idioma.Idioma, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo
+        FROM Oferta, Usuario, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill
+        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard";
         
+        $leeroferta = $conexion -> query($sql);
+    
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
                 echo "<div class=\"container\">";
                 echo "<p class=\"info\">Empresa: ".$fila ->Nombre_Usuario."</p>";
@@ -214,15 +234,35 @@
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
                 echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+
                 ?>
+                <button class="abrirModal">Ver Oferta</button>
+                    <div class="ventanaModal modal">
+                        <div class="modal-content">
+                            <span class="cerrar">&times;</span>
+                            <?php 
+                                echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
+                                echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
+                                echo "<p>Vacantes: ".$fila->Vacantes."</p>";
+                                echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
+                                echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
+                                echo "<p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p>";
+                                echo "<p>Titulacion: ".$fila->Nombre."</p>";
+                                echo "<p>Soft skills: ".$fila->Nombre_soft."</p>";
+                                echo "<p>Hard skills: ".$fila->Nombre_hard."</p>";
+                            ?>
+                        </div>
+                    </div>
+
                 <form action="" method="post">
                 <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
                 <input type="submit" name="inscribirse" value="Inscribirse">
                 </form>
                 <?php
                 echo "</div>";
-                ?>
-    <?php
+                ?>       
+
+            <?php
             }
             if(isset($_POST['inscribirse'])){
                 $IdOferta=$_POST['IdOferta'];
@@ -243,6 +283,20 @@
             }
     ?>
     </div>
+
+    <script>
+        var botonesAbrirModal = document.getElementsByClassName("abrirModal");
+
+        for (var i = 0; i < botonesAbrirModal.length; i++) {
+            botonesAbrirModal[i].addEventListener('click', function() {
+                var modal = this.nextElementSibling;
+                modal.style.display = "block";
+                modal.getElementsByClassName("cerrar")[0].addEventListener('click', function() {
+                    modal.style.display = "none";
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

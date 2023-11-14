@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../Inicio_Alumno/alumno.css">
+    <link rel="stylesheet" href="../../Estilos/empresa.css">
 
     <?php
         session_start();
         $dni = $_SESSION['dni'];
         $username = $_SESSION['Nombre_Usuario'];
-
+        
         function cerrarSesion(){
             session_destroy();
         }
@@ -72,70 +72,8 @@
                             </div>
                         </div>
                             <div id="datosPrincipales">
-                                <?php include "Datos_principales/inicio_Alumno.php"?>
+                                <?php include "Datos_principales/inicio_Empresa.php"?>
                             </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h2 class="card-title">Titulaciones</h2>
-                        <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                        <?php include "Titulaciones/Inicio_Alumno.php"?>
-                        <?php include "Titulaciones/ver_Alumno.php"?>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h2 class="card-title" id="Formacion_complementaria">Formación complementaria</h2>
-                    <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                    <?php include "Formacion_Complementaria/Formacion_Complementaria_Alumno.php"?>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="card" id="Experiencia_Laboral">
-                    <h2 class="card-title">Experiencia</h2>
-                    <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                    <?php include "Experiencia_Laboral/experiencialaboral.php"?>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card"  id="habper"> 
-                    <h2 class="card-title">Habilidades personales</h2>
-                    <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                    <?php include "Habilidades_personales/habilidades_personales.php"?>
-                        </div>
-                    </div>
-                </article>
-    
-                <article class="card"  id="habbas">
-                    <h2 class="card-title">Habilidades básicas</h2>
-                    <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                        <?php include "Habilidades_basicas/habilidades_basicas.php"?>
-                        </div>
-                    </div>
-                </article>
-
-
-                <article class="card" id="Idioma">
-                    <h2 class="card-title">Idioma</h2>
-                    <hr class="hr-divider">
-                    <div class="cardContent">
-                        <div class="cardInfo">
-                        <?php include "Idioma/Idioma.php"?>
-                        </div>
                     </div>
                 </article>
             </section>

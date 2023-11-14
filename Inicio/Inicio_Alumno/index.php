@@ -17,7 +17,7 @@ function cerrarSesion(){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="alumno.css">
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
  
 </head>
 
@@ -36,14 +36,14 @@ function cerrarSesion(){
                 <ul>
                     <li><a href="#">Inicio</a></li>
                     <li><a href="../../Alumno/Curriculum/curriculum.php">Curriculum</a></li>
-                    <li><a href="#">Mis alertas</li>
+                    <li><a href="../../Alumno/Alertas/index.php">Mis alertas</li>
                     <li><a href="#">Mensajes</a></li>
-                    <li><a href="#">Mis ofertas</a></li>
+                    <li><a href="../../Inicio/Inicio_Alumno/Mis_Ofertas/ofertas.php">Mis ofertas</a></li>
                     <hr>
                     <li><a href="../../Alumno/Buscar_Empresas/index.php">Buscar empresas</a></li>
                     <li><a href="../../Alumno/Buscar_Ofertas/index.php">Buscar ofertas</a></li>
                     <hr>
-                    <li><a href="#">Cambiar contraseña</a></li>
+                    <li><a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">Cambiar contraseña</a></li>
                 </ul>
             </nav>
             <section class="main-info">

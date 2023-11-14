@@ -1,11 +1,47 @@
 img{
-    width: 10%;
-    height: 2%;
+    max-width: 10%;
+    margin-right: 20px;
 }
 
-.div2{
-    border-top: solid 1px;
-    
+h1{
+    color: lightblue;
+    padding-left: 30px;
+}
+
+
+.flex{
+    display: flex;
+    align-items: center;
+}
+
+.div1 {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.div1 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.div2 {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.div2 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
 }
 .div3 {
     background-color: #fff;
@@ -22,11 +58,6 @@ img{
     line-height: 1.5;
 }
 
-.div3 p:first-child{
-    font-size: 18px;
-    font-weight: bold;
-    color: gray;
-}
 .div4 {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -42,11 +73,6 @@ img{
     line-height: 1.5;
 }
 
-.div4 p:first-child:after {
-    font-size: 18px;
-    font-weight: bold;
-    color: gray;
-}
 .div5 {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -62,18 +88,48 @@ img{
     line-height: 1.5;
 }
 
-.div5 p:first-child:after {
-    font-size: 18px;
-    font-weight: bold;
-    color: gray;
+
+.div6 {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
 }
-.div6{
-    border-top: solid 1px;
-    
+
+.div6 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
 }
-.div7{
-    border-top: solid 1px;
+
+.div7 {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
 }
-.div8{
-    border-top: solid 1px;
+
+.div7 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
 }
+.div8 {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.div8 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+

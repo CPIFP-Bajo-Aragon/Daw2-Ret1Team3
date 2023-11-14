@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="../../Inicio/Inicio_Alumno/alumno.css">
+        <link rel="stylesheet" href="../../Estilos/alumno.css">
     </head>
 
     <body>
@@ -92,12 +92,13 @@
 
     }
 
-        
+        echo "<h1>Datos Personales</h1>"; 
     ?>
+    <div class="flex">
     <div class="div1">
     <?php
 
-        echo "<h1>Datos Personales</h1>";
+ 
         echo "<img src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>";
         echo "<p>Nombre: ".$Nombre_Usuario."</p>";
         echo "<p>Apellidos: ".$Apellido."</p>";
@@ -107,14 +108,12 @@
         echo "<p>Movilidad: ".$Movilidad."</p>";
     ?>
     </div>
+    </div>
     <?php 
-
+        echo "<h1>Contacto</h1>";
     ?>
     <div class="div2">
     <?php
-
-
-        echo "<h1>Contacto</h1>";
         echo "<p>Telefono: ".$Telefono_Alumno."</p>";
         echo "<p>Correo: ".$email."</p>";
 
@@ -220,14 +219,16 @@
                     if ($prevTipo !== null) {
                         echo "</optgroup>";
                     }
-
                     echo "<optgroup label=\"$tipo_hard\">";
                     $prevTipo = $tipo_hard; 
                 }
-
-
-                echo "<option value=\"$Id_Hard\">$nombre_hard</option>";
-  
+                ?>
+                <div class="div8">
+                <?php
+                echo "<option value=\"$Id_Hard\"><p>.$nombre_hard</p></option>";
+                ?>
+                </div>
+                <?php
             }
 
             if ($prevTipo !== null) {
@@ -275,10 +276,10 @@
                                 <div class="div7">
                         <?php
 
-                echo "<p>Nombre del centro:</p>".$Nombre_Centro;
+                echo "<p>Nombre del centro: ".$Nombre_Centro."</p>";
                 echo "<p>Titulacion: ".$nombre_titulo."</p>";
-                echo "<p>Fecha Inicio".$Fecha_Inicio_titulo."</p>";
-                echo "<p>Fecha Fin".$Fecha_Fin_titulo."</p>";
+                echo "<p>Fecha Inicio: ".$Fecha_Inicio_titulo."</p>";
+                echo "<p>Fecha Fin: ".$Fecha_Fin_titulo."</p>";
             ?>
                     </div>
                 <?php
