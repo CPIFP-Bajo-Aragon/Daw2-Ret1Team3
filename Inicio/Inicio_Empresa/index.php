@@ -50,7 +50,7 @@
                     <li><a href="#">Inicio</a></li>
                     <li><a href="#">Mis alertas</li>
                     <li><a href="#">Mensajes</a></li>
-                    <li><a href="#">Mis ofertas</a></li>
+                    <li><a href="../../Empresa/Crear_Oferta/Crear_Oferta.php">Mis ofertas</a></li>
                     <hr>
                     <li><a href="#">Buscar candidatos</a></li>
                     <hr>

@@ -34,7 +34,7 @@ if ($result = $conexion->query($query)) {
 
 <form method="POST" action="./Datos_principales/actualizar.php" enctype="multipart/form-data">
     <label for="Nombre">Nombre:</label>
-    <input type="text" name="Nombre" value="<?php echo  $Nombre_Usuario; ?>" class="inicio-alumno">
+    <input type="text" name="Nombre" value="<?php echo $Nombre_Usuario; ?>" class="inicio-alumno">
     <label for="Apellido">Apellido:</label>
     <input type="text" name="Apellido" value="<?php echo $Apellido; ?>" class="inicio-alumno">
     <label for="Fecha_Nacimiento">Fecha de Nacimiento:</label>
@@ -58,7 +58,7 @@ if ($result = $conexion->query($query)) {
             }
         }
 
-        $query = "SELECT * FROM Municipio"; 
+        $query = "SELECT * FROM Municipio Order by Nombre_Municipio asc"; 
 
         if ($result = $conexion->query($query)) {
             while ($row = $result->fetch(PDO::FETCH_OBJ)) {

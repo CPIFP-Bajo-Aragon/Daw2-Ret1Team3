@@ -19,20 +19,22 @@ try {
 
     $query = "UPDATE Usuario SET Nombre_Usuario = :Empresa WHERE DNI_CIF = :dni";
     $stmt = $conexion->prepare($query);
-    $stmt->bindParam(':Empresa', $nombre);
+    $stmt->bindParam(':Empresa', $Empresa);
     $stmt->bindParam(':dni', $dni);
     $stmt->execute();
 
-    $query = "UPDATE Alumno SET Apellido = :apellido, Fecha_Nacimiento = :fechaNacimiento, Telefono_Alumno = :telefonoAlumno, Movilidad = :movilidad, Direccion = :direccion, Perfil_Publico = :perfilPublico, Id_Municipio = :idMunicipio WHERE DNI_CIF = :dni";
+    $query = "UPDATE Empresa SET Empresa.Numero_Trabajadores = :Numero_Trabajadores, Empresa.Web = :Web, Empresa.Telefono = :Telefono, Empresa.Area_Negocio = :Area_Negocio, Empresa.Descripcion = :Descripcion, Empresa.Direccion = :Direccion, Empresa.Pais = :Pais, Empresa.Activo = :Activo WHERE DNI_CIF = :DNI_CIF";
     $stmt = $conexion->prepare($query);
-    $stmt->bindParam(':apellido', $apellido);
-    $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
-    $stmt->bindParam(':telefonoAlumno', $telefonoAlumno);
-    $stmt->bindParam(':movilidad', $movilidad);
-    $stmt->bindParam(':direccion', $direccion);
-    $stmt->bindParam(':perfilPublico', $perfilPublico);
-    $stmt->bindParam(':idMunicipio', $idMunicipio);
-    $stmt->bindParam(':dni', $dni);
+    $stmt->bindParam(':Numero_Trabajadores', $Numero_Trabajadores);
+    $stmt->bindParam(':Web', $Web);
+    $stmt->bindParam(':Telefono', $Telefono);
+    $stmt->bindParam(':Area_Negocio', $Area_Negocio);
+    $stmt->bindParam(':Descripcion', $Descripcion);
+    $stmt->bindParam(':Direccion', $Direccion);
+    $stmt->bindParam(':Pais', $Pais);
+    $stmt->bindParam(':Activo', $Activo);
+    $stmt->bindParam(':DNI_CIF', $DNI_CIF);
+    $stmt->bindParam(':Activo', $Activo);
     $stmt->execute();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imagen"])) {

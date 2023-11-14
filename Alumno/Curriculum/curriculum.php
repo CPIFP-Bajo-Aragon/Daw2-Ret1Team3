@@ -28,19 +28,19 @@
             </header>
             <div class="main-content">
                 <nav class="main-menu">
-                    <ul>
-                        <!-- Mister CSS Areggla las url-->
-                        <li><a href="../../Inicio/Inicio_Alumno/">Inicio</a></li>
-                        <li><a href="../../Alumno/Curriculum/curriculum.php">Curriculum</a></li>
-                        <li><a href="#">Mis alertas</li>
-                        <li><a href="#">Mensajes</a></li>
-                        <li><a href="#">Mis ofertas</a></li>
-                        <hr>
-                        <li><a href="../Buscar_Empresas/index.php">Buscar empresas</a></li>
-                        <li><a href="../Buscar_Ofertas/index.php">Buscar ofertas</a></li>
-                        <hr>
-                        <li><a href="#">Cambiar contraseña</a></li>
-                    </ul>
+                <ul>
+                    <a href="#"><li>Inicio</li></a>
+                    <a href="../../Alumno/Curriculum/curriculum.php"><li>Curriculum</li></a>
+                    <a href="../../Alumno/Alertas/index.php"><li>Mis alertas</li></a>
+                    <a href="#"><li>Mensajes</li></a>
+                    <a href="../../Inicio/Inicio_Alumno/Mis_Ofertas/ofertas.php"><li>Mis ofertas</li></a>
+                    <hr>
+                    <a href="../../Alumno/Buscar_Empresas/index.php"><li>Buscar empresas</li></a>
+                    <a href="../../Alumno/Buscar_Ofertas/index.php"><li>Buscar ofertas</li></a>
+                    <hr>
+                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php"><li>Cambiar contraseña</li></a>
+
+                </ul>
                 </nav>
                 <section class="main-info">
                 <article class="card">
@@ -92,22 +92,21 @@
 
     }
 
-        echo "<h1>Datos Personales</h1>"; 
+        echo "<h1>Datos Personales</h1>";
     ?>
-    <div class="flex">
     <div class="div1">
     <?php
-
- 
-        echo "<img src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>";
+        
+        echo "<img class='imagen' src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>"; 
+        echo "<div class='texto'>";
         echo "<p>Nombre: ".$Nombre_Usuario."</p>";
         echo "<p>Apellidos: ".$Apellido."</p>";
         echo "<p>Fecha Nacimiento: ".$Fecha_Nacimiento."</p>";
         echo "<p>Direccion: ".$Direccion."</p>";
         echo "<p>Municipio: ".$Nombre_Municipio."</p>";
         echo "<p>Movilidad: ".$Movilidad."</p>";
+        echo "</div>";
     ?>
-    </div>
     </div>
     <?php 
         echo "<h1>Contacto</h1>";
@@ -222,13 +221,9 @@
                     echo "<optgroup label=\"$tipo_hard\">";
                     $prevTipo = $tipo_hard; 
                 }
-                ?>
-                <div class="div8">
-                <?php
-                echo "<option value=\"$Id_Hard\"><p>.$nombre_hard</p></option>";
-                ?>
-                </div>
-                <?php
+
+                echo "<option value=\"$Id_Hard\">$nombre_hard</option>";
+
             }
 
             if ($prevTipo !== null) {

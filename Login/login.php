@@ -27,7 +27,7 @@
         Login Usuario -> oscar@oscar.es Clave -> oscar
     </p>
     <p>
-        Login Empresa -> prueba1@prueba.es Clave -> prueba
+        Login Empresa -> pruba1@prueba.es Clave -> prueba
     </p>
         <div class="content">
           <div class="loginForm">

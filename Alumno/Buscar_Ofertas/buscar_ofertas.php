@@ -7,6 +7,7 @@
     <title>Document</title>
     <?php include "../../Funciones/conexion.php";
     ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -38,7 +39,7 @@
         ?>
             <p>Area de negocio</p>
             <?php 
-        $sql="SELECT DISTINCT Area_Negocio FROM Empresa";
+        $sql="SELECT * FROM AreasDeNegocio";
         if($resultado = $conexion -> query($sql)){
             ?>
             <select name="area_negocio" id="">
@@ -46,9 +47,11 @@
 
                 <?php
             while($row = $resultado->fetch(PDO::FETCH_OBJ)){
-                $Area_negocio= $row-> Area_Negocio;
+                $Area_negocio= $row-> Nombre;
+                $ID= $row-> ID;
+
                 ?>
-                <option value="<?php echo $Area_negocio?>"><?php echo $Area_negocio?></option>
+                <option value="<?php echo $ID?>"><?php echo $Area_negocio?></option>
                 <?php 
 
             }
@@ -167,7 +170,7 @@
                 $sql = $sql." AND Idioma.Id_Idioma='$Idioma'";
             }
             if($CIF_empresa=="" && $Area_negocio=="" && $Titulacion=="" && $Idioma==""){
-                $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion
+                $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
                 FROM Oferta, Usuario
                 WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF";
             }
@@ -220,9 +223,9 @@
 
     <div id="nomostar">
     <?php
-        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta, Idioma.Idioma, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo
-        FROM Oferta, Usuario, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill
-        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard";
+        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta/*, Idioma.Idioma, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo*/
+        FROM Oferta, Usuario/*, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill*/
+        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF /*AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard*/";
         
         $leeroferta = $conexion -> query($sql);
     
@@ -254,7 +257,7 @@
                         </div>
                     </div>
 
-                <form action="" method="post">
+                <form action="" method="POST">
                 <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
                 <input type="submit" name="inscribirse" value="Inscribirse">
                 </form>
@@ -274,10 +277,18 @@
 
                 try {
                     $sentencia->execute();
+                    
 
                 
                 } catch (PDOException $e) {
                     //Poner una ventana modal si ya esta escrito.
+                    echo '<script>';
+                    echo 'Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Ya estas apuntado en la oferta."
+                        })';
+                    echo '</script>';
                 } 
                 
             }

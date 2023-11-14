@@ -46,6 +46,7 @@ main {
 }
 
 /* MENÚ DE NAVEGACIÓN IZQUIERDA */
+
 .main-menu {
     position: fixed; /* Hace que el menú sea fijo */
     top: 15vh; /* Alinea el menú justo debajo del header fijo */
@@ -70,7 +71,7 @@ main {
     padding: 1vw;
 }
 
-.main-menu ul li a {
+.main-menu ul a li {
     text-decoration: none;
     color: black;
 }
@@ -79,6 +80,8 @@ main {
     background-color: #9BC2DD;
     transition: background-color 0.5s ease;
 }
+
+
 
 /* MAIN INFO */
 
@@ -222,6 +225,8 @@ tr:nth-child(even) {
 
 
 
+
+
 /* FORMULARIO */
 form {
     padding: 1vw;
@@ -348,3 +353,35 @@ form {
     background-color: #0056b3;
   }
     
+
+  /* BREADCRUMBS */
+
+  .breadcrumbs {
+    background-color: #f5f5f5;
+    max-width: 93.5%;
+    padding: 20px;
+    margin: 1.5vw;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+  }
+  
+  .breadcrumbs h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .breadcrumbs span {
+    color: #3498db;
+    font-weight: bold;
+  }
+  
+  /* Estilo para los separadores entre las migas de pan */
+  .breadcrumbs::before {
+    content: "›";
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: #95a5a6; /* Color gris claro */
+  }
+  

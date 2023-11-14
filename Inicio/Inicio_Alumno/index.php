@@ -1,4 +1,5 @@
 <link rel="shortcut icon" href="../../../Imagenes/icon/icon.png">
+<link rel="stylesheet" href="../../Estilos/estilocabeceraLogeado.css">      
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,33 +23,32 @@ function cerrarSesion(){
 </head>
 
 <body>
+
+    <?php include "../../Header/CabeceraLogeado.php"; ?>
+    
     <main>
-        <header class="main-header">
-            <img src="../../Imagenes/Profitech.png" alt="">
-            <div class="conInfo"><p>Hola, <?php echo $username ?></p>
-            <form action="cerrarSesion.php" method="post">
-            <input type="submit" value="Cerrar sesión"/>
-            </form>
-            </div>
-        </header>
+
         <div class="main-content">
             <nav class="main-menu">
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="../../Alumno/Curriculum/curriculum.php">Curriculum</a></li>
-                    <li><a href="../../Alumno/Alertas/index.php">Mis alertas</li>
-                    <li><a href="#">Mensajes</a></li>
-                    <li><a href="../../Inicio/Inicio_Alumno/Mis_Ofertas/ofertas.php">Mis ofertas</a></li>
+            <ul>
+                    <a href="#"><li id="Inicio">Inicio</li></a>
+                    <a href="../../Alumno/Curriculum/curriculum.php"><li>Curriculum</li></a>
+                    <a href="../../Alumno/Alertas/index.php"><li>Mis alertas</li></a>
+                    <a href="#"><li>Mensajes</li></a>
+                    <a href="../../Alumno/Mis_Ofertas/ofertas.php"><li>Mis ofertas</li></a>
                     <hr>
-                    <li><a href="../../Alumno/Buscar_Empresas/index.php">Buscar empresas</a></li>
-                    <li><a href="../../Alumno/Buscar_Ofertas/index.php">Buscar ofertas</a></li>
+                    <a href="../../Alumno/Buscar_Empresas/index.php"><li>Buscar empresas</li></a>
+                    <a href="../../Alumno/Buscar_Ofertas/index.php"><li>Buscar ofertas</li></a>
                     <hr>
-                    <li><a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">Cambiar contraseña</a></li>
+                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php"><li>Cambiar contraseña</li></a>
+
                 </ul>
             </nav>
             <section class="main-info">
 
-                <h1>Info</h1>
+               <div class="breadcrumbs">
+               <h1>Alumno / <span>Inicio</span></h1>
+               </div>
                 <article class="card">
                     <h2 class="card-title">Datos principales</h2>
                         <hr class="hr-divider">

@@ -147,17 +147,5 @@ main>.fotoInfo>img {
     color: #555;
   }
   
-  /* Estilos para ocultar inicialmente los elementos */
-.scroll-animation {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* Estilos para mostrar los elementos cuando se desplazan a la vista */
-.scroll-animation.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 

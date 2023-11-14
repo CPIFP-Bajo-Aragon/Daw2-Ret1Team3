@@ -6,20 +6,35 @@
 <script>desabilitar();</script>
 <?php
 
-// Recoge los datos de Alumnos
-$query = "SELECT Empresa.*, Municipio.Nombre_Municipio FROM Empresa, Municipio Municipio WHERE Empresa.Id_Municipio = Municipio.Id_Municipio AND DNI_CIF='$dni'";
+$dni = $_SESSION['dni'];
+
+   $Numero_Trabajadores = "";
+   $Web = "";
+   $Telefono = "";
+   $Area_Negocio = "";
+   $Descripcion = "";
+   $Direccion = "";
+   $Pais = "";
+   $Activo = "";
+   $DNI_CIF = "";
+   $Nombre_Municipio = "";
+   $id_Municipio_Empresa = 8123;
+
+$query = "SELECT Empresa.*, Municipio.Nombre_Municipio FROM Empresa, Municipio WHERE Empresa.Id_Municipio = Municipio.Id_Municipio AND Empresa.DNI_CIF='$dni'";
+
 if ($result = $conexion->query($query)) {
     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
         $Numero_Trabajadores = $row->Numero_Trabajadores;
         $Web = $row->Web;
         $Telefono = $row->Telefono;
-        $Area_Negocio = $row->Area_Negocio;
+        $Area_Negocio = $row->Area_Negocio; 
         $Descripcion = $row->Descripcion;
         $Direccion = $row->Direccion;
         $Pais = $row->Pais;
         $Activo = $row->Activo;
         $DNI_CIF = $row->DNI_CIF;
         $Nombre_Municipio = $row->Nombre_Municipio;
+        $id_Municipio_Empresa = $row->Id_Municipio;
     }
 }
 
@@ -31,14 +46,14 @@ if ($result = $conexion->query($query)) {
     }
 }
 
+$_SESSION['username'] = $Nombre_Usuario;
+
 ?>
-<form method="GET" action="./Datos_principales/actualizar.php" enctype="multipart/form-data">
+<form method="POST" action="./Datos_principales/actualizar.php" enctype="multipart/form-data">
     <label for="Empresa">Empresa:</label>
     <input type="text" name="Empresa" value="<?php echo  $username; ?>" class="inicio-alumno">
-    <label for="DNI_CIF">CIF:</label>
-    <input type="text" name="DNI_CIF" value="<?php echo $DNI_CIF; ?>" class="inicio-alumno">
     <label for="Web">Web:</label>
-    <input type="text" name="Web" required value="<?php echo $Web; ?>" class="inicio-alumno">
+    <input type="text" name="Web" value="<?php echo $Web; ?>" class="inicio-alumno">
     <label for="Numero_Trabajadores">Número de trabajadores:</label>
     <input type="text" name="Numero_Trabajadores" required value="<?php echo $Numero_Trabajadores; ?>" class="inicio-alumno">
    
@@ -49,10 +64,23 @@ if ($result = $conexion->query($query)) {
     <input type="text" name="Area_Negocio" value="<?php echo $Area_Negocio; ?>" class="inicio-alumno">
 
     <label for="Telefono">Telefono:</label>
-    <input type="text" name="Telefono" value="<?php echo $Telefono; ?>" class="inicio-alumno">
+    <input type="text" name="Telefono" value="<?php echo $Telefono; ?>" pattern="[0-9]+" class="inicio-alumno">
 
-    <label for="Nombre_Municipio">Nombre_Municipio:</label>
-    <input type="text" name="Nombre_Municipio" value="<?php echo $Nombre_Municipio; ?>" class="inicio-alumno">
+    <label for="municipios">Municipio:</label>
+
+    <select name="Nombre_Municipio" id="Nombre_Municipio" class="inicio-alumno">
+        <?php
+        $query = "SELECT * FROM Municipio where Id_Municipio=$id_Municipio_Empresa"; 
+        if ($result = $conexion->query($query)) {
+            while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                $Nombre_Municipio = $row->Nombre_Municipio;
+                $id_Municipio = $row->Id_Municipio;
+                echo "<option value='$id_Municipio'>$Nombre_Municipio</option>";
+            }
+        }
+
+    ?>
+</select>
 
     <label for="Pais">Pais:</label>
     <input type="text" name="Pais" value="<?php echo $Pais; ?>" class="inicio-alumno">

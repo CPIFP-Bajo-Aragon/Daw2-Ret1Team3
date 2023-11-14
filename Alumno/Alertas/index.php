@@ -34,23 +34,30 @@ $username = "";
         <div class="main-content">
             <nav class="main-menu">
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="../../Alumno/Curriculum/curriculum.php">Curriculum</a></li>
-                    <li><a href="#">Mis alertas</a></li>
-                    <li><a href="#">Mensajes</a></li>
-                    <li><a href="#">Mis ofertas</a></li>
+                    <a href="#"><li id="Inicio">Inicio</li></a>
+                    <a href="../../Alumno/Curriculum/curriculum.php"><li>Curriculum</li></a>
+                    <a href="../../Alumno/Alertas/index.php"><li>Mis alertas</li></a>
+                    <a href="#"><li>Mensajes</li></a>
+                    <a href="../../Inicio/Inicio_Alumno/Mis_Ofertas/ofertas.php"><li>Mis ofertas</li></a>
                     <hr>
-                    <li><a href="../../Alumno/Buscar_Empresas/index.php">Buscar empresas</a></li>
-                    <li><a href="../../Alumno/Buscar_Ofertas/index.php">Buscar ofertas</a></li>
+                    <a href="../../Alumno/Buscar_Empresas/index.php"><li>Buscar empresas</li></a>
+                    <a href="../../Alumno/Buscar_Ofertas/index.php"><li>Buscar ofertas</li></a>
                     <hr>
-                    <li><a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">Cambiar contraseña</a></li>
+                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php"><li>Cambiar contraseña</li></a>
+
                 </ul>
             </nav>
             <section class="main-info">
+            <article class="card">
+            <p id="resultado"></p>
+            </article>
+
                 <?php 
                 $sql = "SELECT * FROM Alertas where DNI_CIF = '$dni' AND Vista=1";
-
+                
                 if ($result = $conexion->query($sql)) {
+                    $sqlfilas = $result->rowCount();
+                   
                     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                         $Id_Alerta = $row->Id_Alerta;
                         $Alerta = $row->Alerta;
@@ -62,10 +69,19 @@ $username = "";
                                 <input type="submit" value="Marcar como Leída" />
                             </form>
                         </article>
+
                         <?php
                     }
                 }
+                if ($sqlfilas==0){
+                    ?>
+                    <script>
+                        document.getElementById("resultado").innerHTML = "No tienes alertas actualmente :)";
+                    </script>
+                    <?php
+                }
                 ?>
+                
             </section>
         </div>
     </main>
