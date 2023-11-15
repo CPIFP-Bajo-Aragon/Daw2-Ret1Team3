@@ -126,13 +126,76 @@ h1{
     width:50%;
     margin-left: 8%;
 }
-@media print{
- 
-    .card{
+
+@media print {
+
+
+    .main-header{
         display: none;
     }
-    .
+
+    .main-content{
+        display:none;
+    }
+    .conInfo{
+        display: none;
+    }
+
+    .texto {
+        flex-direction: column;
+        padding-left: 0; 
+        width: auto; 
+    }
+    
+    img{
+        display: block !important;
+        margin-right: 10px;
+        max-width: 10%;
+        padding-bottom: 10%;
+    }
+
+    .div1 {
+        display: flex !important;
+        align-items: center;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 20px;
+        padding: 20px;
+        width: auto;
+        margin-left: 8%; 
+    }
+
+    .div1 p,
+    .div2 p,
+    .div3 p,
+    .div4 p,
+    .div5 p,
+    .div6 p,
+    .div7 p {
+        display: block !important;
+        padding-left: 25%; 
+        margin: 0; 
+        font-size: 16px; 
+        color: #333; 
+        line-height: 1.5; 
+    }
+
+   
+    .div1,
+    .div2,
+    .div3,
+    .div4,
+    .div5,
+    .div6,
+    .div7 {
+        display: block !important;
+        margin: 0;
+        padding: 0; 
+        background-color: transparent; 
+        box-shadow: none; 
+        border-radius: 0;
+        width: auto; 
+        margin-left: 0; 
+    }
 }
-
-
-  

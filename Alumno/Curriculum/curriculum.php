@@ -59,6 +59,7 @@
 
                     </ul>
                 </nav>
+            </div>
                 <section class="main-info">
                     <article class="card">
 
