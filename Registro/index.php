@@ -6,7 +6,7 @@
     <title>Registro</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<?php include "../Header/Cabecera.php" ?>
+<?php include "../Header/cabeceraAcceso.php"; ?>
 
 <body>
 <section class='FlexContainer'>

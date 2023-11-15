@@ -1,5 +1,5 @@
         <footer>
-        <link rel="stylesheet" href="../Estilos/footer.css">
+        <link rel="stylesheet" href="../../Estilos/footer.css">
             <div class="gridfooter">
             <div class="izquierda">    
                 <ul>

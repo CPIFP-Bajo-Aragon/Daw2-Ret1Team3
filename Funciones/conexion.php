@@ -4,7 +4,7 @@
 //Aqui pones tu HOST (LocalHost) si tu servidor esta en casa
 $host = "localhost";
 //Aqui el nombre de usuario 
-$nombre= "root"; 
+$nombre= "profitech"; 
 //Aqui la contraseña
 $contraseña="Admin1234"; 
 

@@ -9,20 +9,11 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <img src="Imagenes/Profitech.png" alt="Profitech Logo">
-        </div>
-        <nav>
-            <a href="phpmyadmin">PHPMYADMIN</a>
-            <a href="Registro">REGISTRATE</a>
-            <a href="Login/login.php">INICIAR SESION</a>
-        </nav>
-    </header>
+  
     <main>
-     <!--    <div class="header-image">
-            <img src="Imagenes/inicioCabecera.jpg" alt="Imagen de Cabecera">
-        </div> -->
+    
+    <?php include "./Header/inicioCabecera.php"; ?>
+
         <div class="separador">
             <h4>Objetivo</h4>
             <p>Profitech es una plataforma para poner en contacto a empresas y estudiantes.

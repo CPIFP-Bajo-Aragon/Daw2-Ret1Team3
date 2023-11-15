@@ -126,48 +126,13 @@ h1{
     width:50%;
     margin-left: 8%;
 }
-
-
-option{
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin: 20px;
-    padding: 20px;
-    width:50%;
-    margin-left: 8%;
+@media print{
+ 
+    .card{
+        display: none;
+    }
+    .
 }
 
-optgroup{
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin: 20px;
-    padding: 20px;
-    width:50%;
-    margin-left: 8%;
-}
 
-.div7 p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-}
-.div8 {
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin: 20px;
-    padding: 20px;
-    width:50%;
-    margin-left: 8%;
-}
-
-.div8 p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-}
-
+  

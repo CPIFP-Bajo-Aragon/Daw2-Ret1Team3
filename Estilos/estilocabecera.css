@@ -4,35 +4,45 @@
 }
 
 
-.logo{
-    width: 150px;
- 
-}
+
 .union{
     padding-right: 50px;
     padding-top: 30px;
     height: 30%;
 }
 
-header {
-    background-color: #0074cc; /* Cambio de color de fondo */
-    display: flex;
+
+/* HEADER */
+.main-header {
+    position: fixed;
+    top: 0; 
     justify-content: space-between;
+    display: flex;
+    background-color: #0074cc;
+    color: black;
+    height: 10vh;
+    width: 95.7%;
+    text-align: center;
     align-items: center;
     padding: 10px 20px;
+    z-index: 3;
 }
 
-header .logo img {
+.main-header > img {
     max-width: 100px;
     height: auto;
 }
 
-header nav a {
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    background-color: #0058a3; /* Cambio de color al pasar el mouse */
-    margin: 0 10px;
-    font-weight: bold;
+/* .conInfo{
+    display: flex;
+    position: absolute;
+    right: 3vw;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 10%;
+    height: 95%;
+} */
+
+.conInfo p{
+    color: white;
 }

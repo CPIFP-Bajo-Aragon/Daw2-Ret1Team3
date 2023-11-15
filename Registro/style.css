@@ -4,16 +4,17 @@ button {
 }
 
 .FlexContainer {
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 10vh;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     align-content: center;
     width: 65%;
-    height: 80vh;
-    overflow: auto;
+    height: 100%;
     flex-direction: column-reverse;
+    border: 1px solid red;
 }
 
 .FlexContainer div {
