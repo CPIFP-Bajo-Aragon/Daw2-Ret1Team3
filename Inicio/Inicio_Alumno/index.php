@@ -18,8 +18,8 @@ function cerrarSesion()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-
+    <script src="../../Funciones/breadcrumbs.js"></script>
+    <script src="../../Funciones/minimizeCards.js"></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@ function cerrarSesion()
                     <a href="../../Alumno/Alertas/index.php">
                         <li>Mis alertas</li>
                     </a>
-                    <a href="#">
+                    <a href="../../Alumno/Mensajes/mensaje.php">
                         <li>Mensajes</li>
                     </a>
                     <a href="../../Alumno/Mis_Ofertas/ofertas.php">
@@ -66,8 +66,9 @@ function cerrarSesion()
 
                 <div class="breadcrumbs">
                     <h1 id="breadcrumbs-title">Alumno / <span>Inicio</span></h1>
-                    <div class="breadcrumb-dropdown">
+                    <div class="breadcrumb-dropdown enlace-caja">
                         <ul>
+                            <li></li>
                             <li><a href="#datosPrincipales">Datos principales</a></li>
                             <li><a href="#titulaciones">Titulaciones</a></li>
                             <li><a href="#formacionComplementaria">Formación complementaria</a></li>
@@ -100,164 +101,91 @@ function cerrarSesion()
                 </article>
 
                 <article id="titulaciones" class="card">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title">Titulaciones</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Titulaciones/Inicio_Alumno.php" ?>
-            <?php include "Titulaciones/ver_Alumno.php" ?>
-        </div>
-    </div>
-</article>
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title">Titulaciones</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Titulaciones/Inicio_Alumno.php" ?>
+                            <?php include "Titulaciones/ver_Alumno.php" ?>
+                        </div>
+                    </div>
+                </article>
 
-<article id="formacionComplementaria" class="card">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title" id="Formacion_complementaria">Formación complementaria</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Formacion_Complementaria/Formacion_Complementaria_Alumno.php" ?>
-        </div>
-    </div>
-</article>
+                <article id="formacionComplementaria" class="card">
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title" id="Formacion_complementaria">Formación complementaria</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Formacion_Complementaria/Formacion_Complementaria_Alumno.php" ?>
+                        </div>
+                    </div>
+                </article>
 
-<article class="card" id="experiencia">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title">Experiencia</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Experiencia_Laboral/experiencialaboral.php" ?>
-        </div>
-    </div>
-</article>
+                <article class="card" id="experiencia">
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title">Experiencia</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Experiencia_Laboral/experiencialaboral.php" ?>
+                        </div>
+                    </div>
+                </article>
 
-<article class="card" id="habilidadesPersonales">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title">Habilidades personales</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Habilidades_personales/habilidades_personales.php" ?>
-        </div>
-    </div>
-</article>
+                <article class="card" id="habilidadesPersonales">
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title">Habilidades personales</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Habilidades_personales/habilidades_personales.php" ?>
+                        </div>
+                    </div>
+                </article>
 
-<article class="card" id="habilidadesBasicas">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title">Habilidades básicas</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Habilidades_basicas/habilidades_basicas.php" ?>
-        </div>
-    </div>
-</article>
+                <article class="card" id="habilidadesBasicas">
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title">Habilidades básicas</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Habilidades_basicas/habilidades_basicas.php" ?>
+                        </div>
+                    </div>
+                </article>
 
-<article class="card" id="idiomas">
-    <div class="card-header">
-        <span class="arrow">&#9654;</span>
-        <h2 class="card-title">Idioma</h2>
-    </div>
-    <hr class="hr-divider">
-    <div class="cardContent">
-        <div class="cardInfo">
-            <?php include "Idioma/Idioma.php" ?>
-        </div>
-    </div>
-</article>
+                <article class="card" id="idiomas">
+                    <div class="card-header">
+                        <span class="arrow">&#9654;</span>
+                        <h2 class="card-title">Idiomas</h2>
+                    </div>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php include "Idioma/Idioma.php" ?>
+                        </div>
+                    </div>
+                </article>
 
             </section>
         </div>
         <div class="footer">
-            <?php include "../footer/footer.php"; ?>
+            <?php include "../../Footer/footer.php"; ?>
         </div>
     </main>
 </body>
 
-<script>
-
-    /* JS BREADCRUM LISTA */
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var breadcrumbs = document.querySelector(".breadcrumbs");
-        var dropdown = document.querySelector(".breadcrumb-dropdown");
-
-        breadcrumbs.addEventListener("click", function () {
-            dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-            breadcrumbs.classList.toggle("open", dropdown.style.display === "block");
-        });
-
-        // Cerrar la lista desplegable si se hace clic fuera de ella
-        document.addEventListener("click", function (event) {
-            if (!breadcrumbs.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.style.display = "none";
-                breadcrumbs.classList.remove("open");
-            }
-        });
-
-        // Manejar clic en enlaces del menú
-        document.querySelectorAll(".breadcrumb-dropdown a").forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                event.preventDefault(); // Evita la navegación normal
-                var targetId = link.getAttribute("href").substring(1); // Elimina el "#" del href
-                scrollToSection(targetId);
-                // Cierra el menú después de hacer clic en un enlace
-                dropdown.style.display = "none";
-                breadcrumbs.classList.remove("open");
-            });
-        });
-
-        // Función para desplazarse a la sección
-        function scrollToSection(sectionId) {
-            var targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                var offset = breadcrumbs.clientHeight + 60; // Ajusta el valor según tus necesidades
-                window.scrollTo({
-                    top: targetSection.offsetTop - offset,
-                    behavior: "smooth"
-                });
-            }
-        }
-    });
-
-    /* MINIMIZAR LA CARD  */
-
-    document.addEventListener("DOMContentLoaded", function () {
-  var cardHeaders = document.querySelectorAll(".card-header");
-
-  cardHeaders.forEach(function (header) {
-    var arrow = header.querySelector(".arrow");
-    var cardContent = header.parentElement.querySelector(".cardContent");
-
-    // Establece la rotación inicial hacia abajo
-    arrow.style.transform = "rotate(90deg)";
-
-    header.addEventListener("click", function () {
-      cardContent.classList.toggle("minimized");
-      arrow.style.transform = cardContent.classList.contains("minimized") ? "rotate(0deg)" : "rotate(90deg)";
-    });
-  });
-});
-
-
-
-
-
-
-
-
-</script>
 
 </html>

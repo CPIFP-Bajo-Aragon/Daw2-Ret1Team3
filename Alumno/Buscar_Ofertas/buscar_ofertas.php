@@ -106,6 +106,7 @@
 
             }
             ?>
+
             </select>
             <?php 
         }
@@ -124,7 +125,6 @@
             $Area_negocio=$_POST['area_negocio'];
             $Titulacion=$_POST['titulacion'];
             $Idioma=$_POST['idioma'];
-
             ?>
             <style>
                 #nomostar{
@@ -132,43 +132,33 @@
                 }
             </style>
          <?php
+                $from = "";        
+                $aa="";
+                $sql ="SELECT DISTINCT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
+                FROM Oferta, Usuario, AreasDeNegocio, Empresa
+                WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND AreasDeNegocio.ID=Empresa.Area_Negocio AND Empresa.DNI_CIF=Usuario.DNI_CIF";
             
-        $sql ="SELECT DISTINCT Oferta.Id_Oferta, Oferta.Titulo, Oferta.Vacantes, Oferta.Descripcion, Oferta.Activo, Oferta.Fecha_Publicacion, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Oferta.DNI_CIF, Oferta.Id_Municipio, Usuario.Nombre_Usuario FROM Oferta, Oferta_Tipo_Titulacion, Titulacion, Empresa, Oferta_Nivel_Idioma, Idioma, Usuario WHERE Oferta.Activo=1 AND Oferta.Id_Oferta = Oferta_Tipo_Titulacion.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Empresa.DNI_CIF=Oferta.DNI_CIF AND Oferta_Nivel_Idioma.Id_Idioma=Idioma.Id_Idioma AND Oferta_Nivel_Idioma.Id_Oferta=Oferta.Id_Oferta AND Oferta.DNI_CIF = Usuario.DNI_CIF";
-            
-        //     $sql="SELECT DISTINCT 
-        //     O.Id_Oferta, 
-        //     O.Titulo, 
-        //     O.Vacantes, 
-        //     O.Descripcion, 
-        //     O.Activo, 
-        //     O.Fecha_Publicacion, 
-        //     O.Fecha_Inicio, 
-        //     O.Fecha_Fin, 
-        //     O.DNI_CIF, 
-        //     O.Id_Municipio
-        // FROM 
-        //     Oferta AS O
-        //     JOIN Oferta_Tipo_Titulacion AS OTT ON O.Id_Oferta = OTT.Id_Oferta
-        //     JOIN Titulacion AS T ON T.Id_Tipo_Titulacion = OTT.Id_Tipo_Titulacion
-        //     JOIN Empresa AS E ON E.DNI_CIF = O.DNI_CIF
-        //     JOIN Oferta_Nivel_Idioma AS ONI ON ONI.Id_Oferta = O.Id_Oferta
-        //     JOIN Idioma AS I ON ONI.Id_Idioma = I.Id_Idioma
-        // WHERE 
-        //     O.Activo = 1";
             
             
             if($CIF_empresa!=""){
-                $sql = $sql." AND Oferta.DNI_CIF='$CIF_empresa'";               
+                $aa = $aa." AND Oferta.DNI_CIF='$CIF_empresa'";               
             }
             if($Area_negocio!=""){
-                $sql = $sql." AND Empresa.Area_Negocio='$Area_negocio'";
+                $aa = $aa." AND Empresa.Area_Negocio='$Area_negocio'";
             }
             if($Titulacion  !=""){
-                $sql = $sql." AND Titulacion.Id_Tipo_Titulacion='$Titulacion'";
+                $aa = $aa." AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Oferta_Tipo_Titulacion.Id_Tipo_Titulacion = Titulacion.Id_Tipo_Titulacion AND Titulacion.Id_Tipo_Titulacion='$Titulacion'";
+                $from = $from.", Oferta_Tipo_Titulacion, Titulacion";
             }
             if($Idioma  !=""){
-                $sql = $sql." AND Idioma.Id_Idioma='$Idioma'";
+                $aa = $aa." AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Idioma='$Idioma'";
+                $from = $from.", Oferta_Nivel_Idioma";
             }
+            
+            $sql ="SELECT DISTINCT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
+            FROM Oferta, Usuario, AreasDeNegocio, Empresa$from
+            WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND AreasDeNegocio.ID=Empresa.Area_Negocio AND Empresa.DNI_CIF=Usuario.DNI_CIF $aa";
+        
             if($CIF_empresa=="" && $Area_negocio=="" && $Titulacion=="" && $Idioma==""){
                 $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
                 FROM Oferta, Usuario
@@ -179,7 +169,7 @@
             //sadfasdfbtasdy
 
             $leeroferta = $conexion -> query($sql);
-        
+
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
                 echo "<div class=\"container\">";
                 echo "<p class=\"info\">Empresa: ".$fila ->Nombre_Usuario."</p>";
@@ -187,29 +177,50 @@
                 echo "<p class=\"info\">Puesto de trabajo: ".$fila ->Titulo."</p>";
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
-                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                $idOferta =  $fila -> Id_Oferta;
 
                 ?>
                 <button class="abrirModal">Ver Oferta</button>
                     <div class="ventanaModal modal">
                         <div class="modal-content">
                             <span class="cerrar">&times;</span>
-                            <?php 
+                            <?php
                                 echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
                                 echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
                                 echo "<p>Vacantes: ".$fila->Vacantes."</p>";
                                 echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
                                 echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
-                                echo "<p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p>";
-                                echo "<p>Titulacion: ".$fila->Nombre."</p>";
-                                echo "<p>Soft skills: ".$fila->Nombre_soft."</p>";
-                                echo "<p>Hard skills: ".$fila->Nombre_hard."</p>";
-                            ?>
+                                
+                                $consulta ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Idioma.Idioma, Oferta.Id_Oferta, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo
+                                FROM Oferta, Usuario, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill
+                                WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard";
+
+                                $statement = $conexion->prepare($consulta);
+                                $statement->execute();
+                                $numFilas = $statement->rowCount();
+                                
+                                //echo $numFilas;
+                                if($numFilas<1){
+
+                                }
+                                else{
+                                $leer = $conexion -> query($consulta);
+                                while($row = $leer->fetch(PDO::FETCH_OBJ)){
+                                    if($row->Id_Oferta==$idOferta){
+                                echo "<p>Idioma: ".$row->Idioma." - ".$row->nivel."</p>";
+                                echo "<p>Titulacion: ".$row->Nombre."</p>";
+                                echo "<p>Soft skills: ".$row->Nombre_soft."</p>";
+                                echo "<p>Hard skills: ".$row->Nombre_hard."</p>";
+                                }
+                                }                               
+                                }
+                            ?>                            
                         </div>
                     </div>
 
                 <form action="" method="post">
-                <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
+                <input type="hidden" name="IdOferta" value="<?php echo $idOferta?>">
                 <input type="submit" name="inscribirse" value="Inscribirse">
                 </form>
                 <?php
@@ -223,12 +234,15 @@
 
     <div id="nomostar">
     <?php
-        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta/*, Idioma.Idioma, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo*/
-        FROM Oferta, Usuario/*, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill*/
-        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF /*AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard*/";
         
-        $leeroferta = $conexion -> query($sql);
-    
+
+        $sql ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
+        FROM Oferta, Usuario
+        WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF";
+
+        
+
+            $leeroferta = $conexion -> query($sql);
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
                 echo "<div class=\"container\">";
                 echo "<p class=\"info\">Empresa: ".$fila ->Nombre_Usuario."</p>";
@@ -236,29 +250,50 @@
                 echo "<p class=\"info\">Puesto de trabajo: ".$fila ->Titulo."</p>";
                 echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
                 echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
-                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>"; 
+                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                $idOferta =  $fila -> Id_Oferta;
 
                 ?>
                 <button class="abrirModal">Ver Oferta</button>
                     <div class="ventanaModal modal">
                         <div class="modal-content">
                             <span class="cerrar">&times;</span>
-                            <?php 
+                            <?php
                                 echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
                                 echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
                                 echo "<p>Vacantes: ".$fila->Vacantes."</p>";
                                 echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
                                 echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
-                                echo "<p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p>";
-                                echo "<p>Titulacion: ".$fila->Nombre."</p>";
-                                echo "<p>Soft skills: ".$fila->Nombre_soft."</p>";
-                                echo "<p>Hard skills: ".$fila->Nombre_hard."</p>";
-                            ?>
+                                
+                                $consulta ="SELECT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Idioma.Idioma, Oferta.Id_Oferta, Nivel.nivel, Titulacion.Nombre, Soft_Skill.nombre AS Nombre_soft, Hard_Skill.nombre AS Nombre_hard, Hard_Skill.tipo
+                                FROM Oferta, Usuario, Oferta_Nivel_Idioma, Nivel, Idioma, Oferta_Tipo_Titulacion, Titulacion, Oferta_Soft_Skill, Soft_Skill, Oferta_Hard_Skill, Hard_Skill
+                                WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND Oferta_Nivel_Idioma.Id_Oferta = Oferta.Id_Oferta AND Oferta_Nivel_Idioma.Id_Nivel = Nivel.Id_Nivel AND Oferta_Nivel_Idioma.Id_Idioma = Idioma.Id_Idioma AND Oferta_Tipo_Titulacion.Id_Oferta = Oferta.Id_Oferta AND Titulacion.Id_Tipo_Titulacion = Oferta_Tipo_Titulacion.Id_Tipo_Titulacion AND Oferta_Soft_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Hard_Skill.Id_Oferta = Oferta.Id_Oferta AND Oferta_Hard_Skill.Id_Hard = Hard_Skill.Id_Hard";
+
+                                $statement = $conexion->prepare($consulta);
+                                $statement->execute();
+                                $numFilas = $statement->rowCount();
+                                
+                                //echo $numFilas;
+                                if($numFilas<1){
+
+                                }
+                                else{
+                                $leer = $conexion -> query($consulta);
+                                while($row = $leer->fetch(PDO::FETCH_OBJ)){
+                                    if($row->Id_Oferta==$idOferta){
+                                echo "<p>Idioma: ".$row->Idioma." - ".$row->nivel."</p>";
+                                echo "<p>Titulacion: ".$row->Nombre."</p>";
+                                echo "<p>Soft skills: ".$row->Nombre_soft."</p>";
+                                echo "<p>Hard skills: ".$row->Nombre_hard."</p>";
+                                }
+                                }                               
+                                }
+                            ?>                            
                         </div>
                     </div>
 
                 <form action="" method="POST">
-                <input type="hidden" name="IdOferta" value="<?php echo $fila -> Id_Oferta?>">
+                <input type="hidden" name="IdOferta" value="<?php echo $idOferta?>">
                 <input type="submit" name="inscribirse" value="Inscribirse">
                 </form>
                 <?php

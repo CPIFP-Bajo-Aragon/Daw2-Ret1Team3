@@ -8,11 +8,11 @@
     <html>
 
     <head>
-        <link rel="stylesheet" href="../../Estilos/curriculum.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="../../Estilos/alumno.css">
+        <link rel="stylesheet" href="../../Estilos/curriculum.css">
     </head>
 
     <body>
@@ -20,82 +20,105 @@
             <header class="main-header">
                 <img src="../../Imagenes/Profitech.png" alt="">
                 <div class="conInfo">
-                <div class="conInfo"><p>Hola, <?php echo $username ?></p>
-                    <form action="cerrarSesion.php" method="post">
-                        <input type="submit" value="Cerrar sesión" />
-                    </form>
-                </div>
+                    <div class="conInfo">
+                        <p>Hola, <?php echo $username ?></p>
+                        <form action="cerrarSesion.php" method="post">
+                            <input type="submit" value="Cerrar sesión" />
+                        </form>
+                    </div>
             </header>
             <div class="main-content">
                 <nav class="main-menu">
-                <ul>
-                    <a href="#"><li>Inicio</li></a>
-                    <a href="../../Alumno/Curriculum/curriculum.php"><li>Curriculum</li></a>
-                    <a href="../../Alumno/Alertas/index.php"><li>Mis alertas</li></a>
-                    <a href="#"><li>Mensajes</li></a>
-                    <a href="../../Inicio/Inicio_Alumno/Mis_Ofertas/ofertas.php"><li>Mis ofertas</li></a>
-                    <hr>
-                    <a href="../../Alumno/Buscar_Empresas/index.php"><li>Buscar empresas</li></a>
-                    <a href="../../Alumno/Buscar_Ofertas/index.php"><li>Buscar ofertas</li></a>
-                    <hr>
-                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php"><li>Cambiar contraseña</li></a>
+                    <ul>
+                        <a href="#">
+                            <li>Inicio</li>
+                        </a>
+                        <a href="#">
+                            <li>Curriculum</li>
+                        </a>
+                        <a href="../Alertas/index.php">
+                            <li>Mis alertas</li>
+                        </a>
+                        <a href="#">
+                            <li>Mensajes</li>
+                        </a>
+                        <a href="../Mis_Ofertas/ofertas.php">
+                            <li>Mis ofertas</li>
+                        </a>
+                        <hr>
+                        <a href="/../Alumno/Buscar_Empresas/index.php">
+                            <li>Buscar empresas</li>
+                        </a>
+                        <a href="/../Alumno/Buscar_Ofertas/index.php">
+                            <li>Buscar ofertas</li>
+                        </a>
+                        <hr>
+                        <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">
+                            <li>Cambiar contraseña</li>
+                        </a>
 
-                </ul>
+                    </ul>
                 </nav>
                 <section class="main-info">
-                <article class="card">
-
-    
-                <?php
+                    <article class="card">
 
 
-    $queryalumno = "SELECT * FROM Alumno WHERE DNI_CIF='$dni'";
-
-    if ($resultalumno = $conexion->query($queryalumno)) {
-        while ($rowalumno = $resultalumno->fetch(PDO::FETCH_OBJ)) {
-            $Apellido = $rowalumno->Apellido;
-            $Fecha_Nacimiento = $rowalumno->Fecha_Nacimiento;
-            $Telefono_Alumno = $rowalumno->Telefono_Alumno;
-            $Foto_Alumno = $rowalumno->Foto_Alumno;
-            $Movilidad = $rowalumno->Movilidad;
-            $Direccion = $rowalumno->Direccion;
-            $Perfil_Publico = $rowalumno->Perfil_Publico;
-            $id_Municipio_usuario = $rowalumno->Id_Municipio;
+                        <?php
 
 
-        }
-    }
+                            $queryalumno = "SELECT * FROM Alumno WHERE DNI_CIF='$dni'";
 
-    $querydni = "SELECT * FROM Usuario WHERE DNI_CIF='$dni'";
-
-    if ($resultdni = $conexion->query($querydni)) {
-        while ($rowdni = $resultdni->fetch(PDO::FETCH_OBJ)) {
-            $Nombre_Usuario = $rowdni->Nombre_Usuario;
-        }
-    }
-
-    $querymunicipio = "SELECT * FROM Municipio where Id_Municipio=$id_Municipio_usuario"; 
-    if ($resultmunicipio = $conexion->query($querymunicipio)) {
-        while ($rowmunicipio = $resultmunicipio->fetch(PDO::FETCH_OBJ)) {
-            $Nombre_Municipio = $rowmunicipio->Nombre_Municipio;
-            $id_Municipio = $rowmunicipio->Id_Municipio;
-
-        }
-    }
+                            if ($resultalumno = $conexion->query($queryalumno)) {
+                                while ($rowalumno = $resultalumno->fetch(PDO::FETCH_OBJ)) {
+                                    $Apellido = $rowalumno->Apellido;
+                                    $Fecha_Nacimiento = $rowalumno->Fecha_Nacimiento;
+                                    $Telefono_Alumno = $rowalumno->Telefono_Alumno;
+                                    $Foto_Alumno = $rowalumno->Foto_Alumno;
+                                    $Movilidad = $rowalumno->Movilidad;
+                                    $Direccion = $rowalumno->Direccion;
+                                    $Perfil_Publico = $rowalumno->Perfil_Publico;
+                                    $id_Municipio_usuario = $rowalumno->Id_Municipio;
 
 
-    $queryemail="SELECT Email FROM Usuario WHERE DNI_CIF='$dni'";
-    if ($resultemail = $conexion->query($queryemail)) {
-        while ($rowemail = $resultemail->fetch(PDO::FETCH_OBJ)) {
-            $email = $rowemail -> Email;
-        }
+                                }
+                            }
 
-    }
+                            $querydni = "SELECT * FROM Usuario WHERE DNI_CIF='$dni'";
 
-        echo "<h1>Datos Personales</h1>";
+                            if ($resultdni = $conexion->query($querydni)) {
+                                while ($rowdni = $resultdni->fetch(PDO::FETCH_OBJ)) {
+                                    $Nombre_Usuario = $rowdni->Nombre_Usuario;
+                                }
+                            }
+
+                            $querymunicipio = "SELECT * FROM Municipio where Id_Municipio=$id_Municipio_usuario"; 
+                            if ($resultmunicipio = $conexion->query($querymunicipio)) {
+                                while ($rowmunicipio = $resultmunicipio->fetch(PDO::FETCH_OBJ)) {
+                                    $Nombre_Municipio = $rowmunicipio->Nombre_Municipio;
+                                    $id_Municipio = $rowmunicipio->Id_Municipio;
+
+                                }
+                            }
+
+
+                            $queryemail="SELECT Email FROM Usuario WHERE DNI_CIF='$dni'";
+                            if ($resultemail = $conexion->query($queryemail)) {
+                                while ($rowemail = $resultemail->fetch(PDO::FETCH_OBJ)) {
+                                    $email = $rowemail -> Email;
+                                }
+
+                            }
+
+                            if($Movilidad==1){
+                                $Movilidad="Si";
+                            }else{
+                                $Movilidad="No";
+                            }
+
+                                echo "<h1>Datos Personales</h1>";
     ?>
-    <div class="div1">
-    <?php
+                        <div class="div1">
+                            <?php
         
         echo "<img class='imagen' src='../../Inicio/Inicio_Alumno/Datos_principales/FotosAlumnos/$dni.png' alt='Imagen icono'>"; 
         echo "<div class='texto'>";
@@ -107,18 +130,18 @@
         echo "<p>Movilidad: ".$Movilidad."</p>";
         echo "</div>";
     ?>
-    </div>
-    <?php 
+                        </div>
+                        <?php 
         echo "<h1>Contacto</h1>";
     ?>
-    <div class="div2">
-    <?php
+                        <div class="div2">
+                            <?php
         echo "<p>Telefono: ".$Telefono_Alumno."</p>";
         echo "<p>Correo: ".$email."</p>";
 
     ?>
-    </div>
-    <?php           
+                        </div>
+                        <?php           
 
     echo "<h1>Experiencia Laboral</h1>";
     $queryexplab="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
@@ -134,8 +157,8 @@
 
         
             ?>
-            <div class="div3">
-            <?php
+                        <div class="div3">
+                            <?php
 
                 echo "<p>Nombre de la Empresa: ".$Nombre_Empresa."</p>";
                 echo "<p>Puesto: ".$Puesto."</p>";
@@ -143,8 +166,8 @@
                 echo "<p>Fecha Inicio: ".$Fecha_Inicio_explab."</p>";
                 echo "<p>Fecha Fin: ".$Fecha_Fin_explab."</p>";
                 ?>
-                </div>
-                <?php
+                        </div>
+                        <?php
         }
         }
 
@@ -163,13 +186,13 @@
                 $Id_Idioma = $rowidioma->Id_Idioma;
         
                 ?>
-                <div class="div4">
-                <?php
+                        <div class="div4">
+                            <?php
                 echo "<p>Idioma: ".$Idioma."</p>";
                 echo "<p>Tipo: ".$Nivel."</p>"; 
                 ?>
-                </div>
-                <?php
+                        </div>
+                        <?php
             }
         
         }
@@ -188,8 +211,8 @@
 
 
                 ?>
-                <div class="div5">
-                <?php
+                        <div class="div5">
+                            <?php
                 echo "<p>Nombre Formacion: ".$Nombre_Formacion."</p>";
                 echo "<p>Enitdad Emisora: ".$Entidad_emisora."</p>";
                 echo "<p>Fecha Inicio: ".$Fecha_Inicio_formacion."</p>";
@@ -198,8 +221,8 @@
                 echo "<p>Numero de horas: ".$Num_Horas_formacion."</p>";
 
                 ?>
-                </div>
-                <?php
+                        </div>
+                        <?php
             }
         }
 
@@ -241,12 +264,12 @@
                 $nombre_soft = $rowsoft->nombre;
     
                 ?>
-                <div class="div6">
-    <?php
+                        <div class="div6">
+                            <?php
                 echo "<p>$nombre_soft<p>";
                 ?>
-                </div>
-                <?php
+                        </div>
+                        <?php
             }
         }
 
@@ -268,25 +291,25 @@
                 $nombre_titulo=$rowtitulo['Nombre'] ;
 
                 ?>
-                                <div class="div7">
-                        <?php
+                        <div class="div7">
+                            <?php
 
                 echo "<p>Nombre del centro: ".$Nombre_Centro."</p>";
                 echo "<p>Titulacion: ".$nombre_titulo."</p>";
                 echo "<p>Fecha Inicio: ".$Fecha_Inicio_titulo."</p>";
                 echo "<p>Fecha Fin: ".$Fecha_Fin_titulo."</p>";
             ?>
-                    </div>
-                <?php
+                        </div>
+                        <?php
                 
             }
 
 
     ?>
 
-            </article>
+                    </article>
 
-            </section>
+                </section>
     </body>
 
     </html>

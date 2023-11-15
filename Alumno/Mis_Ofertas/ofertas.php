@@ -32,7 +32,7 @@ include "../../Funciones/SessionStart.php";
                     <a href="../../Alumno/Curriculum/curriculum.php"><li>Curriculum</li></a>
                     <a href="../../Alumno/Alertas/index.php"><li>Mis alertas</li></a>
                     <a href="#"><li>Mensajes</li></a>
-                    <a href="../../Inicio/Alumno/Mis_Ofertas/ofertas.php"><li>Mis ofertas</li></a>
+                    <a href="#"><li>Mis ofertas</li></a>
                     <hr>
                     <a href="../../Alumno/Buscar_Empresas/index.php"><li>Buscar empresas</li></a>
                     <a href="../../Alumno/Buscar_Ofertas/index.php"><li>Buscar ofertas</li></a>
