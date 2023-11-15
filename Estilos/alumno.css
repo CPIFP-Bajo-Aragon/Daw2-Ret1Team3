@@ -25,7 +25,7 @@ main {
     height: 15vh;
     width: 100%;
     text-align: center;
-    z-index: 1;
+    z-index: 3;
 }
 
 .main-header > img {
@@ -178,6 +178,34 @@ main {
     height: 5vh;
     width: 5vw;
 }
+
+/* Agrega estos estilos para manejar el estado minimizado de la tarjeta */
+.card-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+}
+
+.arrow {
+  margin-right: 0.5vw;
+  transition: transform 0.3s ease-in-out; /* Agrega una transición suave para la flecha */
+  z-index: 0;
+}
+
+
+.minimized {
+  display: none;
+  z-index: 0;
+}
+
+/* Agrega estilos para la transición de la flecha */
+.card-header .arrow {
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
 
 
 
@@ -354,34 +382,72 @@ form {
   }
     
 
-  /* BREADCRUMBS */
+/* BREADCRUMBS */
 
-  .breadcrumbs {
-    background-color: #f5f5f5;
-    max-width: 93.5%;
-    padding: 20px;
-    margin: 1.5vw;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-  }
+.breadcrumbs {
+  background-color: #f5f5f5;
+  max-width: 93.5%;
+  padding: 20px;
+  margin: 1.5vw;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  position: relative; /* Necesario para posicionar el desplegable correctamente */
+  cursor: pointer;
+}
+
+.breadcrumbs h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.breadcrumbs span {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.breadcrumbs::before {
+  content: "🡢";
+  margin: 0 10px;
+  font-size: 1.2rem;
+  color: #95a5a6; /* Color gris claro */
+}
+
+.breadcrumb-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.breadcrumb-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+}
+
+.breadcrumb-dropdown li {
+  padding: 10px;
+}
+
+.breadcrumb-dropdown a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.breadcrumb-dropdown a:hover {
+  background-color: #f0f0f0;
+}
+
   
-  .breadcrumbs h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  
-  .breadcrumbs span {
-    color: #3498db;
-    font-weight: bold;
-  }
-  
-  /* Estilo para los separadores entre las migas de pan */
-  .breadcrumbs::before {
-    content: "›";
-    margin: 0 10px;
-    font-size: 1.2rem;
-    color: #95a5a6; /* Color gris claro */
-  }
-  
+/* Añade este estilo para el estado abierto */
+.breadcrumbs.open::before {
+  content: "🡣";
+}
