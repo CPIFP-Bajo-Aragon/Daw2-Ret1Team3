@@ -34,7 +34,7 @@ function cerrarSesion()
             <nav class="main-menu">
                 <ul>
                     <a href="#">
-                        <li id="Inicio">Inicio</li>
+                    <li id="Inicio"><i class="fa fa-car"></i> Inicio</li>
                     </a>
                     <a href="../../Alumno/Curriculum/curriculum.php">
                         <li>Curriculum</li>
