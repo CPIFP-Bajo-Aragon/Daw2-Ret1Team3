@@ -20,6 +20,8 @@ function cerrarSesion()
     <title>Document</title>
     <script src="../../Funciones/breadcrumbs.js"></script>
     <script src="../../Funciones/minimizeCards.js"></script>
+
+
 </head>
 
 <body>
@@ -34,7 +36,7 @@ function cerrarSesion()
             <nav class="main-menu">
                 <ul>
                     <a href="#">
-                    <li id="Inicio"><i class="fa fa-car"></i> Inicio</li>
+                        <li id="Inicio"><i class="fa fa-car"></i> Inicio</li>
                     </a>
                     <a href="../../Alumno/Curriculum/curriculum.php">
                         <li>Curriculum</li>
@@ -89,9 +91,18 @@ function cerrarSesion()
                     <div class="cardContent">
                         <div id="imageContainer">
                             <div class="divImagenAlumno">
-                                <img class="imagenAlumno" alt="Imagen del alumno"
-                                    src="<?php echo "./Datos_principales/FotosAlumnos/" . $dni . ".png"; ?>">
-                                <!-- AQUÍ EL INCLUDE DE LA IMAGEN -->
+                                <?php
+                                    $rutaImagen = "./Datos_principales/FotosAlumnos/" . $dni . ".png";
+                                    
+                                    // Verificar si la imagen existe
+                                    if (file_exists($rutaImagen)) {
+                                        // Mostrar la imagen del alumno
+                                        echo '<img class="imagenAlumno" alt="Imagen del alumno" src="' . $rutaImagen . '">';
+                                    } else {
+                                        // Mostrar la imagen por defecto
+                                        echo '<img class="imagenAlumno" alt="Imagen del alumno" src="./Datos_principales/FotosAlumnos/default.png">';
+                                    }
+                                ?>
                             </div>
                         </div>
                         <div class="datosPrincipalesContent">
@@ -103,7 +114,7 @@ function cerrarSesion()
                 <article id="titulaciones" class="card">
                     <div class="card-header">
                         <span class="arrow">&#9654;</span>
-                        <h2 class="card-title">Titulaciones</h2>
+                        <h2 class="card-title">Titulaciones de FP:</h2>
                     </div>
                     <hr class="hr-divider">
                     <div class="cardContent">

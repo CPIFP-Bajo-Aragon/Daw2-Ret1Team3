@@ -5,24 +5,24 @@
     $username = $_SESSION['Nombre_Usuario'];
     include "../../Funciones/SessionStart.php";
     ?>
-    <html>
+<html>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="../../Estilos/alumno.css">
-        <link rel="stylesheet" href="../../Estilos/curriculum.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
+    <link rel="stylesheet" href="../../Estilos/curriculum.css">
+</head>
 
-    <body>
+<body>
 
 
 
     <main>
-
+        <div class="cabecera">
         <?php include "../../Header/CabeceraLogeado.php"; ?>
-        <link rel="stylesheet" href="../../Estilos/alumno.css">
+        </div>
         <div class="main-content">
             <nav class="main-menu">
                 <ul>
@@ -168,8 +168,8 @@
 
 
                             ?>
-                            <div class="div3">
-                                <?php
+                    <div class="div3">
+                        <?php
 
                                 echo "<p>Nombre de la Empresa: " . $Nombre_Empresa . "</p>";
                                 echo "<p>Puesto: " . $Puesto . "</p>";
@@ -177,16 +177,16 @@
                                 echo "<p>Fecha Inicio: " . $Fecha_Inicio_explab . "</p>";
                                 echo "<p>Fecha Fin: " . $Fecha_Fin_explab . "</p>";
                                 ?>
-                            </div>
-                            <?php
+                    </div>
+                    <?php
                         }
                     }
 
                     $queryidioma = "SELECT Idioma.Idioma, Nivel.Nivel, Idioma.Id_Idioma
-FROM Idioma
-JOIN Nivel_Idioma ON Idioma.Id_Idioma = Nivel_Idioma.Id_Idioma
-JOIN Nivel ON Nivel.Id_Nivel = Nivel_Idioma.Id_Nivel
-WHERE Nivel_Idioma.DNI_CIF = '$dni'";
+                    FROM Idioma
+                    JOIN Nivel_Idioma ON Idioma.Id_Idioma = Nivel_Idioma.Id_Idioma
+                    JOIN Nivel ON Nivel.Id_Nivel = Nivel_Idioma.Id_Nivel
+                    WHERE Nivel_Idioma.DNI_CIF = '$dni'";
 
 
                     echo "<h1 class='title'>Idioma</h1>";
@@ -197,13 +197,13 @@ WHERE Nivel_Idioma.DNI_CIF = '$dni'";
                             $Id_Idioma = $rowidioma->Id_Idioma;
 
                             ?>
-                            <div class="div4">
-                                <?php
+                    <div class="div4">
+                        <?php
                                 echo "<p>Idioma: " . $Idioma . "</p>";
                                 echo "<p>Tipo: " . $Nivel . "</p>";
                                 ?>
-                            </div>
-                            <?php
+                    </div>
+                    <?php
                         }
 
                     }
@@ -222,8 +222,8 @@ WHERE Nivel_Idioma.DNI_CIF = '$dni'";
 
 
                             ?>
-                            <div class="div5">
-                                <?php
+                    <div class="div5">
+                        <?php
                                 echo "<p>Nombre Formacion: " . $Nombre_Formacion . "</p>";
                                 echo "<p>Enitdad Emisora: " . $Entidad_emisora . "</p>";
                                 echo "<p>Fecha Inicio: " . $Fecha_Inicio_formacion . "</p>";
@@ -232,8 +232,8 @@ WHERE Nivel_Idioma.DNI_CIF = '$dni'";
                                 echo "<p>Numero de horas: " . $Num_Horas_formacion . "</p>";
 
                                 ?>
-                            </div>
-                            <?php
+                    </div>
+                    <?php
                         }
                     }
 
@@ -275,12 +275,12 @@ WHERE Nivel_Idioma.DNI_CIF = '$dni'";
                             $nombre_soft = $rowsoft->nombre;
 
                             ?>
-                            <div class="div6">
-                                <?php
+                    <div class="div6">
+                        <?php
                                 echo "<p>$nombre_soft<p>";
                                 ?>
-                            </div>
-                            <?php
+                    </div>
+                    <?php
                         }
                     }
 
@@ -302,23 +302,29 @@ WHERE Nivel_Idioma.DNI_CIF = '$dni'";
                         $nombre_titulo = $rowtitulo['Nombre'];
 
                         ?>
-                        <div class="div7">
-                            <?php
+                    <div class="div7">
+                        <?php
 
                             echo "<p>Nombre del centro: " . $Nombre_Centro . "</p>";
                             echo "<p>Titulacion: " . $nombre_titulo . "</p>";
                             echo "<p>Fecha Inicio: " . $Fecha_Inicio_titulo . "</p>";
                             echo "<p>Fecha Fin: " . $Fecha_Fin_titulo . "</p>";
                             ?>
-                        </div>
-                        <?php
+                    </div>
+                    <?php
 
                     }
 
 
                     ?>
                 </article>
+                <button id="imprimirBtn" onclick="imprimirPagina()">Imprimir Página</button>
 
+                <script>
+                    function imprimirPagina() {
+                        window.print();
+                    }
+                </script>
 
             </section>
         </div>

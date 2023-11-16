@@ -86,7 +86,7 @@ function cerrarSesion()
                         </ul>
                     </div>
                 </div>
-                <article class="card">
+                <article class="card noAlertas">
                     <p id="resultado"></p>
                 </article>
 
@@ -100,25 +100,27 @@ function cerrarSesion()
                         $Id_Alerta = $row->Id_Alerta;
                         $Alerta = $row->Alerta;
                         ?>
-                        <article class="card">
-                            <p>
-                                <?php echo $Alerta ?>
-                            </p>
-                            <form action="desactivaralerta.php" method="POST">
-                                <input type="hidden" name="id" value="<?php echo $Id_Alerta ?>">
-                                <input type="submit" value="Marcar como Leída" />
-                            </form>
-                        </article>
+                <article class="card">
+                    <p>
+                        <?php echo $Alerta ?>
+                    </p>
+                    <form action="desactivaralerta.php" method="POST">
+                        <input type="hidden" name="id" value="<?php echo $Id_Alerta ?>">
+                        <input type="submit" value="Marcar como leída" />
+                    </form>
+                </article>
 
-                        <?php
+                <?php
                     }
                 }
                 if ($sqlfilas == 0) {
                     ?>
-                    <script>
-                        document.getElementById("resultado").innerHTML = "No tienes alertas actualmente :)";
-                    </script>
-                    <?php
+                <script>
+                document.getElementById("resultado").innerHTML = "No tienes alertas actualmente :)";
+                var verAlertas = document.querySelector(".noAlertas");
+                verAlertas.style.display = "block";
+                </script>
+                <?php
                 }
                 ?>
 

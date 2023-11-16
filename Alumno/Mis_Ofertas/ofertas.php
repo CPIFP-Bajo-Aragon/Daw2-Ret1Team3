@@ -136,7 +136,7 @@ function cerrarSesion()
                                     ?>
                                     <div class="div1">
                                         <?php
-                                        echo "<p> Nombre de la Empresa: " . $nombre_usuario . "</p>";
+                                        echo "<p> Nombre de la Empresa: <strong>". $nombre_usuario ."</strong> </p>";
                                         echo "<p> Titulo: " . $titulo . "</p>";
                                         ;
                                         echo "<p> Descripcion: " . $descripcion . "</p>";

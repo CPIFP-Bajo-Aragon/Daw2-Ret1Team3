@@ -28,6 +28,7 @@ function cerrarSesion()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
 </head>
 
 <body>
@@ -37,7 +38,6 @@ function cerrarSesion()
     <main>
 
         <?php include "../../Header/CabeceraLogeado.php"; ?>
-        <link rel="stylesheet" href="../../Estilos/alumno.css">
         <div class="main-content">
             <nav class="main-menu">
                 <ul>
@@ -87,7 +87,7 @@ function cerrarSesion()
                     </div>
                 </div>
                 <article class="card">
-                    <h2 class="card-title">Titulaciones</h2>
+                    <h2 class="card-title">Buscar Empresa</h2>
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">

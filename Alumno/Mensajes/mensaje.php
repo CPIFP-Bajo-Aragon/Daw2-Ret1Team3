@@ -37,6 +37,7 @@ function cerrarSesion()
     <main>
 
         <?php include "../../Header/CabeceraLogeado.php"; ?>
+        <link rel="stylesheet" href="../../Estilos/mensajes.css">
         <link rel="stylesheet" href="../../Estilos/alumno.css">
         <div class="main-content">
             <nav class="main-menu">
@@ -94,79 +95,156 @@ function cerrarSesion()
                     <?php
 
 
+                 if (isset($_POST['dni_usuario'])) {
+                     $dni_usuario = $_POST['dni_usuario'];
+                 } else {
+                     $dni_usuario = "";
+                 };
+             
 
                     $dni_origen = $_SESSION['dni'];
-                    if (isset($_POST['dni_usuario'])) {
-                        $_SESSION['dni_usuario_mensaje'] = $_POST['dni_usuario'];
+                   
+                    $dni_destino= $_POST['dni_usuario'];
+
+                   
+
+                    
+                     if (isset($_POST['dni_usuario'])){
+                        $dni_destino= $_POST['dni_usuario'];
+                    } else {
+                        $dni_destino =  $_SESSION['dni_usuario_mensaje'] ; 
                     }
 
-                    $dni_destino = $_SESSION['dni_usuario_mensaje'];
-
+                    $_SESSION['dni_usuario_mensaje'] = $dni_usuario;
+                    if ($dni_destino ==  $dni_origen){
+?> <script>
+                    boton.disabled = true;
+                    </script>
+                    <?php
+                    }
 
                     $chats_participado = "SELECT Origen_Mensaje, Destino_Mensaje  FROM bolsa_emplea.Mensaje where Destino_Mensaje='$dni_origen' group by Origen_Mensaje";
-                    if ($resultado_mensaje = $conexion->query($chats_participado)) {
-                        while ($row = $resultado_mensaje->fetch(PDO::FETCH_OBJ)) {
-                            $Origen_DNI_Chat = $row->Origen_Mensaje;
-                            $Destino_DNI_Chat = $row->Destino_Mensaje;
-                            ?>
-                            <form action="mensaje.php" method="post">
-                                <input type="hidden" value="<?php echo $Origen_DNI_Chat ?>" name="dni_usuario" id="dni_usuario">
-                                <?php
-                                $sql_nombre = "SELECT Nombre_Usuario FROM `Usuario` WHERE DNI_CIF='$Origen_DNI_Chat'";
-                                $resultado_nombre = $conexion->query($sql_nombre);
-
-                                while ($row_nombre = $resultado_nombre->fetch(PDO::FETCH_OBJ)) {
-                                    $Nombre = $row_nombre->Nombre_Usuario;
-                                }
-                                ?>
-                                <input type="submit" value="<?php echo $Nombre ?>">
-                            </form>
-                            <?php
-                        }
-                    }
-
-
-
-
                     ?>
+                    <div class="chatsDisponibles">
+                        <?php
+                            if ($resultado_mensaje = $conexion->query($chats_participado)) {
+                                while ($row = $resultado_mensaje->fetch(PDO::FETCH_OBJ)) {
+                                    $Origen_DNI_Chat = $row->Origen_Mensaje;
+                                    $Destino_DNI_Chat = $row->Destino_Mensaje;
+                                    ?>
+
+
+                        <form action="mensaje.php" method="post">
+                            <input type="hidden" value="<?php echo $Origen_DNI_Chat ?>" name="dni_usuario"
+                                id="dni_usuario">
+                            <?php
+                                        $sql_nombre = "SELECT Nombre_Usuario FROM `Usuario` WHERE DNI_CIF='$Origen_DNI_Chat'";
+                                        $resultado_nombre = $conexion->query($sql_nombre);
+
+                                        while ($row_nombre = $resultado_nombre->fetch(PDO::FETCH_OBJ)) {
+                                            $Nombre = $row_nombre->Nombre_Usuario;
+                                        }
+                                        ?>
+                            <input type="submit" value="<?php echo $Nombre ?>">
+                        </form>
+
+
+                        <?php
+                                }
+                            }
+
+
+
+
+                            ?>
+                    </div>
                     <p>Inicia un nuevo chat</p>
                     <form action="mensaje.php" method="post">
                         <input type="text" name="dni_usuario" id="dni_usuario" placeholder="Pon el DNI">
                         <input type="submit" value="Iniciar chat">
                     </form>
                     <hr>
-                    <p>Mensajes:</p>
-                    <br>
-                    <?php
 
-                    $sql_carga_mensaje = "SELECT * FROM `Mensaje` WHERE (Origen_Mensaje = '$dni_origen' OR  Origen_Mensaje = '$dni_destino')AND (Destino_Mensaje= '$dni_destino' or Destino_Mensaje= '$dni_origen') ORDER BY ID_Mensaje ASC  ";
+                    <div class="chat">
+                        <p>Escribiendo:
+                        </p>
+                        <div class="chatContent">
+                            <?php
+        $sql_carga_mensaje = "SELECT * FROM `Mensaje` WHERE (Origen_Mensaje = '$dni_origen' OR  Origen_Mensaje = '$dni_destino') AND (Destino_Mensaje= '$dni_destino' or Destino_Mensaje= '$dni_origen') ORDER BY ID_Mensaje ASC";
 
-                    if ($resultado_mensaje = $conexion->query($sql_carga_mensaje)) {
-                        while ($row = $resultado_mensaje->fetch(PDO::FETCH_OBJ)) {
-                            $Id_Mensaje = $row->ID_Mensaje;
-                            $Mensaje = $row->Mensaje;
-                            $Origen_DNI = $row->Origen_Mensaje;
-                            $Destino_DNI = $row->Destino_Mensaje;
+        if ($resultado_mensaje = $conexion->query($sql_carga_mensaje)) {
+            while ($row = $resultado_mensaje->fetch(PDO::FETCH_OBJ)) {
+                $Id_Mensaje = $row->ID_Mensaje;
+                $Mensaje = $row->Mensaje;
+                $Origen_DNI = $row->Origen_Mensaje;
+                $Destino_DNI = $row->Destino_Mensaje;
 
-                            $sql_nombre = "SELECT Nombre_Usuario FROM `Usuario` WHERE DNI_CIF='$Origen_DNI'";
-                            $resultado_nombre = $conexion->query($sql_nombre);
+                $sql_nombre = "SELECT Nombre_Usuario FROM `Usuario` WHERE DNI_CIF='$Origen_DNI'";
+                $resultado_nombre = $conexion->query($sql_nombre);
 
-                            while ($row_nombre = $resultado_nombre->fetch(PDO::FETCH_OBJ)) {
-                                $Nombre = $row_nombre->Nombre_Usuario;
-                            }
-                            ?>
-                            <p class="Mensaje_origen">
+
+                $sql_nombre_destino = "SELECT Nombre_Usuario FROM `Usuario` WHERE DNI_CIF='$dni_destino'";
+                $resultado_nombre_destino = $conexion->query($sql_nombre_destino);
+
+
+
+                while ($row_nombre_destino = $resultado_nombre_destino->fetch(PDO::FETCH_OBJ)) {
+                    $Nombre_destino = $row_nombre_destino->Nombre_Usuario;
+                }
+
+
+                while ($row_nombre = $resultado_nombre->fetch(PDO::FETCH_OBJ)) {
+                    $Nombre = $row_nombre->Nombre_Usuario;
+                }
+
+                $esUsuarioSesion = ($username == $Nombre);
+
+                $claseMensaje = ($esUsuarioSesion) ? 'Mensaje_origen_usuario' : 'Mensaje_origen';
+
+                ?>
+                            <p class="<?php echo $claseMensaje; ?>">
                                 <?php echo $Nombre . " - " . $Mensaje ?>
                             </p>
                             <?php
-                        }
-                    }
-                    ?>
-                    <form action="enviarmensaje.php" method="post">
-                        <input type="hidden" name="dni_destino" id="dni_destino" value="<?php echo $dni_destino ?>">
-                        <input type="text" name="mensaje" id="mensaje">
-                        <input type="submit" value="Enviar mensaje">
-                    </form>
+            }
+        }
+        $frase = "Inicia el chat con alguien para poder enviar mensjaes"; // Inicializa la variable fuera del bloque condicional
+
+        if (empty($Nombre_destino)) {
+            $Nombre_destino = "";
+        } else {
+            $frase = "Enviar mensaje a " . $Nombre_destino;
+        }
+        if (isset($_GET['enviado']) && $_GET['enviado'] == 'true') {
+            echo "<script>
+            window.onload = function() {
+                var mensajeEnviadoDiv = document.getElementById('mensaje_enviado');
+                mensajeEnviadoDiv.innerHTML = 'Mensaje enviado';
+                mensajeEnviadoDiv.style.display = 'block';
+            };
+          </script>";
+        } else {
+            echo "<script>
+            window.onload = function() {
+                var mensajeEnviadoDiv = document.getElementById('mensaje_enviado');
+                mensajeEnviadoDiv.innerHTML = 'No puedes enviar este mensaje';
+                mensajeEnviadoDiv.style.display = 'block';
+            };
+          </script>";
+        }
+        ?>
+                            <form action="enviarmensaje.php" method="post">
+                                <input type="hidden" name="dni_destino" id="dni_destino"
+                                    value="<?php echo $dni_destino ?>">
+                                <input type="text" name="mensaje" id="mensaje" maxlength="60">
+                                <input type="submit" id="boton" value="<?php echo $frase; ?>"
+                                    <?php echo empty($Nombre_destino) ? 'disabled' : ''; ?>>
+                            </form>
+                            <div id="mensaje_enviado" style="display: none;"></div>
+
+                        </div>
+                    </div>
+
 
 
                 </article>

@@ -42,9 +42,18 @@
         }
 
         try {
+            if($Ffi<$Fin){
+                echo "<script>";
+                echo "alert('la fecha fin no puede ser mayor que la fecha inicio')";
+                echo "</script>";
+                echo "<script>";
+                echo "location.replace('../index.php#Formacion_complementaria')";
+                echo "</script>";
+            }
+            else{
             $sentencia->execute();
             header("Location: ../index.php#Formacion_complementaria");
-            
+        }
 
         } catch (PDOException $e) {
             header("Location: ../index.php");
