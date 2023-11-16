@@ -110,7 +110,7 @@
 
     <div id="nomostar">
     <?php
-        $sql ="SELECT Empresa.DNI_CIF, Empresa.Numero_Trabajadores, Empresa.Web, Empresa.Telefono, Empresa.Area_Negocio, Empresa.Descripcion, Empresa.Direccion, Empresa.Pais, Usuario.Nombre_Usuario, Municipio.Nombre_Municipio FROM Empresa, Usuario, Municipio WHERE Activo=1 AND Empresa.DNI_CIF=Usuario.DNI_CIF AND Empresa.Id_Municipio=Municipio.Id_Municipio";
+        $sql ="SELECT Empresa.Numero_Trabajadores, Empresa.Web, Empresa.Telefono, Empresa.Area_Negocio, Empresa.Descripcion, Empresa.Direccion, Empresa.Pais, Usuario.Nombre_Usuario, Municipio.Nombre_Municipio FROM Empresa, Usuario, Municipio WHERE Activo=1 AND Empresa.DNI_CIF=Usuario.DNI_CIF AND Empresa.Id_Municipio=Municipio.Id_Municipio";
         
         $leeroferta = $conexion -> query($sql);
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
@@ -124,14 +124,9 @@
                 echo "<p class=\"info\">Localidad: ".$fila ->Nombre_Municipio."</p>";
                 echo "<p class=\"info\">Web: ".$fila ->Web."</p>";
                 echo "<p class=\"info\">Telefono: ".$fila ->Telefono."</p>";
-                $idEmpresa = $fila ->DNI_CIF;      
-                ?>
-                <form action="../Mensajes/mensaje.php" method="post">
-                    <input type="hidden" name="idEmpresa" id="" value="<?php echo $idEmpresa?>">
-                    <input type="submit" name="mensaje" value="Mandar mensaje">
-                </form>
-    <?php
                 echo "</div>";
+                ?>
+    <?php
             }
     ?>
     </div>
