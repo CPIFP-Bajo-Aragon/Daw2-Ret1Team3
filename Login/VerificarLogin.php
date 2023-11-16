@@ -36,7 +36,6 @@
             $_SESSION['Nombre_Usuario']=$fila-> Nombre_Usuario;
             $_SESSION['Tipo_Usuario']=$fila-> Tipo_Usuario;
             $_SESSION['dni']=$fila-> DNI_CIF;
-            $_SESSION['dni_usuario_mensaje']=$_SESSION['dni'];
 
 
             if($_SESSION['Tipo_Usuario']=='Alumno'){

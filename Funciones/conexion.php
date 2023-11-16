@@ -1,10 +1,9 @@
-
 <?php
 
 //Aqui pones tu HOST (LocalHost) si tu servidor esta en casa
 $host = "localhost";
 //Aqui el nombre de usuario 
-$nombre= "root"; 
+$nombre= "profitech"; 
 //Aqui la contraseña
 $contraseña="Admin1234"; 
 
@@ -27,5 +26,4 @@ ini_set('display_errors', '1');
 
 
 <!-- Provisional -->
-    <link rel="shortcut icon" href="/Imagenes/Icon/icon.png">
-
+<link rel="shortcut icon" href="/Imagenes/Icon/icon.png">

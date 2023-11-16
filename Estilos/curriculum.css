@@ -41,7 +41,24 @@
     width:50%;
     margin-left: 8%;
 }
-
+optgroup{
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+    width:50%;
+    margin-left: 8%;
+}
+option{
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+    width:50%;
+    margin-left: 8%;
+}
 .div2 p {
     margin: 0;
     font-size: 16px;
@@ -129,41 +146,43 @@
 
 @media print {
 
+    @page{
+        size: A4;
+        margin: 0;
+    }
 
-    .main-header{
+
+
+    .div1 img{
+        padding-left: 5%;
+        padding-top: 10%;
+        max-width: 20%;
+    }
+
+
+    .main-info {
+        padding-right: 15%;
+    }
+
+    .breadcrumbs,
+    .cabecera,
+    .main-menu,
+    .footer {
         display: none;
-    }
-
-    .main-content{
-        display:none;
-    }
-    .conInfo{
-        display: none;
-    }
-
-    .texto {
-        flex-direction: column;
-        padding-left: 0; 
-        width: auto; 
-    }
-    
-    img{
-        display: block !important;
-        margin-right: 10px;
-        max-width: 10%;
-        padding-bottom: 10%;
+     
     }
 
     .div1 {
-        display: flex !important;
+        display: flex;
         align-items: center;
         background-color: transparent;
         box-shadow: none;
         border-radius: 0;
-        margin: 20px;
+        margin: 0;
         padding: 20px;
         width: auto;
-        margin-left: 8%; 
+        margin-left: 8%;
+        margin-bottom: 40%;
     }
 
     .div1 p,
@@ -172,16 +191,18 @@
     .div4 p,
     .div5 p,
     .div6 p,
-    .div7 p {
-        display: block !important;
-        padding-left: 25%; 
-        margin: 0; 
-        font-size: 16px; 
-        color: #333; 
-        line-height: 1.5; 
+    .div7 p,
+    option {
+        display: block;
+        padding-left: 18%;
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+        line-height: 1.5;
     }
-
-   
+    button{
+        display: none;
+    }
     .div1,
     .div2,
     .div3,
@@ -189,13 +210,33 @@
     .div5,
     .div6,
     .div7 {
-        display: block !important;
+        display: block;
         margin: 0;
-        padding: 0; 
-        background-color: transparent; 
-        box-shadow: none; 
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
         border-radius: 0;
-        width: auto; 
-        margin-left: 0; 
+        width: auto;
+        margin-left: 0;
+        margin-top: 3%;
+        margin-bottom: 6.5%;
     }
+    optgroup,
+    option {
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        
+        
+    }
+    option{
+       margin-left: 18%;
+    }
+
 }
+

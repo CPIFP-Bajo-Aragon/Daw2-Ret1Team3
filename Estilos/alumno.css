@@ -62,13 +62,14 @@ main {
   display: flex;
   background-color: yellow;
   width: 100%;
-  height: 550vh;
+  height: auto;
 }
 
 .main-info {
   background-color: lightblue;
   width: 100%;
-  height: 100%;
+  min-height: 57vh;
+  height: auto;
 }
 
 /* MAIN CARDS */
@@ -115,6 +116,9 @@ main {
   align-items: center;
   width: 30vw;
   height: 50vh;
+  min-width: 20vw;
+  min-height: 30vh;
+
 }
 
 .divImagenAlumno {
@@ -127,12 +131,13 @@ main {
   margin-right: 1vw;
   border-radius: 90%;
   overflow: hidden;
-
+  min-width: 20vw;
+  min-height: 30vh;
 }
 
 .divImagenAlumno .imagenAlumno {
-  height: 80%;
-  width: 80%;
+  height: auto;
+  width: 100%;
 }
 
 .cardInfo {
@@ -295,6 +300,27 @@ input[type="submit"] {
 }
 
 input[type="submit"]:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #2838c6;
+}
+
+input[type="reset"] {
+  background-color: rgb(73, 73, 180);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 rgb(58, 58, 151);
+  transition: all 0.3s ease;
+}
+
+input[type="reset"]:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 #2838c6;
 }
@@ -494,4 +520,62 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .enlace-caja ul li a:hover::before {
   transform: rotateY(160deg);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.cerrar {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.cerrar:hover,
+
+.cerrar:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border: 1px solid #ccc;
+  margin: 15px 0;
+}
+
+.noAlertas {
+  display: none;
 }

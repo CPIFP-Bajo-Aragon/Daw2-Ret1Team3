@@ -17,45 +17,41 @@ if ($result = $conexion->query($query)) {
   <h2>Formulario de Inserción de Datos</h2>
 
   <div id="ocultar">
-  <form action="Crear_Oferta.php" method="post">
+        <form action="Crear_Oferta.php" method="post">
 
-    <label for="titulo">Titulo:</label>
-    <input type="text" name="titulo" required>
-    <br>
-    <label for="vacantes">Vacantes:</label>
-    <input type="number" name="vacantes" required>
-    <br>
-    <label for="descripcion">Descripcion:</label>
-    <textarea name="descripcion" required></textarea>
-    <br>
-    <label for="fecha_inicio">Fecha_Inicio:</label>
-    <input type="date" name="fecha_inicio" required>
-    <br>
-    <label for="fecha_fin">Fecha_Fin:</label>
-    <input type="date" name="fecha_fin">
-    <br>
-    <input type="hidden" name="dni" value="<?php echo $dni; ?>">
-    <br>
-    <select name="municipios" id="municipios" class="inicio-alumno">
-       <?php
-       $query = "SELECT * FROM Municipio";
-
-
-       if ($result = $conexion->query($query)) {
-           while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-               $Nombre_Municipio = $row->Nombre_Municipio;
-               $id_Municipio = $row->Id_Municipio;
-               echo "<option value='$id_Municipio'>$Nombre_Municipio</option>";
-           }
-       }
-       ?>
-   
-        <br>  
-    <input type="submit" value="Insertar Datos">
-  </form>
+            <label for="titulo">Titulo:</label>
+            <input type="text" name="titulo" required>
+            <br>
+            <label for="vacantes">Vacantes:</label>
+            <input type="number" name="vacantes" required>
+            <br>
+            <label for="descripcion">Descripcion:</label>
+            <textarea name="descripcion" required></textarea>
+            <br>
+            <label for="fecha_inicio">Fecha_Inicio:</label>
+            <input type="date" name="fecha_inicio" required>
+            <br>
+            <label for="fecha_fin">Fecha_Fin:</label>
+            <input type="date" name="fecha_fin">
+            <br>
+            <input type="hidden" name="dni" value="<?php echo $dni; ?>">
+            <br>
+            <select name="municipios" id="municipios" class="inicio-alumno">
+            <?php
+            $query = "SELECT * FROM Municipio";
+            if ($result = $conexion->query($query)) {
+                while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                    $Nombre_Municipio = $row->Nombre_Municipio;
+                    $id_Municipio = $row->Id_Municipio;
+                    echo "<option value='$id_Municipio'>$Nombre_Municipio</option>";
+                }
+            }
+            ?>
+            <input type="submit" name="insertar" value="Insertar Datos">
+        </form>
   </div>
 <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST["insertar"])) {
     $dni = $_SESSION['dni'];
     $titulo = $_POST['titulo'];
     $vacantes = $_POST['vacantes'];

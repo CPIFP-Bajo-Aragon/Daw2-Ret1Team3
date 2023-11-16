@@ -1,0 +1,54 @@
+.chatsDisponibles {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: auto;
+}
+
+.chatsDisponibles form {
+    width: auto;
+}
+
+.chatsDisponibles form input {
+    display: flex;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(114, 234, 255);
+    width: 100%;
+}
+
+.chatContent {
+    background-color: lightblue;
+    /* Fondo gris claro */
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+
+}
+
+/* Estilos de los mensajes */
+.Mensaje_origen_usuario,
+.Mensaje_origen {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+}
+
+.Mensaje_origen_usuario {
+    background-color: #4CAF50;
+    /* Verde para mensajes del usuario de la sesión */
+    color: white;
+    align-self: flex-end;
+}
+
+.Mensaje_origen {
+    background-color: #f1f1f1;
+    /* Gris claro para mensajes de otros usuarios */
+    align-self: flex-start;
+}
