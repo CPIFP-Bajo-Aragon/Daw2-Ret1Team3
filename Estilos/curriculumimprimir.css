@@ -1,0 +1,22 @@
+#general{
+    display: flex;
+    flex-direction: column;
+}
+#modalCloseButtonContainer{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+}
+#cerrar{
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+}
+#formulario{
+    display: flex;
+    justify-content: center;
+}
+.modalCloseButton{
+    background-color: red;
+    box-shadow: 0 4px 0 red;
+
+}

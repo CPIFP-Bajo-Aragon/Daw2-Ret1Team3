@@ -1,11 +1,11 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
 }
 
 
 
-.union{
+.union {
     padding-right: 50px;
     padding-top: 30px;
     height: 30%;
@@ -15,7 +15,7 @@
 /* HEADER */
 .main-header {
     position: fixed;
-    top: 0; 
+    top: 0;
     justify-content: space-between;
     display: flex;
     background-color: #0074cc;
@@ -28,7 +28,7 @@
     z-index: 3;
 }
 
-.main-header > img {
+.main-header>img {
     max-width: 100px;
     height: auto;
 }
@@ -43,6 +43,6 @@
     height: 95%;
 } */
 
-.conInfo p{
+.conInfo p {
     color: white;
 }

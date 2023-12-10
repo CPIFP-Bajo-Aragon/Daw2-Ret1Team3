@@ -52,3 +52,21 @@
     /* Gris claro para mensajes de otros usuarios */
     align-self: flex-start;
 }
+
+#uso-de-chat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+#chat-txt {
+    color: black;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hr {
+    margin: 2%;
+}

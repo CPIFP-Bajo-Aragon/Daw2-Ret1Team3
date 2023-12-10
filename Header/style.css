@@ -1,0 +1,74 @@
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@400;500;600;700&family=Lobster&family=Paytone+One&display=swap');
+#body-cabecera{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Karla', sans-serif;
+}
+#segmento{
+    display: flex;
+    flex-direction: column;
+}
+#cabecera{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: inset 0px 0px 10px 0 rgba(0, 0, 0, 00.5);
+
+}
+#cabeceradivuno{
+    display: flex;
+    grid-row: 1;
+}
+#cabeceradivuno img{
+    margin: 3%;
+    margin-left: 10%;
+    height: 10vh;    
+}
+#cabeceradivuno p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 200%;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    word-spacing: 0.5em;
+    text-shadow: 0.1em 0.1em 0.2em gray
+}
+/* #cabeceradivdos{
+
+
+}*/
+#cabeceradivtres{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+}  
+#cabeceradivtres button{
+    margin-left: 10%;
+    padding: 2%;
+    box-shadow: 3px 3px gray;
+    color: #ffffff;
+    font-weight: 700;
+    background-color: #00416A;
+    border-radius: 6px;
+    cursor: pointer;
+} 
+#cabeceradivtres button:hover{
+    margin-left: 10%;
+    padding: 2%;
+    box-shadow: 3px 3px gray;
+    color: black;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+} 
+#frase{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00416A;
+    color: white;
+    margin-left: 15%;
+}

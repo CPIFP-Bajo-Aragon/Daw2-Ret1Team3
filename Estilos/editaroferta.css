@@ -1,0 +1,33 @@
+form {
+  max-width: 60vw;
+  margin: 0 auto;
+
+}
+
+label {
+  display: block;
+  margin-bottom: 1vh;
+  font-weight: bold;
+}
+
+/* Estilos para elementos ya añadidos */
+
+.divAnadido {
+  width: auto;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  background-color: lightsteelblue;
+}
+
+.ya-anadido {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: rgb(48, 48, 48);
+
+}
+
+
+input[type="text"] {
+  padding: 5px;
+  margin-bottom: 5px;
+}

@@ -4,6 +4,7 @@
 include "../../Funciones/conexion.php";
 $dni = $_SESSION['dni'];
 $username = $_SESSION['Nombre_Usuario'];
+
 if (!isset($_SESSION['dni'])) {
     header("Location: ../../index");
     exit();
@@ -17,7 +18,6 @@ if($_SESSION['Tipo_Usuario']=='Alumno'){
     header("Location: /");
     exit;
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -36,19 +36,17 @@ function cerrarSesion()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
 </head>
 
 <body>
-
     <main>
-
         <?php include "../../Header/CabeceraLogeado.php"; ?>
-        <link rel="stylesheet" href="../../Estilos/alumno.css">
         <div class="main-content">
             <?php include "../../menuLateral/Empresa/menuEmpresa.php"; ?>
             <section class="main-info">
                 <div class="breadcrumbs">
-                    <h1 id="breadcrumbs-title">Empresa / <span>Mis alertas</span></h1>
+                    <h1 id="breadcrumbs-title">Empresa / <span>Listar alumnos</span></h1>
                     <div class="breadcrumb-dropdown enlace-caja">
                         <ul>
                             <li></li>
@@ -62,43 +60,31 @@ function cerrarSesion()
                         </ul>
                     </div>
                 </div>
-                <article class="card" id="mostrarAlertaEmpresa">
-                    <p id="resultado"></p>
-                </article>
-
-                <?php
-                $sql = "SELECT * FROM Alertas where DNI_CIF = '$dni' AND Vista=1";
-
-                if ($result = $conexion->query($sql)) {
-                    $sqlfilas = $result->rowCount();
-
-                    while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                        $Id_Alerta = $row->Id_Alerta;
-                        $Alerta = $row->Alerta;
-                        ?>
                 <article class="card">
-                    <p>
-                        <?php echo $Alerta ?>
-                    </p>
-                    <form action="desactivaralerta.php" method="POST">
-                        <input type="hidden" name="id" value="<?php echo $Id_Alerta ?>">
-                        <input type="submit" value="Marcar como Leída" />
-                    </form>
+                    <h2 class="card-title">Listado Alumnos</h2>
+                    <hr class="hr-divider">
+                    <div class="cardContent">
+                        <div class="cardInfo">
+                            <?php
+                            $sql="SELECT * FROM Empresa WHERE DNI_CIF='$dni'";
+                            if($resultado = $conexion -> query($sql)){
+                                while($row = $resultado->fetch(PDO::FETCH_OBJ)){
+                                    $activo=$row->Activo;
+
+                                    if($activo==1){
+                                        include "listaralumno.php";
+                                    }else{
+                                        echo "<p class='mensaje-error'>Tienes que estar validado para ver los candidatos</p>";
+                                    } 
+                                }
+                                ?>
+                            </select>
+                            <?php 
+                            }
+                           ?>
+                        </div>
+                    </div>
                 </article>
-
-
-                <?php
-                    }
-                }
-                if ($sqlfilas == 0) {
-                    ?>
-                <script>
-                document.getElementById("mostrarAlertaEmpresa").style.display = "block";
-                document.getElementById("resultado").innerHTML = "No tienes alertas actualmente :)";
-                </script>
-                <?php
-                }
-                ?>
 
             </section>
         </div>

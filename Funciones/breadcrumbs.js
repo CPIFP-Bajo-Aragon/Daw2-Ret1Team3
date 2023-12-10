@@ -35,7 +35,7 @@
         function scrollToSection(sectionId) {
             var targetSection = document.getElementById(sectionId);
             if (targetSection) {
-                var offset = breadcrumbs.clientHeight + 70; // Ajusta el valor según tus necesidades
+                var offset = breadcrumbs.clientHeight + 100; // Ajusta el valor según tus necesidades
                 window.scrollTo({
                     top: targetSection.offsetTop - offset,
                     behavior: "smooth"

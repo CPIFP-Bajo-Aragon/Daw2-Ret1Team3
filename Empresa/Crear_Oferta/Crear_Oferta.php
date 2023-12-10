@@ -1,189 +1,164 @@
+<link rel="shortcut icon" href="../../../Imagenes/icon/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <?php
-        include "../../Funciones/conexion.php";
+include "../../Funciones/conexion.php";
 
-session_start();
 
+$username = $_SESSION['Nombre_Usuario'];
 $dni = $_SESSION['dni'];
-
-$query = "SELECT * FROM Empresa WHERE DNI_CIF='$dni'";
-
-if ($result = $conexion->query($query)) {
-    while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-        $Id_municipio = $row->Id_Municipio;
-    }
+if($_SESSION['Tipo_Usuario']=='Alumno'){
+    session_abort();
+    header("Location: /");
+    exit;
+}else if($_SESSION['Tipo_Usuario']=='Admin'){
+    session_abort();
+    header("Location: /");
+    exit;
 }
 ?>
 
-  <h2>Formulario de Inserción de Datos</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div id="ocultar">
-        <form action="Crear_Oferta.php" method="post">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
+    <script src="cargarMunicipios.js"></script>
 
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo" required>
-            <br>
-            <label for="vacantes">Vacantes:</label>
-            <input type="number" name="vacantes" required>
-            <br>
-            <label for="descripcion">Descripcion:</label>
-            <textarea name="descripcion" required></textarea>
-            <br>
-            <label for="fecha_inicio">Fecha_Inicio:</label>
-            <input type="date" name="fecha_inicio" required>
-            <br>
-            <label for="fecha_fin">Fecha_Fin:</label>
-            <input type="date" name="fecha_fin">
-            <br>
-            <input type="hidden" name="dni" value="<?php echo $dni; ?>">
-            <br>
-            <select name="municipios" id="municipios" class="inicio-alumno">
-            <?php
-            $query = "SELECT * FROM Municipio";
-            if ($result = $conexion->query($query)) {
-                while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                    $Nombre_Municipio = $row->Nombre_Municipio;
-                    $id_Municipio = $row->Id_Municipio;
-                    echo "<option value='$id_Municipio'>$Nombre_Municipio</option>";
-                }
-            }
-            ?>
-            <input type="submit" name="insertar" value="Insertar Datos">
-        </form>
-  </div>
-<?php
-  if (isset($_POST["insertar"])) {
-    $dni = $_SESSION['dni'];
-    $titulo = $_POST['titulo'];
-    $vacantes = $_POST['vacantes'];
-    $descripcion = $_POST['descripcion'];
-    $fecha_inicio = $_POST['fecha_inicio'];
-    $fecha_fin = $_POST['fecha_fin'];
-    $Id_municipio= $_POST['municipios'];
-       
+    <title>Document</title>
+</head>
 
+<body>
+    <main>
 
-        if($fecha_fin!=""){
-            $sentencia = $conexion->prepare("INSERT INTO Oferta(Titulo, Vacantes, Descripcion, Fecha_Inicio, Fecha_Fin, DNI_CIF, Id_Municipio) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $sentencia->bindParam(1, $titulo);
-            $sentencia->bindParam(2, $vacantes);
-            $sentencia->bindParam(3, $descripcion);
-            $sentencia->bindParam(4, $fecha_inicio);
-            $sentencia->bindParam(5, $fecha_fin);
-            $sentencia->bindParam(6, $dni);
-            $sentencia->bindParam(7, $Id_municipio);
-        }else{
-            $sentencia = $conexion->prepare("INSERT INTO Oferta(Titulo, Vacantes, Descripcion, Fecha_Inicio, DNI_CIF, Id_Municipio) VALUES (?, ?, ?, ?, ?, ?)");
-            $sentencia->bindParam(1, $titulo);
-            $sentencia->bindParam(2, $vacantes);
-            $sentencia->bindParam(3, $descripcion);
-            $sentencia->bindParam(4, $fecha_inicio);
-            $sentencia->bindParam(5, $dni);
-            $sentencia->bindParam(6, $Id_municipio);
-        }
-        try {
-            $sentencia->execute();
-        } catch (PDOException $e) {
-            echo "error";
-        } 
-        ?>
-        <style>
-            #ocultar{
-                display: none;
-            }
-        </style>
-        
-        <form action="" method="post">
-        <label for="titulo">Titulo:</label>
-        <input type="text" name="titulo" value="<?php echo $titulo ?>"required>
-        <br>
-        <label for="vacantes">Vacantes:</label>
-        <input type="number" name="vacantes" value="<?php echo $vacantes  ?>" required>
-        <br>
-        <label for="descripcion">Descripcion:</label>
-        <textarea name="descripcion" value="<?php echo $descripcion ?>" required></textarea>
-        <br>
-        <label for="fecha_inicio">Fecha_Inicio:</label>
-        <input type="date" name="fecha_inicio" value="<?php echo $fecha_inicio ?>" required>
-        <br>
-        <label for="fecha_fin">Fecha_Fin:</label>
-        <input type="date" name="fecha_fin" value="<?php echo $fecha_fin ?>">
-        <hr>
-
-        </select>
-       <?php 
-        $sql="SELECT * FROM AreasDeNegocio";
-        if($resultado = $conexion -> query($sql)){
-            ?>
-            <select name="area_negocio" id="">
-                <option value="">- Area de negocio -</option>
+        <?php include "../../Header/CabeceraLogeado.php"; ?>
+        <link rel="stylesheet" href="../../Estilos/alumno.css">
+        <div class="main-content">
+            <?php include "../../menuLateral/Empresa/menuEmpresa.php"; ?>
+            <section class="main-info">
+                <div class="breadcrumbs">
+                    <h1 id="breadcrumbs-title">Empresa / <span>Crear ofertas</span></h1>
+                    <div class="breadcrumb-dropdown enlace-caja">
+                        <ul>
+                            <li></li>
+                            <li><a href="#datosPrincipales">Datos principales</a></li>
+                            <li><a href="#titulaciones">Titulaciones</a></li>
+                            <li><a href="#formacionComplementaria">Formación complementaria</a></li>
+                            <li><a href="#experiencia">Experiencia</a></li>
+                            <li><a href="#habilidadesPersonales">Habilidades personales</a></li>
+                            <li><a href="#habilidadesBasicas">Habilidades básicas</a></li>
+                            <li><a href="#idiomas">Idiomas</a></li>
+                        </ul>
+                    </div>
+                </div>
 
                 <?php
-            while($row = $resultado->fetch(PDO::FETCH_OBJ)){
-                $Area_negocio= $row-> Nombre;
-                $ID= $row-> ID;
+                            $sql="SELECT * FROM Empresa WHERE DNI_CIF='$dni'";
+                            if($resultado = $conexion -> query($sql)){
+                                while($row = $resultado->fetch(PDO::FETCH_OBJ)){
+                                    $activo=$row->Activo;
 
-                ?>
-                <option value="<?php echo $ID?>"><?php echo $Area_negocio?></option>
-                <?php 
+                                    if($activo==1){
+                                    ?>
+                <article class="card">
+                    <h2>Formulario de Inserción de Datos</h2>
 
-            }
-            ?>
-            </select>
-            <?php 
-        }
-        ?>
-        <br>
-        <?php 
-        $sql="SELECT * FROM Titulacion";
+                    <div class="divCrearOferta">
+                        <form action="Insertar_Oferta.php" class="formCrearOferta" method="post">
 
-        if($resultado = $conexion -> query($sql)){
-            ?>
-            <select name="titulacion" id="">
-                <option value="">- Titulacion -</option>
+                            <label for="titulo">Titulo: <span class="campo-obligatorio">*</span></label>
 
-                <?php
-            while($row = $resultado->fetch(PDO::FETCH_OBJ)){
-                $Titulacion= $row-> Nombre;
+                            <input type="text" name="titulo" required>
+                            <br>
+                            <label for="vacantes">Vacantes: <span class="campo-obligatorio">*</span></label>
 
-                $Tpo= $row-> Tipo;
-                $Id_Titulacion= $row-> Id_Tipo_Titulacion;
-                ?>
-                <option value="<?php echo $Id_Titulacion?>"><?php echo $Tpo." - ".$Titulacion?></option>
-                <?php 
+                            <input type="number" name="vacantes" required min="0">
+                            <br>
+                            <label for="descripcion">Descripcion: <span class="campo-obligatorio">*</span></label>
 
-            }
-            ?>
-            </select>
-            <?php 
-        }
-                
-        ?>
-        <br>
-        <?php 
-        $sql="SELECT * FROM Idioma";
+                            <textarea name="descripcion" required></textarea>
+                            <br>
+                            <label for="fecha_inicio">Fecha_Inicio:<span class="campo-obligatorio">*</span></label>
 
-        if($resultado = $conexion -> query($sql)){
-            ?>
-            <select name="idioma" id="">
-                <option value="">- Idioma -</option>
+                            <input type="date" name="fecha_inicio" required>
+                            <br>
+                            <label for="fecha_fin">Fecha_Fin:</label>
+                            <input type="date" name="fecha_fin">
+                            <br>
 
-                <?php
-            while($row = $resultado->fetch(PDO::FETCH_OBJ)){
-                $Idioma= $row-> Idioma;
 
-                $Id_Idioma= $row-> Id_Idioma;
-                ?>
-                <option value="<?php echo $Id_Idioma?>"><?php echo $Idioma?></option>
-                <?php 
+                            <?php
+                            // Asumiendo que $id_pais se obtiene de algún lugar, ajusta esto según tu lógica
+                            $id_pais = isset($_POST['id_pais']) ? $_POST['id_pais'] : null;
+                            ?>
 
-            }
-            ?>
-            </select>
-            <?php 
-        }     
-        ?>
+                            <!-- Continuación de tu código HTML y PHP -->
+                            <label for="Pais">País: <span class="campo-obligatorio">*</span></label>
+                            <select name="Pais" id="Pais">
+                                <?php
+                                $query = "SELECT * FROM paises";
+                                if ($result = $conexion->query($query)) {
+                                    while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                                        $Id_Pais = $row->id;
+                                        $Nombre_Pais = $row->nombre;
+                                        echo "<option value='$Id_Pais'>$Nombre_Pais</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <br>
+                            <label for="municipios">Municipio:</label>
+                            <select name="municipios" id="municipios" class="inicio-alumno">
+                            </select>
+                            <label for="titulo">Movilidad:</label>
+                            Si<input type="radio" id="Movilidad" name="Movilidad" value="1">
+                            No<input type="radio" id="Movilidad" name="Movilidad" value="0">
 
-        </form> 
-    <?php
-}
-?>
+                            <label for="titulo">Coche Propio:</label>
+                            Si<input type="radio" id="Coche" name="Coche" value="1">
+                            No<input type="radio" id="Coche" name="Coche" value="0">
+                            <input type="hidden" name="dni" value="<?php echo $dni; ?>">
+                            <input type="submit" name="insertar" value="Insertar Datos">
+                        </form>
+                        </select>
+                        <!-- Contenedor del alerta -->
+                        <div id="alert-container" class="hidden">
+                            <div class="alert-box">
+                                <span class="close-btn" onclick="closeAlert()">×</span>
+                                <p>En caso de que se introduzca algún elemento de manera incorrecta, podrá editarse toda
+                                    la información
+                                    de la oferta cuándo finalice.
+                                </p>
+                            </div>
+                        </div>
+                        <?php
+                            }else{  
+                                ?>
+                        <article class="card">
+                            <h2 class="card-title">Crear Ofertas</h2>
+                            <hr class="hr-divider">
+                            <p class='mensaje-error'>Tienes que estar validado para poder crear una oferta</p>
+                        </article>
+                        <?php
+                                    } 
+                                }
+                                ?>
+                        <?php 
+                            }
+                           ?>
+                    </div>
+
+                </article>
+            </section>
+        </div>
+        <div class="footer">
+            <?php include "../../Footer/footer.php"; ?>
+        </div>
+    </main>
+
+    <script src="alert.js"></script>
+</body>
+
+</html>

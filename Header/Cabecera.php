@@ -1,5 +1,5 @@
-    <link rel="stylesheet" href="../Estilos/estilocabecera.css">        
- 
+    <link rel="stylesheet" href="../Estilos/estilocabecera.css">
+
 
     <header class="main-header">
         <div class="logo">

@@ -96,6 +96,7 @@ main {
 
 /* MAIN CARDS */
 
+
 .card {
     background-color: whitesmoke;
     max-width: 93.5%;
@@ -107,15 +108,10 @@ main {
 }
 
 .card-title {
-    display: flex;
-    align-items: center;
     font-size: 18px;
     font-weight: bold;
-}
-
-.card-title::before{
-  content: url(../../Imagenes/Icon/info3.png);
-  margin-right: 0.5vw;
+    margin: 0;
+    padding: 0;
 }
 
 .hr-divider {
@@ -175,11 +171,9 @@ main {
     width: 5vw;
 }
 
-
-
 /* FOOTER */
 
-/* .footer{
+.footer{
     display: flex;
     width: 100%;
     height: 50vh;
@@ -190,7 +184,7 @@ footer{
     margin-left: 20vw;
     padding: 2vh 2vw;
 
-} */
+}
 
 /* TABLA */
 
@@ -289,6 +283,27 @@ form {
     box-shadow: 0 0 0 #2838c6;
   }
 
+  input[type="reset"] {
+    background-color: rgb(73, 73, 180); 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px; 
+    box-shadow: 0 4px 0 rgb(58, 58, 151); 
+    transition: all 0.3s ease;
+  }
+  
+  input[type="reset"]:active {
+    transform: translateY(4px); 
+    box-shadow: 0 0 0 #2838c6;
+  }
+
   table form{
     color: #fff;
     border: none;
@@ -346,4 +361,68 @@ form {
   input[type="file"]::-webkit-file-upload-button:hover {
     background-color: #0056b3;
   }
-    
+
+  .container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+  }
+  
+  .info {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+  }
+/*   
+#abrirModal {
+  background-color: #4CAF50; 
+  color: white; 
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.cerrar {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.cerrar:hover,
+.cerrar:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} */

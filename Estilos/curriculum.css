@@ -145,20 +145,20 @@ option{
 }
 
 @media print {
-
-    @page{
+    @page {
         size: A4;
         margin: 0;
     }
 
+    body {
+        margin: 0;
+    }
 
-
-    .div1 img{
+    .div1 img {
         padding-left: 5%;
         padding-top: 10%;
         max-width: 20%;
     }
-
 
     .main-info {
         padding-right: 15%;
@@ -169,7 +169,6 @@ option{
     .main-menu,
     .footer {
         display: none;
-     
     }
 
     .div1 {
@@ -200,9 +199,11 @@ option{
         color: #333;
         line-height: 1.5;
     }
-    button{
+
+    button {
         display: none;
     }
+
     .div1,
     .div2,
     .div3,
@@ -221,6 +222,7 @@ option{
         margin-top: 3%;
         margin-bottom: 6.5%;
     }
+
     optgroup,
     option {
         background-color: transparent;
@@ -231,12 +233,13 @@ option{
         width: auto;
         margin-top: 3%;
         margin-bottom: 3%;
-        
-        
-    }
-    option{
-       margin-left: 18%;
     }
 
+    option {
+        margin-left: 18%;
+    }
+
+   
 }
+
 
