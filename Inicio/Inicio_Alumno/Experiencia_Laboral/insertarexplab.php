@@ -20,6 +20,14 @@ $sentencia->bindParam(5, $fecha_fin);
 $sentencia->bindParam(6, $dni);
 
 try {
+    if($fecha_inicio>$fecha_fin){
+        echo "<script>";
+        echo "alert('la fecha inicio no puede ser menor que la fecha fin')";
+        echo "</script>";
+        echo "<script>";
+        echo "location.replace('../index.php#Experiencia_Laboral')";
+        echo "</script>";
+    }
     $sentencia->execute();
     header("Location: ../index.php#Experiencia_Laboral");
 
@@ -38,6 +46,9 @@ try {
     $sentencia->bindParam(5, $dni);
     
     try {
+        
+
+
         $sentencia->execute();
         header("Location: ../index.php#Experiencia_Laboral");
     

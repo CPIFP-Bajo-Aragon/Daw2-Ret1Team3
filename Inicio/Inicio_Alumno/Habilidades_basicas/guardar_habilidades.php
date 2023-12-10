@@ -16,12 +16,12 @@ $sentencia->bindParam(2, $dni);
 
  try {
     $sentencia->execute();
-    header("Location: ../index.php#habbas");
+    header("Location: ../index.php#habilidadesBasicas");
 
 
 } catch (PDOException $e) {
     echo "Error al actualizar la consulta ";
-    header("Location: ../index.php#habbas");
+    header("Location: ../index.php#habilidadesBasicas");
 
     
 }

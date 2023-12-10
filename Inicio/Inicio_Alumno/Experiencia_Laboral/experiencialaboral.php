@@ -1,93 +1,42 @@
-<?php 
+<?php
 include "../../Funciones/conexion.php";
-include "../../Funciones/SessionStart.php";
 ?>
-<link rel="stylesheet" href="../../../Estilos/curriculumimprimir.css">
-<script src="../../Funciones/ocultardiv.js"></script>
+
+
 
 <?php
 
 
 
 $dni = $_SESSION['dni'];
-$sql = "SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";   
+$sql = "SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
 
 
 if ($resultado = $conexion->query($sql)) {
     while ($row = $resultado->fetch(PDO::FETCH_OBJ)) {
-        $Id_Explab = $row -> Id_Experiencia_Laboral;
+        $Id_Explab = $row->Id_Experiencia_Laboral;
         $Nombre_Complementaria = $row->Nombre_Empresa;
         $Descripcion = $row->Descripcion;
         $Fecha_Inicio = $row->Fecha_Inicio;
         $Fecha_Fin = $row->Fecha_Fin;
     }
-    
+
 }
-    if(isset($_POST['Editar'])){
-        $id=$_POST['id'];
-        $Nombre = $_POST['Nombre'];
-        $Puesto=$_POST['Puesto'];
-        $Descripcion=$_POST['Descripcion'];
-        $Fecha_Inicio = $_POST['Fecha_Inicio'];
-        $Fecha_Fin = $_POST['Fecha_Fin'];
-      
-        ?>
-        <style>
-        #nomostar{
-            display: none;
-        }
-         </style>
-
-        <form action="Experiencia_Laboral/editar.php" method="POST">
-
-        <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
-
-            <label for="Nombre">Nombre Empresa:</label>
-            <input type="text" name="Nombre" value="<?php echo $Nombre?>">
-
-            <label for="Puesto">Puesto:</label>
-            <input type="text" name="Puesto" value="<?php echo $Puesto?>">
-
-            <label for="descripcion">Descripcion:</label>
-            <input type="text" name="Descripcion" value="<?php echo $Descripcion?>">
-
-            <label for="Fecha_Inicio">Fecha_Inicio:</label>
-            <input type="date" name="Fecha_Inicio" value="<?php echo $Fecha_Inicio?>">
-
-            <label for="Fecha_Fin">Fecha_Fin:</label>
-            <input type="date" name="Fecha_Fin" value="<?php echo $Fecha_Fin?>">
-
-            <input type="submit" name="insertarexplab" value="Realizar Cambios">
-            
-        </form>
-        <?php
-    }
-
 ?>
 
-    <form method="POST" action="Experiencia_Laboral/insertarexplab.php" id="nomostar">
-        <label for="Nombre">Nombre Empresa:</label>
-        <input type="text" name="Nombre" value="">
-
-        <label for="puesto">Puesto:</label>
-        <input type="text" name="Puesto">
-
-        <label for="Descripcion">Descripcion:</label>
-        <input type="text" name="Descripcion">
-
-        <label for="Fecha_Inicio">Fecha_Inicio:</label>
-        <input type="date" name="Fecha_Inicio">
-
-        <label for="Fecha_Fin">Fecha_Fin:</label>
-        <input type="date" name="Fecha_Fin">
 
 
-        <input type="submit" name="insertarexplab" value="Añadir Experiencia Laboral">
-    </form>
- 
-   
 
-       
+
+
+
+
+<?php
+    $query = "SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
+    if ($result = $conexion->query($query)) {
+
+        if ($resultado->rowCount() > 0) {
+        ?>
 <table>
     <tr>
         <th>Nombre Empresa</th>
@@ -95,52 +44,81 @@ if ($resultado = $conexion->query($sql)) {
         <th>Descripcion</th>
         <th>Fecha Inicio</th>
         <th>Fecha_Fin</th>
-        <th>Acción</th>
+        <th>Borrar</th>
+        <th>Editar</th>
+
     </tr>
-    
-<?php     
- $query="SELECT * FROM Experiencia_Laboral WHERE DNI_CIF='$dni'";
- if ($result = $conexion->query($query)) {
-     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-         $id = $row -> Id_Experiencia_Laboral;
-         $Nombre = $row->Nombre_Empresa;
-         $Puesto = $row-> Puesto;
-         $Descripcion = $row->Descripcion;
-         $Fecha_Inicio =  $row-> Fecha_Inicio;
-         $Fecha_Fin =  $row-> Fecha_Fin;
-         
-         echo " 
+    <?php
+        } else{
+            echo "<p>Aún no has agregado ninguna experiencia laboral.</p>";
+        }
+        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+            $id_exp = $row->Id_Experiencia_Laboral;
+            $Nombre = $row->Nombre_Empresa;
+            $Puesto = $row->Puesto;
+            $Descripcion = $row->Descripcion;
+            $Fecha_Inicio = $row->Fecha_Inicio;
+            $Fecha_Fin = $row->Fecha_Fin;
+
+            echo " 
          <td> $Nombre</td>
          <td> $Puesto</td>
          <td> $Descripcion</td>
          <td> $Fecha_Inicio</td>
-         <td> $Fecha_Fin</td>
-         <td>"
-         ?>
-         <form action="Experiencia_Laboral/borrarexplab.php" method="POST">
-             <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
-             <input type="submit" value="Borrar">
-         </form>
-         
-         <form action="index.php" method="POST">
-             <input type="hidden" name="id" value="<?php echo $id;?>">
-             <input type="hidden" name="Nombre" value="<?php echo $Nombre;?>">
-             <input type="hidden" name="Puesto" value="<?php echo $Puesto;?>">
-             <input type="hidden" name="Descripcion" value="<?php echo $Descripcion;?>">
-             <input type="hidden" name="Fecha_Inicio" value="<?php echo $Fecha_Inicio;?>">
-             <input type="hidden" name="Fecha_Fin" value="<?php echo $Fecha_Fin;?>">
-             <input type="submit" name="Editar" value="Editar">
-         </form>
-         <?php
-         echo"
-         </td>";
-         echo "</tr>";
-         
-         
-         
-     }
- 
- }
- 
- ?>
- </table>
+         <td> $Fecha_Fin</td>";
+            ?>
+    <td>
+        <button class="papelera" onclick="showModal3('<?php echo $id_exp; ?>')">🗑️</button>
+    </td>
+    <form id='formulario3' action="Experiencia_Laboral/borrarexplab.php" method="POST">
+        <input type="hidden" name="id_exp" id="id_exp" value="<?php echo $id_exp; ?>">
+        <input type="hidden" id="confirmacionEliminacion3" name="confirmacionEliminacion3" value="false">
+
+        <div class="modal3" id="myModal3">
+            <div id="modal-content3" class="modal-content3"></div>
+        </div>
+
+        <script>
+        function showModal3(id_exp) {
+            var modal = document.getElementById('myModal3');
+            modal.style.display = 'block';
+
+            document.getElementById('modal-content3').innerHTML =
+                "<p>¿Estás seguro que quieres eliminarlo?</p>" +
+                "<button  class=abrir onclick=\"confirmar3('" + id_exp + "')\">Confirmar</button>" +
+                "<button id=cerrar class=cerrar2 onclick=hideModal3()>Cancelar</button>"
+        }
+
+        function hideModal3() {
+            var modal = document.getElementById('myModal3');
+            modal.style.display = 'none';
+        }
+
+        function confirmar3(id_exp) {
+            document.getElementById('id_exp').value = id_exp;
+            document.getElementById('confirmacionEliminacion3').value = "true";
+            document.getElementById('formulario3').submit();
+        }
+        </script>
+    </form>
+
+    <?php
+
+            ?>
+    <td>
+
+        <button onclick="openModalExperienciaEditar(<?php echo $id_exp; ?>)">✏️</button>
+
+    </td>
+    </tr>
+
+    <?php
+
+        }
+
+    }
+
+    ?>
+
+
+</table>

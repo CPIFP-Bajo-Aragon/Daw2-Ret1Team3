@@ -20,10 +20,24 @@ try {
     $stmt->bindParam(':dniCif', $dniCif);
     $stmt->bindParam(':fInicio', $fInicio);
     $stmt->bindParam(':fFin', $fFin);
-    $stmt->execute();
+
+    
+    if($FInicio>$Fin ){
+        echo "<script>";
+        echo "alert('la fecha fin no puede ser menor que la fecha inicio')";
+        echo "</script>";
+        echo "<script>";
+        echo "location.replace('../index.php#titulaciones')";
+        echo "</script>";
+    }else{
+        $stmt->execute();
 
 
-   header('Location: ../');
+        header("Location: ../index.php#titulaciones");
+    }
+
+
+   
 } catch (PDOException $e) {
     echo "Error en la base de datos: " . $e->getMessage();
 }

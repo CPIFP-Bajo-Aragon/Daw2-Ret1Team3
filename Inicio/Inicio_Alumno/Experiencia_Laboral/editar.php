@@ -1,5 +1,4 @@
 <?php session_start();
-include "../../Funciones/SessionStart.php";
 include "../../../Funciones/conexion.php"; 
 ?> 
 <!DOCTYPE html>
@@ -12,13 +11,14 @@ include "../../../Funciones/conexion.php";
 </head>
 <body>
 <?php 
-$id = $_POST['id'];
-$nombre_Empresa = $_POST['Nombre'];
+$id = $_POST['Id_Experiencia_Laboral'];
+$nombre_Empresa = $_POST['nombre'];
 $puesto = $_POST['Puesto'];
 $descripcion = $_POST['Descripcion'];
 $fecha_inicio = $_POST['Fecha_Inicio'];
 $fecha_fin = $_POST['Fecha_Fin'];
 $dni=$_SESSION['dni'];
+
 
 $sentencia = $conexion->prepare("UPDATE Experiencia_Laboral SET Nombre_Empresa = ?, Puesto = ?, Descripcion = ?, Fecha_Inicio = ?, Fecha_Fin = ?  WHERE DNI_CIF = ? AND ID_Experiencia_Laboral= ?");
 $sentencia->bindParam(1, $nombre_Empresa);

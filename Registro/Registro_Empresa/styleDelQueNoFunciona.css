@@ -1,0 +1,60 @@
+*{
+
+    font-family: 'Karla', sans-serif;
+}
+#registro_empresa{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#texto{
+color: white;
+display: flex;
+align-items: center;
+justify-content: right;
+background-color: #00416A;
+margin-left: 40%;
+box-shadow: 15px 5px 10px #48529944;
+
+}
+#texto h1{
+width: 50%;
+font-size: 300%;
+margin-right: 10%;
+text-shadow: 0.1em 0.1em #011e30;
+}
+#formulario{
+    display: flex;
+align-items: center;
+border: #00416A 4px solid;
+margin-right: 36%;
+padding: 15%;
+align-content: center;
+box-shadow: 15px 5px 10px #48529944;
+
+}
+#formulario input{
+        display: flex;
+        justify-content: left;
+        margin-bottom: 5%;
+        padding-right: 10%;
+        padding-left: 10%;
+        padding-bottom: 3%;
+        padding-top: 3%;
+        border:none;
+        border-bottom: #00416A 2px solid;
+        font-size: medium;
+}
+ #formulario input[type="submit"]:hover{
+    border: 2px solid #00416A;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+
+} 
+#formulario input[type="submit"]{
+    border: 2px solid #00416A;
+    background-color: #00416A;
+    cursor: pointer;
+    color: white;
+    margin: 3%;
+} 

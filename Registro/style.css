@@ -1,41 +1,36 @@
-button {
-    color: black;   
-    background-color: white;
+#apartados-registro{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
-
-.FlexContainer {
-    margin: auto;
-    margin-top: 10vh;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    width: 65%;
-    height: 100%;
-    flex-direction: column-reverse;
-    border: 1px solid red;
+a:link, a:visited, a:active {
+    text-decoration:none;
 }
-
-.FlexContainer div {
-    margin: 5px;
+.registro-seleccion{
     display: flex;
+    margin: 5%;
+    border-radius: 5%;
+    box-shadow: 0 0 20px gray;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+
+}
+.registro-seleccion:hover{
+    display: flex;
+    background-color: rgb(228, 232, 236);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
 
-.FlexContainer div a {
-    display: block;
-    position: relative;
+.registro-seleccion img{
+  height: 80%;
+  width: 60%;
 }
-
-.FlexContainer div a img {
-    width: 40%;
-    max-width: 100%;
-    transition: opacity 0.3s ease; /* Añadir transición para un cambio suave de opacidad */
-}
-
-.FlexContainer div a:hover img {
-    opacity: 0.7; /* Cambiar la opacidad al pasar el mouse */
+.registro-seleccion h2{
+    margin-top: 5%;
+    font-size: x-large;
+    color: black;
+    
 }

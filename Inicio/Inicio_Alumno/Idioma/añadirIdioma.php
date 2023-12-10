@@ -16,6 +16,7 @@
         $Nivel=$_POST['Nivel'];
         $dni=$_SESSION['dni'];
      
+   
         $sentencia = $conexion->prepare("INSERT INTO Nivel_Idioma (DNI_CIF, Id_Idioma, id_Nivel) VALUES (?, ?, ?)");
         $sentencia->bindParam(1, $dni);
         $sentencia->bindParam(2, $Idioma);
@@ -23,9 +24,9 @@
 
         try {
             $sentencia->execute();
-            header("Location: ../index.php#Idioma");
+            header("Location: ../index.php#idiomas");
         } catch (PDOException $e) {
-            header("Location: ../index.php");
+            header("Location: ../index.php#idiomas");
         } 
     ?> 
 </body>

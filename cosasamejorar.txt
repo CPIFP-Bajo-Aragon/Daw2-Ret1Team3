@@ -1,0 +1,35 @@
+Cuando se solucione algo añadir este emojy a la derecha -> ✅
+Cuando se esta realizando una tarea se pone este emoji -> 👨🏻‍💻
+
+
+----------------- TODO -------------------------------------------------------- 
+-> Registros van raros generan errores abajo
+-> Añadir enviar reportes en los footers
+-> Arreglar footer
+-> Adaptar ventanas modales 👨🏻‍💻 (Carlos)
+-> Poner los Selct2 👨🏻‍💻 (Oscar)
+-> Quitar sesion start -> quitados casi todos
+-> Quitar styles
+----------------- ADMINISTRADOR -----------------------------------------------
+
+-> Administrados puede editar y crear = Usuarios, Empresas y Ofertas 👨🏻‍💻 (Ivan) 👨🏻‍💻 (Diego)   (Crear)✅
+-> menu lateral izquierdo si ponemos mas cosas no se muestran
+-> Arreglar las tablas 
+-> Hacer la maquetacion de todo y permitir poder desplazarte hacia abajo
+-> Arreglar en datos incio Apellidos✅
+
+----------------- ALUMNO -----------------------------------------------
+
+-> Añadir el asterisco rojo a los campos obligatorios
+-> Descripcion en Experiencia Laboral tiene que ser un TextArea
+-> Formacion complementaria ventana modal✅
+-> Añadir en curriculum Coche y Movilidad✅
+-> Buscar Empresa que el Link te lo abra en una nueva pestaña
+-> Cuadrar boton de Borar y Editar ✅
+-> Arreglar borrar de idioma✅
+
+----------------- EMPRESA -----------------------------------------------
+-> No pueda ver candidatos y no pueda crear ofertas si no esta Activo en 1 ✅
+-> crear oferta añadir Coche y Movilidad ✅
+-> Grid de buscar candidatos ✅ (Diego)
+

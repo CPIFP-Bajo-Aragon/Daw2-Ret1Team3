@@ -1,0 +1,337 @@
+/* Importacion de fuentes  */
+
+  @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Lobster&display=swap');
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Karla', sans-serif;
+}
+.FlexContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+}
+
+.FlexContainer div {
+    padding: 4px;
+    margin-bottom: 2px;
+    width: auto;
+    height: auto;
+}
+
+
+#divuno{
+    display: grid;
+    width: auto;
+    grid-template-columns: 1fr 1fr;
+}
+#divuno img{
+    height: auto;
+    width: 40%;
+    
+}
+#divuno #button {
+    margin-top: 2%;
+    margin-right: 10%;
+    text-align: right;
+    font-size: 200%;
+}
+
+/* Estilos para los botones  */
+
+#boton_login{
+    font-size: large;
+    font-weight: 700;
+    padding: 2%;
+    background-color: #00416A;
+    border-radius: 5px;
+    border: 2px solid #00416A;
+    color: white;
+    cursor: pointer;
+}
+#boton_login:hover{
+    font-size: large;
+
+    color: black;
+    font-weight: 700;
+    padding: 2%;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid #00416A;
+}
+#boton_registro{
+    font-size: large;
+
+    margin-top: 1px;
+    font-weight: 700;
+    padding: 2%;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid #00416A;
+    cursor: pointer;
+
+}
+#boton_registro:hover{
+    font-size: large;
+
+    font-weight: 700;
+    padding: 2%;
+    background-color: #00416A;
+    border-radius: 5px;
+    border: 2px solid #00416A;
+    color: white;
+}
+
+/* Parte de debajo del encabezado  */
+#divdos{
+    background-image: url("img/imagen_entrada.jpg");
+    background-repeat: no-repeat;
+	background-size: cover;
+    padding: 10%;
+}
+#divdos p{
+    width: 60%;
+    color: white;
+    font-size:xx-large;
+    text-shadow: 0 0 10px black;
+
+}
+
+/* Cartas sobre datos */
+#divtres{
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    
+    
+}
+#divtres div img{
+   width: 50%;
+   margin:auto;
+   display:block;
+}
+#divtres div{
+    box-sizing: border-box;
+    padding: 10%;
+    color: white;
+    background-color:#00416A;
+    border: 20px white solid;
+    border-radius: 30px;
+}
+#divtres div p{
+    margin-top: 10%;
+    font-size: large;
+ }
+ #divtres div h2{
+    margin-bottom: 10%;
+    font-size: xx-large;
+    text-align: center;
+ }
+
+ /* Cartas sobre informacion numero */
+ #divcuatro{
+    margin-top: 2%;
+    display: grid;   
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-align: center;  
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+#titulo_divcuatro{
+    grid-row: 1;
+    grid-column: span 4;
+    font-weight: 700;
+    font-size: 300%;
+    margin-bottom: 5%;
+}
+#divcuatro {
+    border: #00416A 2px solid;
+    padding-top: 3%;
+}
+#divcuatro h2{
+    font-size: 250%;
+}
+#divcuatro h3{
+    font-size: 150%;
+    font-weight: 300;
+}
+ /* footer */
+
+#divcinco {
+    padding-top: 5%;
+    margin-top: 2%;
+    background-color: gray;
+    margin-bottom: -1%;
+    color: white;
+    display: grid;   
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 20vh;
+    text-align: center;
+
+
+}
+#divcinco i{
+    color: white;
+    font-size: 100%;
+}
+
+
+
+#copiright{
+    text-align: center;
+    grid-row: 2;
+    grid-column: span 2;
+}
+
+
+
+/*Parte izquierda login */
+
+#izquierda_pagina_login{
+    display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: repeat(4, 1fr);
+font-size: large;
+
+}
+
+#pagina_login_uno{
+    
+    grid-row: 1;
+    grid-column: span 2;
+    text-align: center;
+    border-bottom: #00416A 3px solid;
+
+}
+#pagina_login_uno h2{
+ font-size: xx-large;
+}
+
+#pagina_login_dos{
+    text-align: right;
+}
+#pagina_login_tres{
+    display: flex;
+    text-align: left;
+    align-items: end;   
+}
+#pagina_login_cuatro{
+    grid-row: 3;
+    grid-column: 2;
+    align-content: start;
+    
+}
+#pagina_login_cinco{
+    grid-row: 3;
+    grid-column: 1  ;
+    align-content: end;
+    display: flex;
+    text-align: left;
+    align-items: end;
+}
+#pagina_login_seis{
+    text-align: right;
+
+}
+#pagina_login_siete{
+    text-align: right;
+    display: flex;
+    text-align: left;
+    align-items: end;
+    
+}
+
+.izquierda_login{
+    margin: 10%;
+}
+
+.izquierda_login h2{
+     font-size: 300%;
+     color: #00416A;
+}
+
+
+
+/* Pagina del Login */
+
+#pagina_login{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content:end;
+}
+
+
+#login inputs{
+    padding: 15%;
+    text-decoration: none;
+    background-color: white;
+    padding: 10%;
+
+}
+#login form{
+    text-decoration: none;
+    background-color: rgba(255, 255, 255);
+    padding: 10%;
+    width: 30%;
+    text-align: center;
+}
+
+#login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(img/login-img.jpg);
+
+    }
+
+#login input{
+    padding: 5%;
+    margin: 5%;
+    border:none;
+    border-bottom: #00416A 2px solid;
+    text-decoration: none;
+}
+
+#login form{
+    
+    box-shadow: #00416A;
+ 
+}
+.boton_login{
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+    background-color: #005488;
+    border: #00416A 2px solid;
+
+}
+#resultado_login {
+    color: red;
+}
+#viewPassword{
+    cursor: pointer;
+    color: gray;
+  }
+.boton_login{
+    width: 70%;
+}
+#email-login{
+    width: 65%;
+}
+#otroContenido a {
+    text-decoration: none;
+    color: white;
+    margin-bottom: 5%;
+}
+.campo-obligatorio{
+    color: red;
+    font-weight: 700;
+    font-size: 110%;
+    
+}

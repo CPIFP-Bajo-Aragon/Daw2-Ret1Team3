@@ -1,5 +1,5 @@
 <form action="Habilidades_basicas/guardar_habilidades.php" method="post">
-<select name="Hard_Skill" id="Hard_Skill">
+<select name="Hard_Skill" id="Hard_Skill" class="js-example-basic-single"  name="states[]">
             <?php
 
                 $query = "SELECT * FROM Hard_Skill";
@@ -49,7 +49,7 @@ $dni = $_SESSION['dni'];
                         <td><?php echo $nombre?></td>
                         <td>   <form action="Habilidades_basicas/borrarhabilidad.php" method="post">
                         <input type="text" name="id_Hard" value="<?php echo $Id_Hard;?>" style="display: none;">
-                        <input type="submit" value="Borrar">
+                        <input type="submit" value="🗑️">
                         </form>
                     </td>
                         </tr>

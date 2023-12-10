@@ -10,7 +10,8 @@ echo "  <table>
     <th>Descripcion</th>
     <th>Fecha Inicio</th>
     <th>Fecha Fin</th>
-
+    <th>Borrar</th>
+    <th>Editar</th> 
 </tr>   ";
 $query= "SELECT * FROM Experiencia_Laboral, Alumno WHERE Alumno.DNI_CIF=Experiencia_Laboral.DNI_CIF and DNI_CIF=$dni";
 $numfilas=$query->rowCount;
@@ -29,9 +30,9 @@ if ($resultado = $conexion->query($query)) {
 
         echo 
         '<tr> 
-        <td>'.$nombre_empresa.'</td> 
-        <td>'.$puesto.'</td> 
-        <td>'.$descripcion.'</td> 
+        <td>'.htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8').'</td> 
+        <td>'.htmlspecialchars($puesto, ENT_QUOTES, 'UTF-8').'</td> 
+        <td>'.htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8').'</td> 
         <td>'.$fecha_inicio.'</td> 
         <td>'.$fecha_fin.'</td> 
         <td>
@@ -39,8 +40,7 @@ if ($resultado = $conexion->query($query)) {
                 <input type="text" name="id" id="id" value="' .$id. '" style="display:none";>
                 <input type="submit" value="Editar">
             </form>
-        </td>
-        <td>
+        
             <form action="borrarexplab.php" method="POST">
                 <input type="text" name="id" id="id" value="' .$id. '" style="display:none";>
                 <input type="submit" value="Borrar">

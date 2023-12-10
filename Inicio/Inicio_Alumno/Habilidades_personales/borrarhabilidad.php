@@ -10,11 +10,11 @@ $query = "DELETE FROM Soft_Skill_Alumno WHERE Id_Soft = $id_soft AND DNI_CIF = '
 try {
     $conexion->query($query);
     echo "Se ha borrado con exito";
-    header("Location: ../index.php#habper");
+    header("Location: ../index.php#habilidadesPersonales");
 
 } catch (PDOException $e) {
   echo "Error al borrar la consulta";
-  header("Location: ../index.php#habper");
+  header("Location: ../index.php#habilidadesPersonales");
     
 }
 

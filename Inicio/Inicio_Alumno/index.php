@@ -7,19 +7,44 @@ session_start();
 $dni = $_SESSION['dni'];
 $username = $_SESSION['Nombre_Usuario'];
 
+if($_SESSION['Tipo_Usuario']=='Empresa'){
+    session_abort();
+    header("Location: /");
+    exit;
+}else if($_SESSION['Tipo_Usuario']=='Admin'){
+    session_abort();
+    header("Location: /");
+    exit;
+}
+
 function cerrarSesion()
 {
     session_destroy();
 }
+$_SESSION["dni_usuario_mensaje"] = $dni;
 
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio Alumno</title>
     <script src="../../Funciones/breadcrumbs.js"></script>
     <script src="../../Funciones/minimizeCards.js"></script>
+    <!-- PARTE DEL SELECT 2 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Incluir jQuery desde CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <!-- Mi script -->
+    <script src="../../Funciones/select2.js"></script>
 
 
 </head>
@@ -29,41 +54,14 @@ function cerrarSesion()
 
 
     <main>
-
+        <?php    include "../../Funciones/conexion.php"; ?>
         <?php include "../../Header/CabeceraLogeado.php"; ?>
-        <link rel="stylesheet" href="../../Estilos/alumno.css">
-        <div class="main-content">
-            <nav class="main-menu">
-                <ul>
-                    <a href="#">
-                        <li id="Inicio"><i class="fa fa-car"></i> Inicio</li>
-                    </a>
-                    <a href="../../Alumno/Curriculum/curriculum.php">
-                        <li>Curriculum</li>
-                    </a>
-                    <a href="../../Alumno/Alertas/index.php">
-                        <li>Mis alertas</li>
-                    </a>
-                    <a href="../../Alumno/Mensajes/mensaje.php">
-                        <li>Mensajes</li>
-                    </a>
-                    <a href="../../Alumno/Mis_Ofertas/ofertas.php">
-                        <li>Mis ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Alumno/Buscar_Empresas/index.php">
-                        <li>Buscar empresas</li>
-                    </a>
-                    <a href="../../Alumno/Buscar_Ofertas/index.php">
-                        <li>Buscar ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">
-                        <li>Cambiar contraseña</li>
-                    </a>
 
-                </ul>
-            </nav>
+
+        <link rel="stylesheet" href="../../Estilos/alumno.css">
+        <div id="modal-container"></div>
+        <div class="main-content">
+            <?php include "../../menuLateral/Alumno/menuAlumno.php"; ?>
             <section class="main-info">
 
                 <div class="breadcrumbs">
@@ -74,7 +72,7 @@ function cerrarSesion()
                             <li><a href="#datosPrincipales">Datos principales</a></li>
                             <li><a href="#titulaciones">Titulaciones</a></li>
                             <li><a href="#formacionComplementaria">Formación complementaria</a></li>
-                            <li><a href="#experiencia">Experiencia</a></li>
+                            <li><a href="#experiencia">Experiencia Laboral</a></li>
                             <li><a href="#habilidadesPersonales">Habilidades personales</a></li>
                             <li><a href="#habilidadesBasicas">Habilidades básicas</a></li>
                             <li><a href="#idiomas">Idiomas</a></li>
@@ -119,11 +117,16 @@ function cerrarSesion()
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
-                            <?php include "Titulaciones/Inicio_Alumno.php" ?>
+
+
+                            <button onclick="openModalTitulacion()">Agregar Titulación</button>
+
                             <?php include "Titulaciones/ver_Alumno.php" ?>
                         </div>
                     </div>
                 </article>
+
+
 
                 <article id="formacionComplementaria" class="card">
                     <div class="card-header">
@@ -133,19 +136,24 @@ function cerrarSesion()
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
+
+
+
+                            <button onclick="openModalFormacion()">Agregar Formación</button>
+
                             <?php include "Formacion_Complementaria/Formacion_Complementaria_Alumno.php" ?>
                         </div>
-                    </div>
                 </article>
 
                 <article class="card" id="experiencia">
                     <div class="card-header">
                         <span class="arrow">&#9654;</span>
-                        <h2 class="card-title">Experiencia</h2>
+                        <h2 class="card-title">Experiencia laboral</h2>
                     </div>
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
+                            <button onclick="openModalExperiencia()">Agregar experiencia</button>
                             <?php include "Experiencia_Laboral/experiencialaboral.php" ?>
                         </div>
                     </div>
@@ -159,6 +167,7 @@ function cerrarSesion()
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
+                            <!-- <button onclick="openModalHabilidadesPersonales()">Agregar habilidades personales</button> -->
                             <?php include "Habilidades_personales/habilidades_personales.php" ?>
                         </div>
                     </div>
@@ -172,6 +181,7 @@ function cerrarSesion()
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
+                            <!-- <button onclick="openModalHabilidadesBasicas()">Agregar habilidades básicas</button> -->
                             <?php include "Habilidades_basicas/habilidades_basicas.php" ?>
                         </div>
                     </div>
@@ -185,9 +195,13 @@ function cerrarSesion()
                     <hr class="hr-divider">
                     <div class="cardContent">
                         <div class="cardInfo">
+
+
+                            <button onclick="openModalIdioma()">Agregar Idioma</button>
                             <?php include "Idioma/Idioma.php" ?>
                         </div>
                     </div>
+
                 </article>
 
             </section>
@@ -196,6 +210,9 @@ function cerrarSesion()
             <?php include "../../Footer/footer.php"; ?>
         </div>
     </main>
+
+    <script src="../../Funciones/ventanaModal.js"></script>
+
 </body>
 
 

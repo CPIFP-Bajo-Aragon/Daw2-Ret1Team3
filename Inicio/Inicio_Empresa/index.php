@@ -1,86 +1,101 @@
-<?php session_start(); ?>
+<link rel="shortcut icon" href="../../../Imagenes/icon/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<?php
+include "../../Funciones/conexion.php";
+$dni = $_SESSION['dni'];
+$username = $_SESSION['Nombre_Usuario'];
+$_SESSION["dni_usuario_mensaje"] = $dni;
+
+if (!isset($_SESSION['dni'])) {
+    header("Location: ../../index");
+    exit();
+
+}
+if($_SESSION['Tipo_Usuario']=='Alumno'){
+    session_abort();
+    header("Location: /");
+    exit;
+}else if($_SESSION['Tipo_Usuario']=='Admin'){
+    session_abort();
+    header("Location: /");
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
+
+<?php
+
+function cerrarSesion()
+{
+    session_destroy();
+}
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../Estilos/empresa.css">
-
-    <?php
-        session_start();
-        $dni = $_SESSION['dni'];
-        $username = $_SESSION['Nombre_Usuario'];
-        
-        function cerrarSesion(){
-            session_destroy();
-        }
-
-    ?>
+    <link rel="stylesheet" href="../../Estilos/alumno.css">
 </head>
+
 <body>
-    <?php
-   
-    if($_SESSION['Tipo_Usuario']!='Empresa'){
-        //echo "Acceso no permitido";
-         header("Location: ../PermisoDenegado.php"); 
-    }else{
-        echo "Acceso permitido";
-    }
-    ?>
-    <h1>PAGINA WEB DE EMPRESA!</h1>
-    
-    <?php
-        echo $_SESSION['dni'];
-        echo "<a href=\"../login.php\">Ir a inicio</a>";
-    ?>
+    <main>
 
-<main>
-        <header class="main-header">
-            <img src="../../Imagenes/Profitech.png" alt="">
-            <div class="conInfo"><p>Hola, <?php echo $username ?></p>
-            <form action="cerrarSesion.php" method="post">
-            <input type="submit" value="Cerrar sesión"/>
-            </form>
-            </div>
-        </header>
+        <?php include "../../Header/CabeceraLogeado.php"; ?>
         <div class="main-content">
-            <nav class="main-menu">
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Mis alertas</li>
-                    <li><a href="#">Mensajes</a></li>
-                    <li><a href="../../Empresa/Crear_Oferta/Crear_Oferta.php">Mis ofertas</a></li>
-                    <hr>
-                    <li><a href="#">Buscar candidatos</a></li>
-                    <hr>
-                    <li><a href="#">Cambiar contraseña</a></li>
-                </ul>
-            </nav>
+            <?php include "../../menuLateral/Empresa/menuEmpresa.php"; ?>
             <section class="main-info">
-
-                <h1>Inicio</h1>
+                <div class="breadcrumbs">
+                    <h1 id="breadcrumbs-title">Empresa / <span>Inicio</span></h1>
+                    <div class="breadcrumb-dropdown enlace-caja">
+                        <ul>
+                            <li></li>
+                            <li><a href="#datosPrincipales">Datos principales</a></li>
+                            <li><a href="#titulaciones">Titulaciones</a></li>
+                            <li><a href="#formacionComplementaria">Formación complementaria</a></li>
+                            <li><a href="#experiencia">Experiencia</a></li>
+                            <li><a href="#habilidadesPersonales">Habilidades personales</a></li>
+                            <li><a href="#habilidadesBasicas">Habilidades básicas</a></li>
+                            <li><a href="#idiomas">Idiomas</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <article class="card">
                     <h2 class="card-title">Datos principales</h2>
-                        <hr class="hr-divider">
+                    <hr class="hr-divider">
                     <div class="cardContent">
                         <div id="imageContainer">
                             <div class="divImagenAlumno">
-                                <img class="imagenAlumno" alt="Imagen del alumno" src="<?php echo "./Datos_principales/FotosAlumnos/".$dni.".png"?>">
-                                <img class="imagenUE" alt="Imagen del alumno" src="<?php echo "./Datos_principales/FotosAlumnos/".$dni.".png"?>">
-
+                                <?php
+                                    $rutaImagen = "./Datos_principales/FotosEmpresa/" . $dni . ".png";
+                                    
+                                    // Verificar si la imagen existe
+                                    if (file_exists($rutaImagen)) {
+                                        // Mostrar la imagen del alumno
+                                        echo '<img class="imagenAlumno" alt="Imagen del alumno" src="' . $rutaImagen . '">';
+                                    } else {
+                                        // Mostrar la imagen por defecto
+                                        echo '<img class="imagenAlumno" alt="Imagen del alumno" src="./Datos_principales/FotosEmpresa/default.png">';
+                                    }
+                                ?>
                             </div>
                         </div>
-                            <div id="datosPrincipales">
-                                <?php include "Datos_principales/inicio_Empresa.php"?>
-                            </div>
+                        <div id="datosPrincipales">
+                            <?php include "Datos_principales/inicio_Empresa.php"?>
+                        </div>
                     </div>
                 </article>
+
             </section>
         </div>
         <div class="footer">
-        <?php include "../footer/footer.php"; ?>
+            <?php include "../../Footer/footer.php"; ?>
         </div>
     </main>
 </body>
+
 </html>
