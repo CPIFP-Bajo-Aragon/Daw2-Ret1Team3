@@ -1,4 +1,4 @@
-# Daw2-Ret1Team3 - Trabajo de Profitech
+# Daw2-Ret1Team3 - Trabajo de Profitech.
 
 ¡Bienvenido al repositorio del equipo Daw2-Ret1Team3 para el proyecto Profitech!
 
