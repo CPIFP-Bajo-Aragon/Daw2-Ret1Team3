@@ -1,6 +1,5 @@
 <?php 
     include "../../Funciones/conexion.php";
-    session_start();
     $dni_origen=$_SESSION['dni'];
     $dni_destino=$_POST['dni_destino'];
     $mensaje = $_POST['mensaje'];
@@ -20,7 +19,7 @@
         $sentencia->bindParam(3, $processed_input);
     
         $sentenciados = $conexion->prepare("INSERT INTO Alertas (Alerta, DNI_CIF, Vista) VALUES (?, ?, 1)");
-        $Mensaje = "Tienes un nuevo mensaje de ".$Nombre_destino;
+        $Mensaje = "📩 Tienes un nuevo mensaje de ".$Nombre_destino.", a las ".date("h:i:sa (Y-m-d) ", mktime( date("h",$SF)+1));
         $sentenciados->bindParam(1, $Mensaje);
         $sentenciados->bindParam(2, $dni_destino);
     
@@ -28,12 +27,12 @@
      try {
         $sentencia->execute();
         $sentenciados->execute();
-        header("Location: mensaje.php?enviado=true");
+        header("Location: mensaje?enviado=true");
     } catch (PDOException $e) {
-         header ('Location: mensaje.php');
+         header ('Location: mensaje');
      }
     } else {
-        header("Location: mensaje.php?enviado=false");
+        header("Location: mensaje?enviado=false");
 
     }
     

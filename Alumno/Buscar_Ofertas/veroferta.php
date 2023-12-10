@@ -9,18 +9,20 @@ $numFilas = $statement->rowCount();
 
 //echo $numFilas;
 if($numFilas<1){
-    echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
-    echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
-    echo "<p>Vacantes: ".$fila->Vacantes."</p>";
-    echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
-    echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
+    echo "<ul>";
+    echo "<li><h2>Empresa: ".$fila->Nombre_Usuario."</h2></li>";
+    echo "<li><p>Puesto de trabajo: ".$fila->Titulo."</p></li>";
+    echo "<li><p>Vacantes: ".$fila->Vacantes."</p></li>";
+    echo "<li><p>Fecha inicio: ".$fila->Fecha_Inicio."</p></li>";
+    echo "<li><p>Descripcion: ".nl2br($fila->Descripcion)."</p></li>"; 
 }else{
 $leeroferta = $conexion -> query($consulta);
 while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
-    echo "<p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p>";
-    echo "<p>Titulacion: ".$fila->Nombre."</p>";
-    echo "<p>Soft skills: ".$fila->Nombre_soft."</p>";
-    echo "<p>Hard skills: ".$fila->Nombre_hard."</p>";
+    echo "<li><p>Idioma: ".$fila->Idioma." - ".$fila->nivel."</p></li>";
+    echo "<li><p>Titulacion: ".$fila->Nombre."</p></li>";
+    echo "<li><p>Soft skills: ".$fila->Nombre_soft."</p></li>";
+    echo "<li><p>Hard skills: ".$fila->Nombre_hard."</p></li>";
+    echo"</ul>";
 }                               
 }
 

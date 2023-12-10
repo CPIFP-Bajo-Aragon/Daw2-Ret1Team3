@@ -1,18 +1,27 @@
 <?php 
     include "../../Funciones/conexion.php";
-    session_start();
     $dni = $_SESSION['dni'];
     $username = $_SESSION['Nombre_Usuario'];
-    include "../../Funciones/SessionStart.php";
+    if($_SESSION['Tipo_Usuario']=='Empresa'){
+        session_abort();
+        header("Location: /");
+        exit;
+    }else if($_SESSION['Tipo_Usuario']=='Admin'){
+        session_abort();
+        header("Location: /");
+        exit;
+    }
     ?>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mi Curriculum</title>
     <link rel="stylesheet" href="../../Estilos/alumno.css">
     <link rel="stylesheet" href="../../Estilos/curriculum.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 
 <body>
@@ -20,41 +29,11 @@
 
 
     <main>
-        <div class="cabecera">
-        <?php include "../../Header/CabeceraLogeado.php"; ?>
-        </div>
-        <div class="main-content">
-            <nav class="main-menu">
-                <ul>
-                    <a href="../../Inicio/Inicio_Alumno/index.php">
-                        <li id="Inicio">Inicio</li>
-                    </a>
-                    <a href="../../Alumno/Curriculum/curriculum.php">
-                        <li>Curriculum</li>
-                    </a>
-                    <a href="../../Alumno/Alertas/index.php">
-                        <li>Mis alertas</li>
-                    </a>
-                    <a href="../../Alumno/Mensajes/mensaje.php">
-                        <li>Mensajes</li>
-                    </a>
-                    <a href="../../Alumno/Mis_Ofertas/ofertas.php">
-                        <li>Mis ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Alumno/Buscar_Empresas/index.php">
-                        <li>Buscar empresas</li>
-                    </a>
-                    <a href="../../Alumno/Buscar_Ofertas/index.php">
-                        <li>Buscar ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">
-                        <li>Cambiar contraseña</li>
-                    </a>
 
-                </ul>
-            </nav>
+        <?php include "../../Header/CabeceraLogeado.php"; ?>
+
+        <div class="main-content">
+            <?php include "../../menuLateral/Alumno/menuAlumno.php"; ?>
             <section class="main-info">
 
                 <div class="breadcrumbs">
@@ -84,12 +63,11 @@
                             $Apellido = $rowalumno->Apellido;
                             $Fecha_Nacimiento = $rowalumno->Fecha_Nacimiento;
                             $Telefono_Alumno = $rowalumno->Telefono_Alumno;
-                            $Foto_Alumno = $rowalumno->Foto_Alumno;
                             $Movilidad = $rowalumno->Movilidad;
                             $Direccion = $rowalumno->Direccion;
                             $Perfil_Publico = $rowalumno->Perfil_Publico;
                             $id_Municipio_usuario = $rowalumno->Id_Municipio;
-
+                            $coche=$rowalumno->Coche;
 
                         }
                     }
@@ -120,13 +98,19 @@
 
                     }
 
+                    if ($coche == 1) {
+                        $coche = "Si";
+                    } else {
+                        $coche= "No";
+                    }
+
                     if ($Movilidad == 1) {
                         $Movilidad = "Si";
                     } else {
                         $Movilidad = "No";
                     }
 
-                    echo "<h1 class='title'>Datos Personales</h1>";
+                    echo "<h1 class='title' id='titulo'>Datos Personales</h1>";
                     ?>
                     <div class="div1">
                         <?php
@@ -139,6 +123,7 @@
                         echo "<p>Direccion: " . $Direccion . "</p>";
                         echo "<p>Municipio: " . $Nombre_Municipio . "</p>";
                         echo "<p>Movilidad: " . $Movilidad . "</p>";
+                        echo "<p>Dispne de coche: " . $Movilidad . "</p>";
                         echo "</div>";
                         ?>
                     </div>
@@ -209,7 +194,7 @@
                     }
 
                     echo "<h1 class='title'>Formacion Complementaria</h1>";
-                    $queryformacion = "SELECT * FROM Formacion_Complementaria";
+                    $queryformacion = "SELECT * FROM Formacion_Complementaria WHERE DNI_CIF='$dni'";
                     if ($resultformacion = $conexion->query($queryformacion)) {
                         while ($rowformacion = $resultformacion->fetch(PDO::FETCH_OBJ)) {
                             $Id_Formacion = $rowformacion->Id_Formacion_Complementaria;
@@ -225,7 +210,7 @@
                     <div class="div5">
                         <?php
                                 echo "<p>Nombre Formacion: " . $Nombre_Formacion . "</p>";
-                                echo "<p>Enitdad Emisora: " . $Entidad_emisora . "</p>";
+                                echo "<p>Entidad Emisora: " . $Entidad_emisora . "</p>";
                                 echo "<p>Fecha Inicio: " . $Fecha_Inicio_formacion . "</p>";
                                 echo "<p>Fecha Fin: " . $Fecha_Fin_formacion . "</p>";
                                 echo "<p>Fecha caducidad: " . $Fecha_Caducidad_formacion . "</p>";
@@ -318,12 +303,47 @@
 
                     ?>
                 </article>
-                <button id="imprimirBtn" onclick="imprimirPagina()">Imprimir Página</button>
+
+                <button id="imprimirButton">Imprimir CV</button>
+                <button id="imprimirButtoningles">Imprimir CV (Ingles)</button>
 
                 <script>
-                    function imprimirPagina() {
-                        window.print();
-                    }
+                function imprimirYRedirigir() {
+                    var iframe = document.createElement('iframe');
+                    iframe.src = 'imprimir.php';
+
+                    iframe.style.display = 'none';
+
+                    document.body.appendChild(iframe);
+
+                    iframe.onload = function() {
+                        iframe.contentWindow.print();
+                    };
+
+                    setTimeout(function() {
+                        window.location.href = "curriculum.php";
+                    }, 30000);
+                }
+
+                function imprimirYRedirigiringles() {
+                    var iframe = document.createElement('iframe');
+                    iframe.src = 'imprimir-ingles.php';
+
+                    iframe.style.display = 'none';
+
+                    document.body.appendChild(iframe);
+
+                    iframe.onload = function() {
+                        iframe.contentWindow.print();
+                    };
+
+                    setTimeout(function() {
+                        window.location.href = "curriculum.php";
+                    }, 30000);
+                }
+
+                document.getElementById('imprimirButton').addEventListener('click', imprimirYRedirigir);
+                document.getElementById('imprimirButtoningles').addEventListener('click', imprimirYRedirigiringles);
                 </script>
 
             </section>

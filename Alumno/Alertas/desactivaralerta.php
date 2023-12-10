@@ -8,5 +8,5 @@ echo $sql_update;
 $stmt = $conexion->prepare($sql_update);
 $stmt->execute();
 
-header("location: index.php");
+header("location: index");
 ?>

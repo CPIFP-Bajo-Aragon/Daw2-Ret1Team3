@@ -15,12 +15,25 @@
 <body>
 
     <div id="Filtrar">
-        <form action="index.php" method="post">
-            <p>Empresa</p>
+        <form action="index" method="post">
             <?php 
-        $sql="SELECT * FROM Usuario WHERE Tipo_Usuario='Empresa'";
 
-        if($resultado = $conexion -> query($sql)){
+$sqlactivo = "SELECT Activo FROM Alumno WHERE DNI_CIF = '" . $_SESSION['dni'] . "'";
+
+if ($resultado = $conexion->query($sqlactivo)) {
+    while ($row = $resultado->fetch(PDO::FETCH_OBJ)) {
+        $Activo = $row->Activo;
+        // Resto de tu lógica aquí
+    }
+} else {
+    echo "Error en la consulta: " . $conexion->errorInfo()[2];
+}
+
+echo"            <p>Empresa</p>
+";
+$sql="SELECT * FROM Usuario, Empresa WHERE Tipo_Usuario='Empresa' AND Usuario.DNI_CIF=Empresa.DNI_CIF AND Empresa.Activo=1";
+
+        if($resultado = $conexion -> query( $sql)){
             ?>
             <select name="empresa" id="">
                 <option value="">- Empresa -</option>
@@ -64,7 +77,7 @@
         ?>
             <p>Idioma</p>
             <?php 
-        $sql="SELECT DISTINCT Idioma.Id_Idioma, Idioma.Idioma FROM Oferta_Nivel_Idioma, Idioma WHERE Oferta_Nivel_Idioma.Id_Idioma= Idioma.Id_Idioma";
+        $sql="SELECT DISTINCT Idioma.Id_Idioma, Idioma.Idioma FROM Oferta_Nivel_Idioma, Idioma, Oferta WHERE Oferta_Nivel_Idioma.Id_Idioma= Idioma.Id_Idioma AND Oferta.Id_Oferta=Oferta_Nivel_Idioma.Id_Oferta AND Oferta.Activo=1";
 
         if($resultado = $conexion -> query($sql)){
             ?>
@@ -89,7 +102,7 @@
         ?>
             <p>Titulacion</p>
             <?php 
-        $sql="SELECT * FROM Titulacion";
+        $sql="SELECT Titulacion.Tipo, Titulacion.Nombre, Titulacion.Id_Tipo_Titulacion FROM Oferta_Tipo_Titulacion, Titulacion, Oferta WHERE Oferta_Tipo_Titulacion.Id_Tipo_Titulacion=Titulacion.Id_Tipo_Titulacion AND Oferta_Tipo_Titulacion.Id_Oferta=Oferta.Id_Oferta AND Oferta.Activo=1";
 
         if($resultado = $conexion -> query($sql)){
             ?>
@@ -136,7 +149,7 @@
     <?php
                 $from = "";        
                 $aa="";
-                $sql ="SELECT DISTINCT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta
+                $sql ="SELECT DISTINCT Oferta.Titulo, Oferta.Vacantes, Oferta.Fecha_Inicio, Oferta.Fecha_Fin, Usuario.Nombre_Usuario, Oferta.Descripcion, Oferta.Id_Oferta,
                 FROM Oferta, Usuario, AreasDeNegocio, Empresa
                 WHERE Oferta.Activo = 1 AND Oferta.DNI_CIF = Usuario.DNI_CIF AND AreasDeNegocio.ID=Empresa.Area_Negocio AND Empresa.DNI_CIF=Usuario.DNI_CIF";
             
@@ -174,25 +187,28 @@
 
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
                 echo "<div class=\"container\">";
-                echo "<p class=\"info\">Empresa: ".$fila ->Nombre_Usuario."</p>";
+                echo "<p class=\"info\"><b>".$fila ->Titulo."</b></p>";
                 $nombreEmpresa = $fila ->Nombre_Usuario;
                 echo "<hr class=\"divider\">";
-                echo "<p class=\"info\">Puesto de trabajo: ".$fila ->Titulo."</p>";
-                echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
-                echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
-                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                echo "<p class=\"info\"><b>Empresa: </b>".$fila ->Nombre_Usuario."</p>";
+                echo "<p class=\"info\"><b>Vacantes: </b>".$fila ->Vacantes."</p>";
+                echo "<p class=\"info\"><b>Fecha inicio: </b>".$fila ->Fecha_Inicio."</p>";
                 $idOferta =  $fila -> Id_Oferta;
                 ?>
+    <div class="botonesOfertas">
     <button class="abrirModal">Ver Oferta</button>
     <div class="ventanaModal modal">
         <div class="modal-content">
             <span class="cerrar">&times;</span>
             <?php
-                                echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
-                                echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
-                                echo "<p>Vacantes: ".$fila->Vacantes."</p>";
-                                echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
-                                echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
+            
+                                echo "<h2>".$fila->Titulo."</h2>";
+                                echo "<hr class=\"divider\">";
+                                echo "<p class=\"info\"><b>Empresa: </b>".$fila->Nombre_Usuario."</p>";
+                                echo "<p class=\"info\"><b>Vacantes: </b>".$fila->Vacantes."</p>";
+                                echo "<p class=\"info\"><b>Fecha inicio: </b>".$fila->Fecha_Inicio."</p>";
+                                echo "<p class=\"info\"><b>Fecha fin: </b>".$fila->Fecha_Fin."</p>";
+                                echo "<p class=\"info\"><b>Descripcion: </b>".nl2br($fila->Descripcion)."</p>"; 
                                 
                                 $slqe="SELECT * FROM Oferta_Tipo_Titulacion, Titulacion WHERE Oferta_Tipo_Titulacion.Id_Tipo_Titulacion=Titulacion.Id_Tipo_Titulacion AND Oferta_Tipo_Titulacion.Id_Oferta = $idOferta;";
                                 $statement = $conexion->prepare($slqe);
@@ -202,10 +218,11 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Titulacion: </b></p>";
                                 $leer = $conexion -> query($slqe);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Titulacion: ".$row->Nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->Nombre."</p>";
                                 }
                                 }                               
                                 }
@@ -218,10 +235,11 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Idioma: </b></p>";
                                 $leer = $conexion -> query($slqr);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Idioma: ".$row->Idioma." - ".$row->nivel."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->Idioma." - ".$row->nivel."</p>";
                                 }
                                 }                               
                                 }
@@ -234,10 +252,11 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Soft Skill: </b></p>";
                                 $leer = $conexion -> query($slqq);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Soft Skill: ".$row->nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->nombre."</p>";
                                 }
                                 }                               
                                 }
@@ -249,10 +268,28 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Hard Skill: </b></p>";
                                 $leer = $conexion -> query($slqw);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Hard Skill: ".$row->nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->nombre."</p>";
+                                }
+                                }                               
+                                }
+                                $slqn="SELECT Oferta.Id_Oferta, Municipio.Nombre_Municipio, paises.nombre FROM Oferta, Municipio, paises WHERE Oferta.Id_Municipio=Municipio.Id_Municipio AND Oferta.Id_Pais=paises.id AND Oferta.Id_Oferta=$idOferta;";
+                                $statement = $conexion->prepare($slqn);
+                                $statement->execute();
+                                $numFilas = $statement->rowCount();                                
+                                //echo $numFilas;
+                                if($numFilas<1){
+                                }
+                                else{
+                                    $leer = $conexion -> query($slqn);
+                                    while($row = $leer->fetch(PDO::FETCH_OBJ)){
+                                        if($row->Id_Oferta==$idOferta){
+                                echo "<p class=\"info\"><b>Municipio: </b>".$row->Nombre_Municipio."</p>";
+                                echo "<p class=\"info\"><b>Pais: </b>".$row->nombre."</p>";
+
                                 }
                                 }                               
                                 }
@@ -264,7 +301,11 @@
     <form action="" method="post">
         <input type="hidden" name="IdOferta" value="<?php echo $idOferta?>">
         <input type="hidden" name="nombreEmpresa" value="<?php echo $nombreEmpresa?>">
-        <input type="submit" name="inscribirse" value="Inscribirse">
+        <?php if ($Activo==1){
+         echo"<input type='submit' name='inscribirse' value='Inscribirse'>";
+        }else {
+            echo"<p class='mensaje-error'>Necesitas una cuenta verificada para poder Inscribirte</p>";
+        } ?></div>
     </form>
     <?php
                 echo "</div>";
@@ -288,26 +329,29 @@
             $leeroferta = $conexion -> query($sql);
             while($fila = $leeroferta->fetch(PDO::FETCH_OBJ)){
                 echo "<div class=\"container\">";
-                echo "<p class=\"info\">Empresa: ".$fila ->Nombre_Usuario."</p>";
+                echo "<p class=\"info\"><b>".$fila ->Titulo."</b></p>";
                 $nombreEmpresa = $fila ->Nombre_Usuario;
                 echo "<hr class=\"divider\">";
-                echo "<p class=\"info\">Puesto de trabajo: ".$fila ->Titulo."</p>";
-                echo "<p class=\"info\">Vacantes: ".$fila ->Vacantes."</p>";
-                echo "<p class=\"info\">Fecha inicio: ".$fila ->Fecha_Inicio."</p>";
-                echo "<p class=\"info\">Descripcion: ".$fila ->Descripcion."</p>";
+                echo "<p class=\"info\"><b>Empresa: </b>".$fila ->Nombre_Usuario."</p>";
+                echo "<p class=\"info\"><b>Vacantes: </b>".$fila ->Vacantes."</p>";
+                echo "<p class=\"info\"><b>Fecha inicio: </b>".$fila ->Fecha_Inicio."</p>";
                 $idOferta =  $fila -> Id_Oferta;
 
                 ?>
+
+        <div class="botonesOfertas">        
         <button class="abrirModal">Ver Oferta</button>
         <div class="ventanaModal modal">
             <div class="modal-content">
                 <span class="cerrar">&times;</span>
                 <?php
-                                echo "<h2>Empresa: ".$fila->Nombre_Usuario."</h2>";
-                                echo "<p>Puesto de trabajo: ".$fila->Titulo."</p>";
-                                echo "<p>Vacantes: ".$fila->Vacantes."</p>";
-                                echo "<p>Fecha inicio: ".$fila->Fecha_Inicio."</p>";
-                                echo "<p>Descripcion: ".$fila->Descripcion."</p>"; 
+                                echo "<h2>".$fila->Titulo."</h2>";
+                                echo "<hr class=\"divider\">";
+                                echo "<p class=\"info\"><b>Empresa: </b>".$fila->Nombre_Usuario."</p>";
+                                echo "<p class=\"info\"><b>Vacantes: </b>".$fila->Vacantes."</p>";
+                                echo "<p class=\"info\"><b>Fecha inicio: </b>".$fila->Fecha_Inicio."</p>";
+                                echo "<p class=\"info\"><b>Fecha fin: </b>".$fila->Fecha_Fin."</p>";
+                                echo "<p class=\"info\"><b>Descripcion: </b>".nl2br($fila->Descripcion)."</p>"; 
                                 
                                 $slqe="SELECT * FROM Oferta_Tipo_Titulacion, Titulacion WHERE Oferta_Tipo_Titulacion.Id_Tipo_Titulacion=Titulacion.Id_Tipo_Titulacion AND Oferta_Tipo_Titulacion.Id_Oferta = $idOferta;";
                                 $statement = $conexion->prepare($slqe);
@@ -317,10 +361,11 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Titulacion: </b></p>";
                                 $leer = $conexion -> query($slqe);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Titulacion: ".$row->Nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->Nombre."</p>";
                                 }
                                 }                               
                                 }
@@ -333,10 +378,11 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Idioma: </b></p>";
                                 $leer = $conexion -> query($slqr);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Idioma: ".$row->Idioma." - ".$row->nivel."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->Idioma." - ".$row->nivel."</p>";
                                 }
                                 }                               
                                 }
@@ -349,13 +395,16 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Soft Skill: </b></p>";
                                 $leer = $conexion -> query($slqq);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Soft Skill: ".$row->nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->nombre."</p>";
                                 }
                                 }                               
                                 }
+
+
                                 $slqw="SELECT Oferta_Soft_Skill.Id_Oferta, Soft_Skill.nombre FROM Oferta_Soft_Skill, Soft_Skill WHERE Oferta_Soft_Skill.Id_Soft = Soft_Skill.Id_Soft AND Oferta_Soft_Skill.Id_Oferta= $idOferta;";
                                 $statement = $conexion->prepare($slqw);
                                 $statement->execute();
@@ -364,10 +413,28 @@
                                 if($numFilas<1){
                                 }
                                 else{
+                                echo "<p class=\"info\"><b>Hard Skill: </b></p>";
                                 $leer = $conexion -> query($slqw);
                                 while($row = $leer->fetch(PDO::FETCH_OBJ)){
                                     if($row->Id_Oferta==$idOferta){
-                                echo "<p>Hard Skill: ".$row->nombre."</p>";
+                                echo "<p class=\"info\"><b>- </b>".$row->nombre."</p>";
+                                }
+                                }                               
+                                }
+                                $slqn="SELECT Oferta.Id_Oferta, Municipio.Nombre_Municipio, paises.nombre FROM Oferta, Municipio, paises WHERE Oferta.Id_Municipio=Municipio.Id_Municipio AND Oferta.Id_Pais=paises.id AND Oferta.Id_Oferta=$idOferta;";
+                                $statement = $conexion->prepare($slqn);
+                                $statement->execute();
+                                $numFilas = $statement->rowCount();                                
+                                //echo $numFilas;
+                                if($numFilas<1){
+                                }
+                                else{
+                                    $leer = $conexion -> query($slqn);
+                                    while($row = $leer->fetch(PDO::FETCH_OBJ)){
+                                        if($row->Id_Oferta==$idOferta){
+                                echo "<p class=\"info\"><b>Municipio: </b>".$row->Nombre_Municipio."</p>";
+                                echo "<p class=\"info\"><b>Pais: </b>".$row->nombre."</p>";
+
                                 }
                                 }                               
                                 }
@@ -378,8 +445,11 @@
         <form action="" method="POST">
             <input type="hidden" name="IdOferta" value="<?php echo $idOferta?>">
             <input type="hidden" name="nombreEmpresa" value="<?php echo $nombreEmpresa?>">
-            <input type="submit" name="inscribirse" value="Inscribirse">
-        </form>
+            <?php if ($Activo===1){
+         echo"<input type='submit' name='inscribirse' value='Inscribirse'>";
+        }else {
+            echo"<p class='mensaje-error'>Necesitas una cuenta verificada para poder Inscribirte</p>";
+        } ?></div>        </form>
         <?php
                 echo "</div>";
                 ?>
@@ -400,16 +470,22 @@
                 $sentencia->bindParam(1, $dni);
                 $sentencia->bindParam(2, $IdOferta);
 
+                $sql_nombre_destino = "SELECT Titulo FROM `Oferta` WHERE Id_Oferta='$IdOferta'";
+                $resultado_nombre_destino = $conexion->query($sql_nombre_destino);
+                while ($row_nombre_destino = $resultado_nombre_destino->fetch(PDO::FETCH_OBJ)) {
+                $Titulo = $row_nombre_destino->Titulo;
+                }
+               
                 //Manda una alerta a alumno de que se a inscrito
                 $sentenciados = $conexion->prepare("INSERT INTO Alertas (Alerta, DNI_CIF, Vista) VALUES (?, ?, 1)");
-                $Mensaje = "Te has inscrito a una oferta en ".$empresa;
+                $Mensaje = "Te has inscrito a una oferta de ".$Titulo;
                 $sentenciados->bindParam(1, $Mensaje);
                 $sentenciados->bindParam(2, $dni);
                 
                 //Manda una alerta a la empresa de que se a inscrito un alumno
                 $sentenc = $conexion->prepare("INSERT INTO Alertas (Alerta, DNI_CIF, Vista) VALUES (?, ?, 1)");
-                $nombreAlumno = $_SESSION['Nombre_Usuario'];
-                $Mensaje2 = "Se ha inscrito el usuario ".$nombreAlumno;
+                $Nombre_destino = $_SESSION['Nombre_Usuario'];
+                $Mensaje2 = "Se ha inscrito en tu oferta ".$Titulo. " el usuario ". $Nombre_destino;
                 $sentenc->bindParam(1, $Mensaje2);
                 $sentenc->bindParam(2, $Id_empresa);
             
@@ -418,9 +494,7 @@
                     $sentencia->execute();
                     $sentenciados->execute();
                     $sentenc->execute();
-                    
                 } catch (PDOException $e) {
-                    //Poner una ventana modal si ya esta escrito.
                     echo '<script>';
                     echo 'Swal.fire({
                             icon: "error",
@@ -428,9 +502,8 @@
                             text: "Ya estas apuntado en la oferta."
                         })';
                     echo '</script>';
-                } 
-                
-            }
+                }    
+            }  
     ?>
     </div>
 
@@ -446,6 +519,7 @@
             });
         });
     }
+
     </script>
 </body>
 

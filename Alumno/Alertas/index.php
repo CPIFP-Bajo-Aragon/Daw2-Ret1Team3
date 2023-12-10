@@ -1,14 +1,21 @@
 <link rel="shortcut icon" href="../../../Imagenes/icon/icon.png">
 <?php
 include "../../Funciones/conexion.php";
-session_start();
 $dni = $_SESSION['dni'];
 $username = $_SESSION['Nombre_Usuario'];
 if (!isset($_SESSION['dni'])) {
-    header("Location: ../../index.php");
+    header("Location: ../../index");
     exit();
 }
-
+if($_SESSION['Tipo_Usuario']=='Empresa'){
+    session_abort();
+    header("Location: /");
+    exit;
+}else if($_SESSION['Tipo_Usuario']=='Admin'){
+    session_abort();
+    header("Location: /");
+    exit;
+}
 
 
 ?>
@@ -27,49 +34,17 @@ function cerrarSesion()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mis Alertas</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-
-
-
     <main>
 
         <?php include "../../Header/CabeceraLogeado.php"; ?>
         <link rel="stylesheet" href="../../Estilos/alumno.css">
         <div class="main-content">
-            <nav class="main-menu">
-                <ul>
-                    <a href="../../Inicio/Inicio_Alumno/index.php">
-                        <li id="Inicio">Inicio</li>
-                    </a>
-                    <a href="../../Alumno/Curriculum/curriculum.php">
-                        <li>Curriculum</li>
-                    </a>
-                    <a href="../../Alumno/Alertas/index.php">
-                        <li>Mis alertas</li>
-                    </a>
-                    <a href="../../Alumno/Mensajes/mensaje.php">
-                        <li>Mensajes</li>
-                    </a>
-                    <a href="../../Alumno/Mis_Ofertas/ofertas.php">
-                        <li>Mis ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Alumno/Buscar_Empresas/index.php">
-                        <li>Buscar empresas</li>
-                    </a>
-                    <a href="../../Alumno/Buscar_Ofertas/index.php">
-                        <li>Buscar ofertas</li>
-                    </a>
-                    <hr>
-                    <a href="../../Cambiar_Clave/Alumno/Cambiar_Clave_Alumno.php">
-                        <li>Cambiar contraseña</li>
-                    </a>
-
-                </ul>
-            </nav>
+            <?php include "../../menuLateral/Alumno/menuAlumno.php"; ?>
             <section class="main-info">
                 <div class="breadcrumbs">
                     <h1 id="breadcrumbs-title">Alumno / <span>Mis alertas</span></h1>
